@@ -36,7 +36,7 @@ export default function VerificationStep1() {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <p className="text-sm text-system-12">
+        <p className="text-md text-system-12">
           Para completar seu Login com sucesso, por favor efetue a autenticação
           de seus dados. Escolha por qual meio deseja receber o código.
         </p>
@@ -76,7 +76,7 @@ export default function VerificationStep1() {
             id="phone"
             placeholder="Ex: +55 (71) 99999-9999"
             value={phone}
-            onChange={(value) => {
+            onChangeNumber={(value) => {
               setPhone(value)
               setMethod("sms")
             }}
@@ -87,8 +87,8 @@ export default function VerificationStep1() {
         </div>
 
         <Button
+          variant="primary"
           type="submit"
-          className="w-full bg-primary-9 hover:bg-primary-10"
           disabled={
             isLoading ||
             !method ||

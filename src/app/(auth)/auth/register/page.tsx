@@ -90,7 +90,7 @@ export default function RegisterPage() {
               id="phone"
               placeholder="Ex: +55 (71) 99999-9999"
               value={phone}
-              onChange={setPhone}
+              onChangeNumber={setPhone}
               required
             />
           </div>

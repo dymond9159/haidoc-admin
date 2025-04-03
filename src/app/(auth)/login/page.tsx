@@ -80,11 +80,7 @@ export default function LoginPage() {
           </div>
         </div>
 
-        <Button
-          type="submit"
-          className="h-12 w-full bg-primary-9 hover:bg-primary-10 text-white font-medium"
-          disabled={isLoading}
-        >
+        <Button variant="primary" type="submit" disabled={isLoading}>
           {isLoading ? "Carregando..." : "Entrar"}
         </Button>
 

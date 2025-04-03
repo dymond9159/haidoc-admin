@@ -5,10 +5,14 @@ import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 
 interface PhoneInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  onChange: (value: string) => void
+  onChangeNumber: (value: string) => void
 }
 
-export function PhoneInput({ className, onChange, ...props }: PhoneInputProps) {
+export function PhoneInput({
+  className,
+  onChangeNumber,
+  ...props
+}: PhoneInputProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value.replace(/\D/g, "")
 
@@ -32,7 +36,7 @@ export function PhoneInput({ className, onChange, ...props }: PhoneInputProps) {
       }
     }
 
-    onChange(value)
+    onChangeNumber(value)
   }
 
   return (

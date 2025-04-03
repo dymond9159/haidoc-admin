@@ -53,15 +53,15 @@ export default function VerificationStep3() {
     <div className="space-y-6">
       <div className="space-y-2">
         {method === "email" ? (
-          <p className="text-sm text-system-12">
+          <p className="text-md text-system-12">
             Digite abaixo o código enviado para o seu e-mail.
           </p>
         ) : method === "sms" ? (
-          <p className="text-sm text-system-12">
+          <p className="text-md text-system-12">
             Digite abaixo o código enviado para o seu número de telefone.
           </p>
         ) : (
-          <p className="text-sm text-system-12">
+          <p className="text-md text-system-12">
             Digite abaixo o código enviado.
           </p>
         )}
@@ -76,15 +76,15 @@ export default function VerificationStep3() {
             id="code"
             placeholder="Ex: ABC123"
             value={code}
-            onChange={setCode}
+            onChangeCode={setCode}
             required
           />
           {error && <p className="text-xs text-error-6">{error}</p>}
         </div>
 
         <Button
+          variant="primary"
           type="submit"
-          className="w-full bg-primary-9 hover:bg-primary-10"
           disabled={isLoading || code.length !== 6}
         >
           {isLoading ? "Verificando..." : "Próximo"}

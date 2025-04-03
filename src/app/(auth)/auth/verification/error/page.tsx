@@ -17,14 +17,11 @@ export default function VerificationError() {
         <XCircle className="h-16 w-16 text-error-6" />
         <h2 className="text-xl font-semibold text-system-13">Autenticação</h2>
         <p className="text-center text-sm text-system-12">
-          Infelizmente o código digitado está incorreto.
+          O código digitado está incorreto.
         </p>
       </div>
 
-      <Button
-        onClick={handleTryAgain}
-        className="w-full bg-primary-9 hover:bg-primary-10"
-      >
+      <Button variant="primary" onClick={handleTryAgain}>
         Tentar Novamente
       </Button>
     </div>

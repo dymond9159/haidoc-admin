@@ -31,30 +31,26 @@ export default function VerificationStep2() {
     <div className="space-y-6">
       <div className="space-y-2">
         {method === "email" ? (
-          <p className="text-sm text-system-12">
+          <p className="text-md text-system-12">
             Enviamos um código de autenticação para o seu e-mail cadastrado. Por
             favor, verifique a sua caixa de entrada e a pasta de spam, se
             necessário.
           </p>
         ) : method === "sms" ? (
-          <p className="text-sm text-system-12">
+          <p className="text-md text-system-12">
             Enviamos um código de autenticação para o seu número cadastrado. Por
             favor, verifique a sua caixa de entrada e a pasta de spam, se
             necessário.
           </p>
         ) : (
-          <p className="text-sm text-system-12">
+          <p className="text-md text-system-12">
             Enviamos um código de autenticação. Por favor, verifique a sua caixa
             de entrada.
           </p>
         )}
       </div>
 
-      <Button
-        onClick={handleNext}
-        className="w-full bg-primary-9 hover:bg-primary-10"
-        disabled={isLoading}
-      >
+      <Button variant="primary" onClick={handleNext} disabled={isLoading}>
         {isLoading ? "Carregando..." : "Próximo"}
       </Button>
     </div>

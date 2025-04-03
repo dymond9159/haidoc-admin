@@ -5,10 +5,14 @@ import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 
 interface CodeInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  onChange: (value: string) => void
+  onChangeCode: (value: string) => void
 }
 
-export function CodeInput({ className, onChange, ...props }: CodeInputProps) {
+export function CodeInput({
+  className,
+  onChangeCode,
+  ...props
+}: CodeInputProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // Allow only letters and numbers
     let value = e.target.value.replace(/[^A-Za-z0-9]/g, "").toUpperCase()
@@ -18,7 +22,7 @@ export function CodeInput({ className, onChange, ...props }: CodeInputProps) {
       value = value.substring(0, 6)
     }
 
-    onChange(value)
+    onChangeCode(value)
   }
 
   return (

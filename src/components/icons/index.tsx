@@ -23,7 +23,7 @@ import {
   Sun,
   User,
   X,
-  LightbulbIcon as LucidePropsEx,
+  ChevronUp,
 } from "lucide-react"
 import {
   AppointmentIcon,
@@ -42,6 +42,7 @@ export type IconName =
   | "alert-circle"
   | "calendar"
   | "check-circle"
+  | "chevron-up"
   | "chevron-down"
   | "chevron-left"
   | "chevron-right"
@@ -68,11 +69,18 @@ export type IconName =
   | "notification"
   | "lab-result"
 
+// Define the type for the icon map more explicitly for clarity
+// This maps IconName keys to React components accepting LucideProps
+type IconMapType = {
+  [key in IconName]: React.ComponentType<LucideProps>
+}
+
 export function Icon({ name, className, ...props }: IconProps) {
-  const iconMap = {
+  const iconMap: IconMapType = {
     "alert-circle": AlertCircle,
     calendar: Calendar,
     "check-circle": CheckCircle,
+    "chevron-up": ChevronUp,
     "chevron-down": ChevronDown,
     "chevron-left": ChevronLeft,
     "chevron-right": ChevronRight,

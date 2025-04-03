@@ -17,15 +17,12 @@ export default function VerificationSuccess() {
       <div className="flex flex-col items-center space-y-4">
         <CheckCircle className="h-16 w-16 text-success-6" />
         <h2 className="text-xl font-semibold text-system-13">Autenticação</h2>
-        <p className="text-center text-sm text-system-12">
+        <p className="text-center text-md text-system-12">
           Parabéns! Autenticação efetuada com sucesso!
         </p>
       </div>
 
-      <Button
-        onClick={handleAccess}
-        className="w-full bg-primary-9 hover:bg-primary-10"
-      >
+      <Button variant="primary" onClick={handleAccess}>
         Acessar
       </Button>
     </div>

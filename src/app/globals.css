@@ -6,19 +6,19 @@
 @layer base {
   :root {
     /* System colors */
-    --system-1: 0 0% 100%;
-    --system-2: 0 0% 99%;
-    --system-3: 240 6% 98%;
-    --system-4: 220 6% 95%;
-    --system-5: 220 6% 92%;
-    --system-6: 220 6% 89%;
-    --system-7: 220 6% 86%;
-    --system-8: 220 6% 82%;
-    --system-9: 220 6% 75%;
-    --system-10: 220 2% 57%;
-    --system-11: 220 2% 53%;
-    --system-12: 220 2% 40%;
-    --system-13: 220 4% 13%;
+    --system-0: 0 0% 100%;
+    --system-1: 240 5% 99%;
+    --system-2: 240 10% 98%;
+    --system-3: 240 14% 95%;
+    --system-4: 240 16% 92%;
+    --system-5: 240 18% 89%;
+    --system-6: 240 20% 86%;
+    --system-7: 240 21% 82%;
+    --system-8: 240 22% 75%;
+    --system-9: 240 10% 57%;
+    --system-10: 240 10% 53%;
+    --system-11: 240 12% 40%;
+    --system-12: 240 20% 13%;
 
     /* Primary colors */
     --primary-1: 0 100% 99%;
@@ -219,6 +219,20 @@
   --radius-xl: calc(var(--radius) + 4px);
 
   /* Custom Colors */
+  --color-system-0: hsl(var(--system-0));
+  --color-system-1: hsl(var(--system-1));
+  --color-system-2: hsl(var(--system-2));
+  --color-system-3: hsl(var(--system-3));
+  --color-system-4: hsl(var(--system-4));
+  --color-system-5: hsl(var(--system-5));
+  --color-system-6: hsl(var(--system-6));
+  --color-system-7: hsl(var(--system-7));
+  --color-system-8: hsl(var(--system-8));
+  --color-system-9: hsl(var(--system-9));
+  --color-system-10: hsl(var(--system-10));
+  --color-system-11: hsl(var(--system-11));
+  --color-system-12: hsl(var(--system-12));
+
   --color-primary-1: hsl(var(--primary-1));
   --color-primary-2: hsl(var(--primary-2));
   --color-primary-3: hsl(var(--primary-3));
@@ -244,20 +258,6 @@
   --color-secondary-12: hsl(var(--secondary-12));
   --color-secondary: hsl(var(--secondary));
   --color-secondary-foreground: hsl(var(--secondary-foreground));
-
-  --color-system-1: hsl(var(--system-1));
-  --color-system-2: hsl(var(--system-2));
-  --color-system-3: hsl(var(--system-3));
-  --color-system-4: hsl(var(--system-4));
-  --color-system-5: hsl(var(--system-5));
-  --color-system-6: hsl(var(--system-6));
-  --color-system-7: hsl(var(--system-7));
-  --color-system-8: hsl(var(--system-8));
-  --color-system-9: hsl(var(--system-9));
-  --color-system-10: hsl(var(--system-10));
-  --color-system-11: hsl(var(--system-11));
-  --color-system-12: hsl(var(--system-12));
-  --color-system-13: hsl(var(--system-13));
 
   --color-success-1: hsl(var(--success-1));
   --color-success-2: hsl(var(--success-2));
