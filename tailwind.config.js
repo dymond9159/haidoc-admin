@@ -1,6 +1,5 @@
-import type { Config } from "tailwindcss"
-
-const config = {
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
@@ -8,22 +7,9 @@ const config = {
     "./src/**/*.{ts,tsx}",
     "*.{js,ts,jsx,tsx,mdx}",
   ],
-  prefix: "",
   theme: {
-    container: {
-      center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
-    },
     extend: {
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
         primary: {
           1: "hsl(var(--primary-1))",
           2: "hsl(var(--primary-2))",
@@ -35,10 +21,6 @@ const config = {
           8: "hsl(var(--primary-8))",
           9: "hsl(var(--primary-9))",
           10: "hsl(var(--primary-10))",
-          11: "hsl(var(--primary-11))",
-          12: "hsl(var(--primary-12))",
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
           1: "hsl(var(--secondary-1))",
@@ -154,6 +136,4 @@ const config = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config
-
-export default config
+}
