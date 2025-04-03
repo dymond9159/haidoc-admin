@@ -5,7 +5,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { Logo } from "@/components/logo"
-import { Icon } from "@/components/icons"
+import { Icon, IconName } from "@/components/icons"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
@@ -22,7 +22,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 interface NavItem {
   label: string
   href: string
-  icon: string
+  icon: IconName
 }
 
 const navItems: NavItem[] = [
@@ -66,7 +66,7 @@ export function Header() {
               : "text-system-11 hover:bg-system-3 hover:text-system-12",
           )}
         >
-          <Icon name={item.icon as any} className="h-4 w-4" />
+          <Icon name={item.icon} className="h-4 w-4" />
           {item.label}
         </Link>
       ))}

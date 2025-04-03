@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
-import { Icon } from "@/components/icons"
+import { Icon, IconName } from "@/components/icons"
 import { ScrollArea } from "@/components/ui/scroll-area"
 
 interface SidebarProps {
@@ -13,7 +13,7 @@ interface SidebarProps {
 interface SidebarItem {
   title: string
   href: string
-  icon: string
+  icon: IconName
   variant?: "default" | "ghost"
 }
 
@@ -91,7 +91,7 @@ export function Sidebar({ className }: SidebarProps) {
                   : "text-system-11 hover:bg-system-3 hover:text-system-12",
               )}
             >
-              <Icon name={item.icon as any} className="h-5 w-5" />
+              <Icon name={item.icon} className="h-5 w-5" />
               {item.title}
             </Link>
           ))}
