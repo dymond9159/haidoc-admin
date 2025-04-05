@@ -4,8 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
-import { Logo } from "@/components/logo"
-import { Icon, IconName } from "@/components/icons"
+import { Icon, IconName } from "@/components/icons/icons"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
@@ -18,6 +17,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { useMobile } from "./hooks/use-mobile"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Logo } from "./logo"
 
 interface NavItem {
   label: string

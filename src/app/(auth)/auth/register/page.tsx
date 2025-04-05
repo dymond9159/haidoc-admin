@@ -5,11 +5,11 @@ import type React from "react"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import { Logo } from "@/components/logo"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { EyeIcon, EyeOffIcon } from "lucide-react"
 import { PhoneInput } from "@/components/ui/phone-input"
+import { Logo } from "@/components/logo"
 
 export default function RegisterPage() {
   const router = useRouter()

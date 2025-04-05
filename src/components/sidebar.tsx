@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
-import { Icon, IconName } from "@/components/icons"
+import { Icon, IconName } from "@/components/icons/icons"
 import { ScrollArea } from "@/components/ui/scroll-area"
 
 interface SidebarProps {

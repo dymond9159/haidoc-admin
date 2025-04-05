@@ -1,5 +1,5 @@
-import { Logo } from "@/components/logo"
-import { Icon } from "@/components/icons"
+import { Icon } from "@/components/icons/icons"
+import { Logo } from "./logo"
 
 export function Footer() {
   return (
