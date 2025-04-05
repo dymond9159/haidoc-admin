@@ -1,0 +1,13 @@
+export * from "./icons"
+export * from "./hidoc-icons"
+
+export * from "./home-icon"
+export * from "./dashboard-icon"
+export * from "./user-settings-icon"
+export * from "./user-check-icon"
+export * from "./truck-icon"
+export * from "./edit1-icon"
+export * from "./dollar-icon"
+export * from "./clock-icon"
+export * from "./tax-icon"
+export * from "./arrow-left-icon"

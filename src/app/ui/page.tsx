@@ -1,9 +1,9 @@
 "use client"
-import { Logo } from "@/components/logo"
-import { Icon } from "@/components/icons"
+import { Icon } from "@/components/icons/icons"
 import { Container, Section } from "@/components/common"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Button } from "@/components/ui"
+import { Logo } from "@/components/logo"
 
 export default function ComponentShowcase() {
   return (

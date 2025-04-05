@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils"
-import { Icon } from "@/components/icons"
+import { Icon } from "@/components/icons/icons"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import type { IconName } from "@/components/icons"
+import type { IconName } from "@/components/icons/icons"
 
 interface StatCardProps {
   title: string
