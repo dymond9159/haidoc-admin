@@ -1,0 +1,95 @@
+"use client"
+
+import type React from "react"
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import { EyeIcon, EyeOffIcon } from "lucide-react"
+import Link from "next/link"
+import { LogoIcon } from "@/components/icons/hidoc-icons"
+
+export const LoginForm = () => {
+  const router = useRouter()
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [showPassword, setShowPassword] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsLoading(true)
+
+    setTimeout(() => {
+      setIsLoading(false)
+      router.push("/auth/verification/step1")
+    }, 1000)
+  }
+  return (
+    <div className="login-form">
+      <div className="flex justify-center">
+        <LogoIcon />
+      </div>
+
+      <h1 className="text-2xl font-bold mt-10 mb-8">Faça seu Login!</h1>
+
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="space-y-2">
+          <label htmlFor="email" className="block text-sm font-medium">
+            E-mail<span className="text-error-6">*</span>
+          </label>
+          <Input
+            id="email"
+            type="email"
+            placeholder="mail.example@gmail.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="h-12"
+          />
+        </div>
+
+        <div className="space-y-2">
+          <label htmlFor="password" className="block text-sm font-medium">
+            Senha<span className="text-error-6">*</span>
+          </label>
+          <div className="relative">
+            <Input
+              id="password"
+              type={showPassword ? "text" : "password"}
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="h-12"
+            />
+            <button
+              type="button"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-system-10"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? (
+                <EyeOffIcon className="h-5 w-5" />
+              ) : (
+                <EyeIcon className="h-5 w-5" />
+              )}
+            </button>
+          </div>
+        </div>
+
+        <Button variant="primary" type="submit" disabled={isLoading}>
+          {isLoading ? "Carregando..." : "Entrar"}
+        </Button>
+
+        <div className="">
+          <Link
+            href="/auth/forgot-password"
+            className="font-bold text-primary-9 hover:text-primary-10 text-sm"
+          >
+            Esqueci minha senha
+          </Link>
+        </div>
+      </form>
+    </div>
+  )
+}

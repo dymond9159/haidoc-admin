@@ -25,55 +25,57 @@ export default function ForgotPassword() {
   }
 
   return (
-    <div className="space-y-6">
-      <h2 className="text-xl font-semibold text-system-13">
-        Esqueci minha senha
-      </h2>
+    <div className="w-full max-w-md space-y-8 rounded-lg bg-system-1 p-8 shadow-md">
+      <div className="space-y-6">
+        <h2 className="text-xl font-semibold text-system-13">
+          Esqueci minha senha
+        </h2>
 
-      {submitted ? (
-        <div className="space-y-4">
-          <p className="text-sm text-system-12">
-            Enviamos um e-mail com instruções para redefinir sua senha. Por
-            favor, verifique sua caixa de entrada.
-          </p>
-
-          <Button
-            onClick={() => router.push("/login")}
-            className="w-full bg-primary-9 hover:bg-primary-10"
-          >
-            Voltar para o Login
-          </Button>
-        </div>
-      ) : (
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="space-y-2">
+        {submitted ? (
+          <div className="space-y-4">
             <p className="text-sm text-system-12">
-              Digite seu e-mail abaixo e enviaremos instruções para redefinir
-              sua senha.
+              Enviamos um e-mail com instruções para redefinir sua senha. Por
+              favor, verifique sua caixa de entrada.
             </p>
 
-            <label htmlFor="email" className="block text-sm font-medium">
-              E-mail<span className="text-error-6">*</span>
-            </label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="mail.example@gmail.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+            <Button
+              onClick={() => router.push("/login")}
+              className="w-full bg-primary-9 hover:bg-primary-10"
+            >
+              Voltar para o Login
+            </Button>
           </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="space-y-2">
+              <p className="text-sm text-system-12">
+                Digite seu e-mail abaixo e enviaremos instruções para redefinir
+                sua senha.
+              </p>
 
-          <Button
-            type="submit"
-            className="w-full bg-primary-9 hover:bg-primary-10"
-            disabled={isLoading}
-          >
-            {isLoading ? "Enviando..." : "Enviar instruções"}
-          </Button>
-        </form>
-      )}
+              <label htmlFor="email" className="block text-sm font-medium">
+                E-mail<span className="text-error-6">*</span>
+              </label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="mail.example@gmail.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+
+            <Button
+              type="submit"
+              className="w-full bg-primary-9 hover:bg-primary-10"
+              disabled={isLoading}
+            >
+              {isLoading ? "Enviando..." : "Enviar instruções"}
+            </Button>
+          </form>
+        )}
+      </div>
     </div>
   )
 }
