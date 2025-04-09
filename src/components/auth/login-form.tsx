@@ -77,7 +77,12 @@ export const LoginForm = () => {
           </div>
         </div>
 
-        <Button variant="primary" type="submit" disabled={isLoading}>
+        <Button
+          variant="primary"
+          className="w-full"
+          type="submit"
+          disabled={isLoading}
+        >
           {isLoading ? "Carregando..." : "Entrar"}
         </Button>
 

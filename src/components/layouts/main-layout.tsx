@@ -4,7 +4,7 @@ import type { ReactNode } from "react"
 import { Header } from "@/components/header"
 import { Sidebar } from "@/components/sidebar"
 import { Footer } from "@/components/footer"
-import { useMobile } from "../hooks/use-mobile"
+import { useMobile } from "../../hooks/use-mobile"
 
 interface MainLayoutProps {
   children: ReactNode
