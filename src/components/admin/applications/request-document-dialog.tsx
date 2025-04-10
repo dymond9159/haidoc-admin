@@ -5,7 +5,6 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
-import { useToast } from "@/hooks/use-toast"
 import { CheckCircle, Plus } from "lucide-react"
 
 interface DocumentRequest {
@@ -24,9 +23,7 @@ export function RequestDocumentDialog({
   open,
   onOpenChange,
   onSubmit,
-  businessName,
 }: RequestDocumentDialogProps) {
-  const { toast } = useToast()
   const [documents, setDocuments] = useState<DocumentRequest[]>([
     { type: "", description: "" },
   ])

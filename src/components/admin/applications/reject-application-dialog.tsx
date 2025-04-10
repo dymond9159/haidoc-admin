@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/dialog"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
-import { useToast } from "@/hooks/use-toast"
 import { CheckCircle } from "lucide-react"
 import { DialogTitle } from "@radix-ui/react-dialog"
 
@@ -23,9 +22,7 @@ export function RejectApplicationDialog({
   open,
   onOpenChange,
   onConfirm,
-  businessName,
 }: RejectApplicationDialogProps) {
-  const { toast } = useToast()
   const [reason, setReason] = useState("")
   const [error, setError] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)

@@ -23,7 +23,6 @@ export function SuspendApplicationDialog({
   open,
   onOpenChange,
   onConfirm,
-  businessName,
 }: SuspendApplicationDialogProps) {
   const [reason, setReason] = useState("")
   const [documentType, setDocumentType] = useState("")

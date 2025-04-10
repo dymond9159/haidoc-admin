@@ -8,7 +8,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
-import { useToast } from "@/hooks/use-toast"
 import { CheckCircle } from "lucide-react"
 
 interface ApproveApplicationDialogProps {
@@ -22,9 +21,7 @@ export function ApproveApplicationDialog({
   open,
   onOpenChange,
   onConfirm,
-  businessName,
 }: ApproveApplicationDialogProps) {
-  const { toast } = useToast()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
 

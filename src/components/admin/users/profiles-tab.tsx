@@ -219,12 +219,6 @@ export function ProfilesTab() {
     }
   }
 
-  // Handle page change
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page)
-    // In a real app, you would fetch the data for the new page here
-  }
-
   return (
     <div className="space-y-4">
       <div className="flex justify-end">
@@ -305,7 +299,11 @@ export function ProfilesTab() {
       </div>
       <Separator className="my-2" />
       <div className="flex items-center justify-center">
-        <Pagination currentPage={currentPage} totalPages={10} />
+        <Pagination
+          currentPage={currentPage}
+          totalPages={10}
+          onPageChange={setCurrentPage}
+        />
       </div>
 
       {/* Profile Form Dialog */}

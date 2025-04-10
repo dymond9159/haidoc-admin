@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { UserPlus } from "lucide-react"
@@ -12,7 +12,7 @@ import { Toaster } from "sonner"
 export default function UsersPageClient() {
   const [isAddUserDialogOpen, setIsAddUserDialogOpen] = useState(false)
 
-  document.title = "HaiDoc Admin | Gerenciamento de Usuários"
+  // document.title = "HaiDoc Admin | Gerenciamento de Usuários"
 
   return (
     <div className="space-y-6">

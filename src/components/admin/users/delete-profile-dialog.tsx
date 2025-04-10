@@ -30,7 +30,6 @@ interface DeleteProfileDialogProps {
 }
 
 export function DeleteProfileDialog({
-  profile,
   open,
   onOpenChange,
   onConfirm,

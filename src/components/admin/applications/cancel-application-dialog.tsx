@@ -22,7 +22,6 @@ export function CancelApplicationDialog({
   open,
   onOpenChange,
   onConfirm,
-  businessName,
 }: CancelApplicationDialogProps) {
   const [reason, setReason] = useState("")
   const [error, setError] = useState("")
