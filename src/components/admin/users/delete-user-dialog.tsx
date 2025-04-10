@@ -20,7 +20,6 @@ interface DeleteUserDialogProps {
 }
 
 export function DeleteUserDialog({
-  user,
   open,
   onOpenChange,
   onConfirm,
@@ -29,23 +28,24 @@ export function DeleteUserDialog({
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Excluir usuário</AlertDialogTitle>
-          <AlertDialogDescription>
-            Tem certeza que deseja excluir o usuário{" "}
-            <strong>{user.name}</strong>?
+          <AlertDialogTitle>
+            Tem certeza que deseja excluir este usuário?
+          </AlertDialogTitle>
+          <AlertDialogDescription className="text-destructive font-medium text-sm mb-4">
+            Esta ação não pode ser desfeita e todos os dados associados a este
+            usuário serão permanentemente removidos.
           </AlertDialogDescription>
         </AlertDialogHeader>
-        <div className="text-destructive font-medium text-sm mb-4">
-          Esta ação não pode ser desfeita e todos os dados associados a este
-          usuário serão permanentemente removidos.
-        </div>
-        <AlertDialogFooter className="gap-2 sm:gap-0">
-          <AlertDialogCancel>Cancelar</AlertDialogCancel>
+
+        <AlertDialogFooter className="gap-2 sm:gap-2">
+          <AlertDialogCancel className="cursor-pointer">
+            Não excluir
+          </AlertDialogCancel>
           <AlertDialogAction
             onClick={onConfirm}
-            className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            className="cursor-pointer bg-primary text-primary-foreground shadow-xs hover:bg-primary-10"
           >
-            Excluir usuário
+            Sim, desejo excluir
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

@@ -23,6 +23,8 @@ import {
 import { z } from "zod"
 import type { User } from "@/types/user"
 import { useToast } from "@/hooks/use-toast"
+import { MessageCircleQuestionIcon } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 // Form validation schema
 const userFormSchema = z.object({
@@ -219,9 +221,10 @@ export function UserFormDialog({
               >
                 <SelectTrigger
                   id="profile"
-                  className={
-                    errors.profile ? "border-destructive ring-destructive" : ""
-                  }
+                  className={cn(
+                    "w-full",
+                    errors.profile ? "border-destructive ring-destructive" : "",
+                  )}
                   aria-invalid={!!errors.profile}
                   aria-describedby={
                     errors.profile ? "profile-error" : undefined
@@ -244,7 +247,8 @@ export function UserFormDialog({
             </div>
 
             {mode === "create" && (
-              <div className="text-xs text-muted-foreground">
+              <div className="flex flex-row gap-2 text-xs text-secondary-9">
+                <MessageCircleQuestionIcon size="16" />
                 <p>
                   Um e-mail será enviado para o usuário, para que ele possa
                   criar a sua senha de acesso.
@@ -253,7 +257,7 @@ export function UserFormDialog({
             )}
           </div>
 
-          <DialogFooter className="gap-2 sm:gap-0">
+          <DialogFooter className="gap-2 sm:gap-2">
             <Button
               type="button"
               variant="outline"
