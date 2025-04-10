@@ -83,8 +83,8 @@ export default function VerificationStep3() {
         </div>
 
         <Button
-          variant="primary"
           type="submit"
+          className="w-full"
           disabled={isLoading || code.length !== 6}
         >
           {isLoading ? "Verificando..." : "Próximo"}

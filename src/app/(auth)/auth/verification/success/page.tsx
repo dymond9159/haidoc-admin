@@ -22,7 +22,7 @@ export default function VerificationSuccess() {
         </p>
       </div>
 
-      <Button variant="primary" onClick={handleAccess}>
+      <Button className="w-full" onClick={handleAccess}>
         Acessar
       </Button>
     </div>
