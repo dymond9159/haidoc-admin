@@ -1,7 +1,12 @@
 "use client"
 
 import { useState } from "react"
-import { Dialog, DialogContent } from "@/components/ui/dialog"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { useToast } from "@/hooks/use-toast"
 import { CheckCircle } from "lucide-react"
@@ -62,14 +67,13 @@ export function ApproveApplicationDialog({
           </div>
         ) : (
           <div className="p-6">
-            <h3 className="text-base font-medium mb-2">
-              Você realmente deseja aprovar esta aplicação?
-            </h3>
-            <p className="text-sm text-gray-600 mb-4">
+            <DialogTitle>
+              Você realmente deseja aprovar esta aplicação?{" "}
+            </DialogTitle>
+            <DialogDescription>
               A aplicação será movida para a aba Aprovados.
-            </p>
-
-            <div className="flex justify-center gap-4 mt-6">
+            </DialogDescription>
+            <div className="flex justify-end gap-4 mt-6">
               <Button
                 variant="outline"
                 onClick={() => onOpenChange(false)}

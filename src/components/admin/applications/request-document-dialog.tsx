@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Dialog, DialogContent } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
@@ -115,7 +115,7 @@ export function RequestDocumentDialog({
           </div>
         ) : (
           <div className="p-6">
-            <h3 className="text-lg font-medium mb-4">Documento adicional</h3>
+            <DialogTitle>Documento adicional</DialogTitle>
 
             <div className="space-y-6">
               {documents.map((doc, index) => (

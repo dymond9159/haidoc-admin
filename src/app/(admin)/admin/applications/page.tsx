@@ -18,20 +18,7 @@ export default function ApplicationsPageClient() {
   // Handle view application details
   const handleViewApplication = (id: string) => {
     // Navigate to the appropriate route based on active tab
-    switch (activeTab) {
-      case "pending":
-        router.push(`/admin/applications/${id}`)
-        break
-      case "approved":
-        router.push(`/admin/applications/approved/${id}`)
-        break
-      case "rejected":
-        router.push(`/admin/applications/rejected/${id}`)
-        break
-      case "canceled":
-        router.push(`/admin/applications/canceled/${id}`)
-        break
-    }
+    router.push(`/admin/applications/${id}?status=${activeTab}`)
   }
 
   // Handle tab change

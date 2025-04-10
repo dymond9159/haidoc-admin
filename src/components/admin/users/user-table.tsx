@@ -112,7 +112,7 @@ export function UserTable() {
   }
 
   return (
-    <div className="rounded-md border">
+    <div className="rounded-md border bg-white overflow-hidden">
       <div className="overflow-x-auto">
         <Table>
           <TableHeader>
@@ -165,11 +165,11 @@ export function UserTable() {
       </div>
 
       <div className="p-4 flex items-center justify-center">
-        {/* <Pagination
+        <Pagination
           currentPage={currentPage}
           totalPages={10}
           onPageChange={handlePageChange}
-        /> */}
+        />
       </div>
 
       {/* Edit User Dialog */}

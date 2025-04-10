@@ -39,7 +39,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-30 flex h-20 items-center justify-between bg-system-2 px-4 md:px-6">
       <div className="flex items-center">
-        <h1 className="text-xl font-semibold ml-8 md:ml-0">{pageTitle}</h1>
+        <h1 className="text-xl font-semibold ml-10 md:ml-0">{pageTitle}</h1>
       </div>
 
       <div className="flex items-center gap-4">

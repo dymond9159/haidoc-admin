@@ -1,11 +1,16 @@
 "use client"
 
 import { useState } from "react"
-import { Dialog, DialogContent } from "@/components/ui/dialog"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+} from "@/components/ui/dialog"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { useToast } from "@/hooks/use-toast"
 import { CheckCircle } from "lucide-react"
+import { DialogTitle } from "@radix-ui/react-dialog"
 
 interface RejectApplicationDialogProps {
   open: boolean
@@ -72,12 +77,12 @@ export function RejectApplicationDialog({
           </div>
         ) : (
           <div className="p-6">
-            <h3 className="text-base font-medium mb-2">
+            <DialogTitle>
               Você realmente deseja reprovar esta aplicação?
-            </h3>
-            <p className="text-sm text-gray-600 mb-4">
+            </DialogTitle>
+            <DialogDescription>
               A aplicação será movida para a aba Reprovados.
-            </p>
+            </DialogDescription>
 
             <div className="space-y-4">
               <div className="space-y-2">
@@ -102,7 +107,7 @@ export function RejectApplicationDialog({
               </div>
             </div>
 
-            <div className="flex justify-center gap-4 mt-6">
+            <div className="flex justify-end gap-4 mt-6">
               <Button
                 variant="outline"
                 onClick={() => onOpenChange(false)}

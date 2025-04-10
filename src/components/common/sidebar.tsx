@@ -112,7 +112,7 @@ export function Sidebar() {
     <Button
       variant="ghost"
       size="icon"
-      className="fixed left-4 top-4 z-50 md:hidden"
+      className="fixed left-4 top-[23px] z-50 md:hidden"
       onClick={toggleDrawer}
       aria-label="Menu"
     >
@@ -128,14 +128,14 @@ export function Sidebar() {
           <SheetContent side="left" className="p-0 w-[240px] border-r-0">
             <div className="flex h-16 items-center border-b px-4">
               <Logo className="h-8" />
-              <Button
+              {/* <Button
                 variant="ghost"
                 size="icon"
                 className="absolute right-2"
                 onClick={() => setIsOpen(false)}
               >
                 <X className="h-5 w-5" />
-              </Button>
+              </Button> */}
             </div>
             <div className="py-4">
               <nav className="space-y-1 px-2">

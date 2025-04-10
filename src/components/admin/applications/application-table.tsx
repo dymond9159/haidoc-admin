@@ -114,20 +114,7 @@ export function ApplicationTable({
       onViewDetails(id)
     } else {
       // Navigate to the appropriate route based on status
-      switch (status) {
-        case "pending":
-          router.push(`/admin/applications/${id}`)
-          break
-        case "approved":
-          router.push(`/admin/applications/${id}`)
-          break
-        case "rejected":
-          router.push(`/admin/applications/${id}`)
-          break
-        case "canceled":
-          router.push(`/admin/applications/${id}`)
-          break
-      }
+      router.push(`/admin/applications/${id}?status=${status}`)
     }
   }
 

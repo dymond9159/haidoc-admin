@@ -1,7 +1,12 @@
 "use client"
 
 import { useState } from "react"
-import { Dialog, DialogContent } from "@/components/ui/dialog"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from "@/components/ui/dialog"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { CheckCircle } from "lucide-react"
@@ -70,12 +75,12 @@ export function CancelApplicationDialog({
           </div>
         ) : (
           <div className="p-6">
-            <h3 className="text-base font-medium mb-2">
+            <DialogTitle>
               Você realmente deseja cancelar esta aplicação?
-            </h3>
-            <p className="text-sm text-gray-600 mb-4">
+            </DialogTitle>
+            <DialogDescription>
               A aplicação será movida para a aba Canceladas.
-            </p>
+            </DialogDescription>
 
             <div className="space-y-4">
               <div className="space-y-2">
@@ -100,7 +105,7 @@ export function CancelApplicationDialog({
               </div>
             </div>
 
-            <div className="flex justify-center gap-4 mt-6">
+            <div className="flex justify-end gap-4 mt-6">
               <Button
                 variant="outline"
                 onClick={() => onOpenChange(false)}

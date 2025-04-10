@@ -1,7 +1,12 @@
 "use client"
 
 import { useState } from "react"
-import { Dialog, DialogContent } from "@/components/ui/dialog"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from "@/components/ui/dialog"
 import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -93,13 +98,13 @@ export function SuspendApplicationDialog({
           </div>
         ) : (
           <div className="p-6">
-            <h3 className="text-base font-medium mb-2">
+            <DialogTitle>
               Você realmente deseja suspender esta aplicação?
-            </h3>
-            <p className="text-sm text-gray-600 mb-4">
+            </DialogTitle>
+            <DialogDescription>
               Informe o motivo da suspensão e qual documento é necessário que o
               usuário envie.
-            </p>
+            </DialogDescription>
 
             <div className="space-y-4">
               <div className="space-y-2">
@@ -153,20 +158,15 @@ export function SuspendApplicationDialog({
               </div>
             </div>
 
-            <div className="flex justify-center gap-4 mt-6">
+            <div className="flex justify-end gap-4 mt-6">
               <Button
                 variant="outline"
                 onClick={() => onOpenChange(false)}
                 disabled={isSubmitting}
-                className="w-full border-purple-200 text-gray-700 hover:bg-gray-50"
               >
                 Cancelar
               </Button>
-              <Button
-                onClick={handleConfirm}
-                disabled={isSubmitting}
-                className="w-full bg-red-500 hover:bg-red-600 text-white"
-              >
+              <Button onClick={handleConfirm} disabled={isSubmitting}>
                 {isSubmitting ? "Processando..." : "Suspender aplicação"}
               </Button>
             </div>

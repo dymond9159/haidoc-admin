@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation"
+import { useParams, useRouter, useSearchParams } from "next/navigation"
 import { ChevronLeft, Download, FileText } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
@@ -25,15 +25,23 @@ interface DocumentRequest {
   description: string
 }
 
-export default function ApplicationDetailPage({
-  params,
-}: {
-  params: { id: string }
-}) {
+export default function ApplicationDetailPage() {
   const router = useRouter()
   const { toast } = useToast()
 
+  const params = useParams<{ id: string }>()
   const id = params.id
+
+  const searchParams = useSearchParams()
+  const applicationStatus = searchParams.get("status")
+
+  useEffect(() => {
+    console.log("Application ID (from useParams):", id)
+    console.log("Application Status (from useSearchParams):", applicationStatus)
+
+    if (id) {
+    }
+  }, [id, applicationStatus])
 
   const [isRejectDialogOpen, setIsRejectDialogOpen] = useState(false)
   const [isApproveDialogOpen, setIsApproveDialogOpen] = useState(false)
@@ -41,9 +49,6 @@ export default function ApplicationDetailPage({
     useState(false)
   const [isSuspendDialogOpen, setIsSuspendDialogOpen] = useState(false)
   const [isCancelDialogOpen, setIsCancelDialogOpen] = useState(false)
-  const [applicationStatus, setApplicationStatus] = useState<
-    "pending" | "approved" | "rejected" | "canceled"
-  >("pending")
 
   // Mock application data
   const application = {
@@ -66,23 +71,6 @@ export default function ApplicationDetailPage({
       { id: "3", name: "nuit", type: "pdf", url: "#" },
     ],
   }
-
-  // Simulate fetching application status
-  useEffect(() => {
-    // In a real app, you would fetch the application status from an API
-    // For now, we'll check the URL to determine the status
-    const path = window.location.pathname
-    if (path.includes("/approved")) {
-      setApplicationStatus("approved")
-    } else if (path.includes("/rejected")) {
-      setApplicationStatus("rejected")
-    } else if (path.includes("/canceled")) {
-      setApplicationStatus("canceled")
-    } else {
-      // Default to pending
-      setApplicationStatus("pending")
-    }
-  }, [])
 
   // Handle back button
   const handleBack = () => {

@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/accordion"
 import { Pagination } from "@/components/ui/pagination"
 import { useToast } from "@/hooks/use-toast"
+import { Separator } from "@radix-ui/react-dropdown-menu"
 
 // Profile type definition
 interface Permission {
@@ -233,7 +234,7 @@ export function ProfilesTab() {
         </Button>
       </div>
 
-      <div className="rounded-md border">
+      <div className="rounded-md border bg-white overflow-hidden">
         <Accordion type="multiple" className="w-full">
           {profiles.map((profile) => (
             <AccordionItem
@@ -302,9 +303,9 @@ export function ProfilesTab() {
           ))}
         </Accordion>
       </div>
-
-      <div className="flex items-center justify-center py-4">
-        <Pagination />
+      <Separator className="my-2" />
+      <div className="flex items-center justify-center">
+        <Pagination currentPage={currentPage} totalPages={10} />
       </div>
 
       {/* Profile Form Dialog */}
