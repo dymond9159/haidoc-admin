@@ -11,8 +11,25 @@ import { Card } from "@/components/ui/card"
 import { StatCard, LineChart } from "@/components/common"
 
 // Sample data for the graphs
-const newUsersData = [400, 380, 360, 340, 320, 300, 280]
-const activeUsersData = [240, 250, 260, 255, 270, 280, 300]
+const newUsersData = [
+  { day: "Seg", value: 290 },
+  { day: "Ter", value: 260 },
+  { day: "Qua", value: 210 },
+  { day: "Qui", value: 190 },
+  { day: "Sex", value: 140 },
+  { day: "Sáb", value: 90 },
+  { day: "Dom", value: 75 },
+]
+
+const activeUsersData = [
+  { day: "Seg", value: 240 },
+  { day: "Ter", value: 250 },
+  { day: "Qua", value: 260 },
+  { day: "Qui", value: 255 },
+  { day: "Sex", value: 140 },
+  { day: "Sáb", value: 90 },
+  { day: "Dom", value: 300 },
+]
 
 export default function AdminHomePage() {
   return (
@@ -26,7 +43,13 @@ export default function AdminHomePage() {
             value="300"
             icon={<UserPlus className="h-5 w-5 text-system-11" />}
             performance={-20}
-            chart={<LineChart data={newUsersData} color="#FF4D4F" />}
+            chart={
+              <LineChart
+                data={newUsersData}
+                color="#FF4D4F"
+                className="h-full"
+              />
+            }
           />
 
           <StatCard
@@ -34,7 +57,13 @@ export default function AdminHomePage() {
             value="300"
             icon={<UserCheck className="h-5 w-5 text-system-11" />}
             performance={20}
-            chart={<LineChart data={activeUsersData} color="#52C41A" />}
+            chart={
+              <LineChart
+                data={activeUsersData}
+                className="h-full"
+                color="#52C41A"
+              />
+            }
           />
         </div>
       </section>

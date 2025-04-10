@@ -33,7 +33,7 @@ export function StatCard({
       )}
       onClick={onClick}
     >
-      <div className="flex flex-wrap gap-5">
+      <div className="flex flex-row gap-1 sm:gap-5 md:gap-10">
         <div className="">
           <div className="flex items-center gap-2">
             {icon}
@@ -46,7 +46,7 @@ export function StatCard({
             )}
           </div>
         </div>
-        {chart && <div className="h-16">{chart}</div>}
+        {chart && <div className="w-full flex-1">{chart}</div>}
       </div>
     </Card>
   )

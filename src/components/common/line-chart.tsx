@@ -1,44 +1,79 @@
+"use client"
+
+import {
+  CartesianGrid,
+  Line,
+  LineChart as BaseLineChart,
+  XAxis,
+  YAxis,
+} from "recharts"
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "../ui/chart"
+import { cn } from "@/lib/utils"
+
 interface LineChartProps {
-  data: number[]
+  data: Record<string, unknown>[]
   color: string
-  height?: number
+  height?: string
   className?: string
 }
 
-export function LineChart({
-  data,
-  color,
-  height = 100,
-  className,
-}: LineChartProps) {
-  // Normalizar dados para o intervalo 0-1
-  const max = Math.max(...data, 1)
-  const normalizedData = data.map((value) => value / max)
-
-  // Criar pontos para o caminho SVG
-  const points = normalizedData
-    .map((value, index) => {
-      const x = (index / (normalizedData.length - 1)) * 100
-      const y = 100 - value * 80 // Deixar algum espaço nas bordas
-      return `${x},${y}`
-    })
-    .join(" L")
+export function LineChart({ data, color, className }: LineChartProps) {
+  const chartConfig = {
+    value: {
+      label: "Users",
+      color: color,
+    },
+  }
 
   return (
-    <div className={className} style={{ height }}>
-      <svg
-        width="100%"
-        height="100%"
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
+    <ChartContainer
+      config={chartConfig}
+      className={cn("aspect-auto w-full", className)}
+    >
+      <BaseLineChart
+        accessibilityLayer
+        data={data}
+        margin={{
+          top: 0,
+          right: 0,
+          left: 0,
+          bottom: 0,
+        }}
       >
-        <path
-          d={`M0,${100 - normalizedData[0] * 80} L${points}`}
-          fill="none"
-          stroke={color}
-          strokeWidth="2"
+        <CartesianGrid
+          horizontal={true}
+          vertical={false}
+          strokeDasharray="3 3"
+          stroke="#e5e5e5"
         />
-      </svg>
-    </div>
+        <XAxis
+          dataKey="day"
+          tickLine={false}
+          axisLine={false}
+          tickMargin={8}
+          fontSize={14}
+        />
+        <YAxis
+          domain={[0, 400]}
+          tickCount={5}
+          tickLine={false}
+          axisLine={false}
+          fontSize={14}
+        />
+        <ChartTooltip
+          content={
+            <ChartTooltipContent className="w-[100px]" nameKey="value" />
+          }
+        />
+        <Line
+          dataKey="value"
+          type="monotone"
+          stroke="var(--color-value)"
+          strokeWidth={1}
+          dot={true}
+          activeDot={{ r: 3 }}
+        />
+      </BaseLineChart>
+    </ChartContainer>
   )
 }
