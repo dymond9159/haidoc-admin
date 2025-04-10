@@ -47,11 +47,13 @@ export function DeleteProfileDialog({
           Esta ação não pode ser desfeita. Existem 10 usuários associados a este
           perfil que serão afetados.
         </div>
-        <AlertDialogFooter className="gap-2 sm:gap-0">
-          <AlertDialogCancel>Cancelar</AlertDialogCancel>
+        <AlertDialogFooter className="gap-2 sm:gap-2">
+          <AlertDialogCancel className="cursor-pointer">
+            Não excluir
+          </AlertDialogCancel>
           <AlertDialogAction
             onClick={onConfirm}
-            className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            className="cursor-pointer bg-primary text-primary-foreground shadow-xs hover:bg-primary-10"
           >
             Sim, excluir perfil
           </AlertDialogAction>

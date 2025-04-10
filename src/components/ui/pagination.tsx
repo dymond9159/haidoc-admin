@@ -251,9 +251,8 @@ function Pagination({
                 "h-8 w-8", // Consistent size
                 // Example active styling using data attribute selector in CSS/global styles
                 // Or apply classes directly (though data attribute is often cleaner)
-                pageNumber === currentPage
-                  ? "border-primary bg-primary text-primary-foreground hover:bg-primary/90"
-                  : "hover:bg-accent hover:text-accent-foreground",
+                pageNumber === currentPage &&
+                  "border-primary bg-primary text-primary-foreground hover:bg-primary/90",
               )}
             >
               {pageNumber}
