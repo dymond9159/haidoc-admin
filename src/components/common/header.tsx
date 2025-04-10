@@ -12,12 +12,34 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { usePathname } from "next/navigation"
+import { useEffect, useState } from "react"
 
 export function Header() {
+  const pathname = usePathname()
+  const [pageTitle, setPageTitle] = useState("Home")
+
+  useEffect(() => {
+    // Set default page title based on pathname
+    const pageTitles: Record<string, string> = {
+      "/admin": "Home",
+      "/admin/dashboard": "Dashboard",
+      "/admin/users": "Gerenciamento de Usuários",
+      "/admin/applications": "Aplicações de usuários business",
+      "/admin/deliveries": "Entregas",
+      "/admin/pre-assessments": "Pré-avaliações",
+      "/admin/finances": "Finanças",
+      "/admin/activity-log": "Log de Atividades",
+      "/admin/taxes": "Taxas",
+    }
+
+    setPageTitle(pageTitles[pathname] || "")
+  }, [pathname])
+
   return (
     <header className="sticky top-0 z-30 flex h-20 items-center justify-between bg-system-2 px-4 md:px-6">
       <div className="flex items-center">
-        <h1 className="text-xl font-semibold ml-8 md:ml-0">Home</h1>
+        <h1 className="text-xl font-semibold ml-10 md:ml-0">{pageTitle}</h1>
       </div>
 
       <div className="flex items-center gap-4">

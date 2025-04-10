@@ -15,7 +15,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { useMobile } from "./hooks/use-mobile"
+import { useMobile } from "../hooks/use-mobile"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Logo } from "./logo"
 

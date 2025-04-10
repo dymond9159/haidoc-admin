@@ -62,10 +62,10 @@ export default function VerificationStep1() {
           />
         </div>
 
-        <div className="flex items-center">
-          <Separator className="flex-grow" />
+        <div className="w-full flex flex-row gap-2 items-center">
+          <Separator className="flex-grow !w-1/3" />
           <span className="mx-2 text-xs text-system-10">ou</span>
-          <Separator className="flex-grow" />
+          <Separator className="flex-grow !w-1/3" />
         </div>
 
         <div className="space-y-2">
@@ -87,8 +87,8 @@ export default function VerificationStep1() {
         </div>
 
         <Button
-          variant="primary"
           type="submit"
+          className="w-full"
           disabled={
             isLoading ||
             !method ||

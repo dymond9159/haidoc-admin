@@ -50,7 +50,7 @@ export default function VerificationStep2() {
         )}
       </div>
 
-      <Button variant="primary" onClick={handleNext} disabled={isLoading}>
+      <Button className="w-full" onClick={handleNext} disabled={isLoading}>
         {isLoading ? "Carregando..." : "Próximo"}
       </Button>
     </div>

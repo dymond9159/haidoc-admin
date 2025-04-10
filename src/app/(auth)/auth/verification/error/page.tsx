@@ -21,7 +21,7 @@ export default function VerificationError() {
         </p>
       </div>
 
-      <Button variant="primary" onClick={handleTryAgain}>
+      <Button className="w-full" onClick={handleTryAgain}>
         Tentar Novamente
       </Button>
     </div>
