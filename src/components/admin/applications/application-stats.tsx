@@ -17,9 +17,12 @@ export function ApplicationStats({ className }: ApplicationStatsProps) {
   ]
 
   return (
-    <div className={cn("grid gap-4 md:grid-cols-4", className)}>
+    <div className={cn("grid gap-4 sm:grid-cols-2 md:grid-cols-4", className)}>
       {stats.map((stat) => (
-        <Card key={stat.value} className={cn("border", `border-${stat.color}`)}>
+        <Card
+          key={stat.value}
+          className={cn("flex-1 border", `border-${stat.color}`)}
+        >
           <h3 className="text-sm font-medium text-system-11">{stat.label}</h3>
           <p className="mt-2 text-3xl font-bold">{stat.count}</p>
         </Card>

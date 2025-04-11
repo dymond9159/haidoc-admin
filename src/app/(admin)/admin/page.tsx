@@ -7,8 +7,8 @@ import {
   Receipt,
   ScrollText,
 } from "lucide-react"
-import { Card } from "@/components/ui/card"
 import { StatCard, LineChart } from "@/components/common"
+import { ApplicationStats } from "@/components/admin/applications/application-stats"
 
 // Sample data for the graphs
 const newUsersData = [
@@ -36,7 +36,7 @@ export default function AdminHomePage() {
     <div className="space-y-8">
       {/* Users Section */}
       <section>
-        <h2 className="mb-4 text-2xl font-bold">Usuários</h2>
+        <h3 className="mb-4 text-xl font-semibold">Usuários</h3>
         <div className="grid gap-4 md:grid-cols-2">
           <StatCard
             title="Novos Usuários"
@@ -70,35 +70,15 @@ export default function AdminHomePage() {
 
       {/* Applications Section */}
       <section>
-        <h2 className="mb-4 text-2xl font-bold">Aplicações</h2>
-        <div className="grid gap-4 md:grid-cols-4">
-          <Card className="border-l-3 border-secondary-9">
-            <h3 className="text-sm font-medium text-system-11">Pendentes</h3>
-            <p className="mt-2 text-3xl font-bold">10</p>
-          </Card>
-
-          <Card className="border border-success-5">
-            <h3 className="text-sm font-medium text-system-11">Aprovadas</h3>
-            <p className="mt-2 text-3xl font-bold">108</p>
-          </Card>
-
-          <Card className="border border-error-5">
-            <h3 className="text-sm font-medium text-system-11">Reprovadas</h3>
-            <p className="mt-2 text-3xl font-bold">5</p>
-          </Card>
-
-          <Card className="border-r-3 border-warning-5">
-            <h3 className="text-sm font-medium text-system-11">Canceladas</h3>
-            <p className="mt-2 text-3xl font-bold">12</p>
-          </Card>
-        </div>
+        <h3 className="mb-4 text-xl font-semibold">Aplicações</h3>
+        <ApplicationStats />
       </section>
 
       {/* Finance and Delivery Sections */}
       <div className="grid gap-8 md:grid-cols-2">
         {/* Finance Section */}
         <section>
-          <h2 className="mb-4 text-2xl font-bold">Finanças</h2>
+          <h3 className="mb-4 text-xl font-semibold">Finanças</h3>
           <div className="space-y-4">
             <StatCard
               title="Faturamento total"
@@ -127,7 +107,7 @@ export default function AdminHomePage() {
 
         {/* Delivery Section */}
         <section>
-          <h2 className="mb-4 text-2xl font-bold">Entregas</h2>
+          <h3 className="mb-4 text-xl font-semibold">Entregas</h3>
           <div className="grid gap-4 grid-cols-2">
             <StatCard
               title="Aguardando Separação"

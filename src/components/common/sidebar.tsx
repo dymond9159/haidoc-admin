@@ -119,7 +119,7 @@ export function Sidebar() {
     <Button
       variant="ghost"
       size="icon"
-      className="fixed left-4 top-[23px] z-50 md:hidden"
+      className="bg-system-1 fixed left-4 top-[23px] z-50 md:hidden"
       onClick={toggleDrawer}
       aria-label="Menu"
     >
@@ -135,7 +135,7 @@ export function Sidebar() {
           <SheetContent side="left" className="p-0 w-[240px] border-r-0">
             <SheetHeader className="pb-0">
               <SheetTitle>
-                <Logo size="sm" className="mb-3 -ml-5" />
+                <Logo size="sm" className="mb-3 -ml-4" />
               </SheetTitle>
             </SheetHeader>
             <div className="px-2">
@@ -152,7 +152,7 @@ export function Sidebar() {
                       className={cn(
                         "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
                         isActive
-                          ? "bg-primary-2 text-primary-9 font-medium"
+                          ? "bg-secondary-4 text-secondary font-medium"
                           : "text-system-11 hover:bg-system-3",
                       )}
                       onClick={() => setIsOpen(false)}
@@ -201,13 +201,13 @@ export function Sidebar() {
       <div className="fixed h-full">
         <div
           className={cn(
-            "flex flex-col px-3",
-            isTablet ? "w-[70px]" : "w-[240px]",
+            "flex flex-col",
+            isTablet ? "w-[70px] px-1" : "w-[240px] px-3",
           )}
         >
           <div className="flex items-center border-b py-6">
             {isTablet ? (
-              <div className="flex w-full">
+              <div className="flex w-full px-2">
                 <LogoNoText size="sm" />
               </div>
             ) : (
@@ -228,7 +228,7 @@ export function Sidebar() {
                       "flex items-center rounded-md transition-colors",
                       isTablet ? "justify-center p-3" : "gap-3 px-3 py-2",
                       isActive
-                        ? "bg-primary-2 text-primary-9 font-medium"
+                        ? "bg-secondary-4 text-secondary font-medium"
                         : "text-system-11 hover:bg-system-3",
                     )}
                     title={isTablet ? item.label : undefined}

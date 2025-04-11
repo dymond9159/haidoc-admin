@@ -252,7 +252,7 @@ function Pagination({
                 // Example active styling using data attribute selector in CSS/global styles
                 // Or apply classes directly (though data attribute is often cleaner)
                 pageNumber === currentPage &&
-                  "border-primary bg-primary text-primary-foreground hover:bg-primary/90",
+                  "border-secondary bg-secondary text-primary-foreground hover:bg-secondary/90",
               )}
             >
               {pageNumber}

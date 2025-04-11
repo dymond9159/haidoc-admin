@@ -117,12 +117,12 @@ export function UserTable() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[40%] text-primary-9">
+              <TableHead className="w-[40%] text-secondary">
                 NOME DO USUÁRIO
               </TableHead>
-              <TableHead className="w-[35%] text-primary-9">E-MAIL</TableHead>
-              <TableHead className="w-[15%] text-primary-9">PERFIL</TableHead>
-              <TableHead className="w-[10%] text-primary-9">AÇÕES</TableHead>
+              <TableHead className="w-[35%] text-secondary">E-MAIL</TableHead>
+              <TableHead className="w-[15%] text-secondary">PERFIL</TableHead>
+              <TableHead className="w-[10%] text-secondary">AÇÕES</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -133,7 +133,7 @@ export function UserTable() {
                   {user.email}
                 </TableCell>
                 <TableCell>
-                  <Badge className="bg-secondary-2 text-secondary-9">
+                  <Badge className="bg-secondary-9 text-white">
                     {user.profile}
                   </Badge>
                 </TableCell>

@@ -19,7 +19,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   return (
     <div className="flex flex-row min-h-screen bg-system-2">
       <Sidebar />
-      <div className="flex flex-1 flex-col">
+      <div className="flex flex-1 flex-col overflow-auto">
         <Header />
         <main className="flex-1 p-6">{children}</main>
       </div>
