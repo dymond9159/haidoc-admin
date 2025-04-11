@@ -7,7 +7,6 @@ import {
   Receipt,
   ScrollText,
 } from "lucide-react"
-import { Card } from "@/components/ui/card"
 import { StatCard, LineChart } from "@/components/common"
 import { ApplicationStats } from "@/components/admin/applications/application-stats"
 

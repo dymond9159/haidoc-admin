@@ -100,6 +100,7 @@ export default function DeliveryDetailsPage() {
 
         setDelivery(mockDelivery)
       } catch (error) {
+        console.log(error)
         toast?.({
           title: "Erro",
           description: "Não foi possível carregar os detalhes da entrega.",
@@ -155,6 +156,7 @@ export default function DeliveryDetailsPage() {
         description: `Entrega #${delivery.id} atualizada para "${newStatus}"`,
       })
     } catch (error) {
+      console.log(error)
       toast({
         title: "Erro ao atualizar status",
         description: "Ocorreu um erro ao atualizar o status da entrega.",
@@ -206,6 +208,7 @@ export default function DeliveryDetailsPage() {
         router.push("/admin/deliveries")
       }, 3000)
     } catch (error) {
+      console.log(error)
       toast({
         title: "Erro",
         description: "Ocorreu um erro ao confirmar a entrega. Tente novamente.",

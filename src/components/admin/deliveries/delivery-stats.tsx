@@ -1,14 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import {
-  PackageSearch,
-  Truck,
-  Navigation,
-  PackageCheck,
-  UserPlus,
-} from "lucide-react"
+import { UserPlus } from "lucide-react"
 import { StatCard } from "@/components/common"
 
 interface DeliveryStatsData {
@@ -37,10 +30,8 @@ export function DeliveryStats() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Simulate API call to fetch initial stats
     const fetchStats = async () => {
       setLoading(true)
-      // In a real app, this would be an API call
       await new Promise((resolve) => setTimeout(resolve, 1000))
 
       setStats({
@@ -60,32 +51,40 @@ export function DeliveryStats() {
     fetchStats()
   }, [])
 
+  const cards = [
+    {
+      title: "Aguardando Separação",
+      value: stats.waitingSeparation,
+      performance: stats.waitingSeparationChange,
+    },
+    {
+      title: "Aguardando motorista",
+      value: stats.waitingDriver,
+      performance: stats.waitingDriverChange,
+    },
+    {
+      title: "À caminho",
+      value: stats.onWay,
+      performance: stats.onWayChange,
+    },
+    {
+      title: "Entregues",
+      value: stats.delivered,
+      performance: stats.deliveredChange,
+    },
+  ]
+
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-      <StatCard
-        title="Aguardando Separação"
-        value="300"
-        icon={<UserPlus className="h-5 w-5 text-system-11" />}
-        performance={20}
-      />
-      <StatCard
-        title="Aguardando Separação"
-        value="150"
-        icon={<UserPlus className="h-5 w-5 text-system-11" />}
-        performance={15}
-      />
-      <StatCard
-        title="Aguardando Separação"
-        value="75"
-        icon={<UserPlus className="h-5 w-5 text-system-11" />}
-        performance={-5}
-      />
-      <StatCard
-        title="Aguardando Separação"
-        value="450"
-        icon={<UserPlus className="h-5 w-5 text-system-11" />}
-        performance={30}
-      />
+      {cards.map((card, index) => (
+        <StatCard
+          key={index}
+          title={card.title}
+          value={loading ? "..." : card.value}
+          icon={<UserPlus className="h-5 w-5 text-system-11" />}
+          performance={card.performance}
+        />
+      ))}
     </div>
   )
 }

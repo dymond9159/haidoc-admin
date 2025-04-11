@@ -5,11 +5,10 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
-import { CheckCircle, Loader2 } from "lucide-react"
+import { Loader2 } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 
 interface ProblemReportDialogProps {
@@ -22,7 +21,6 @@ interface ProblemReportDialogProps {
 export function ProblemReportDialog({
   open,
   onOpenChange,
-  onSuccess,
   orderId,
 }: ProblemReportDialogProps) {
   const [message, setMessage] = useState("")
@@ -55,6 +53,7 @@ export function ProblemReportDialog({
       setMessage("")
       onOpenChange(false)
     } catch (error) {
+      console.log(error)
       toast({
         title: "Erro",
         description: "Ocorreu um erro ao reportar o problema. Tente novamente.",

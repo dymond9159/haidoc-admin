@@ -67,7 +67,6 @@ export function OrderTable({
   const [filteredOrders, setFilteredOrders] = useState<Order[]>([])
   const [currentPage, setCurrentPage] = useState(1)
   const [isLoading, setIsLoading] = useState(true)
-  const [isUpdatingStatus, setIsUpdatingStatus] = useState<string | null>(null)
   const { toast } = useToast()
   const itemsPerPage = 7
 
@@ -586,8 +585,6 @@ export function OrderTable({
   }, [searchQuery, selectedDate, selectedStatus, allOrders])
 
   const handleStatusChange = async (id: string, newStatus: DeliverStatus) => {
-    setIsUpdatingStatus(id)
-
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000)) // Simulate API
 
@@ -635,7 +632,6 @@ export function OrderTable({
         description: "Ocorreu um erro ao atualizar o status do pedido.",
       })
     } finally {
-      setIsUpdatingStatus(null)
     }
   }
 
