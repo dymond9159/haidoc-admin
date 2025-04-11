@@ -124,17 +124,17 @@ export function ApplicationTable({
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="text-center text-primary-9">NOME</TableHead>
-              <TableHead className="text-center text-primary-9">DATA</TableHead>
-              <TableHead className="text-center text-primary-9">
+              <TableHead className="text-center text-secondary">NOME</TableHead>
+              <TableHead className="text-center text-secondary">DATA</TableHead>
+              <TableHead className="text-center text-secondary">
                 PLANO
               </TableHead>
               {status === "rejected" && (
-                <TableHead className="text-center text-primary-9">
+                <TableHead className="text-center text-secondary">
                   TENTATIVAS
                 </TableHead>
               )}
-              <TableHead className="text-center text-primary-9">
+              <TableHead className="text-center text-secondary">
                 DETALHES
               </TableHead>
             </TableRow>

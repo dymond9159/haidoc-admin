@@ -1,7 +1,7 @@
 "use client"
 
 import type { ReactNode } from "react"
-import { Card } from "@/components/ui/card"
+import { Card, CardTitle } from "@/components/ui/card"
 import { PerformanceIndicator } from "@/components/common/performance-indicator"
 import { cn } from "@/lib/utils"
 

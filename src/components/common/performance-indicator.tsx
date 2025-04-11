@@ -18,9 +18,9 @@ export function PerformanceIndicator({
     <div
       className={cn(
         "flex items-center gap-1 text-sm",
-        isPositive && "text-success-6",
-        isNeutral && "text-warning-6",
-        isNegative && "text-error-6",
+        isPositive && "text-success-5",
+        isNeutral && "text-warning-5",
+        isNegative && "text-error-5",
         className,
       )}
     >
