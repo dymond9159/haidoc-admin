@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
 import { z } from "zod"
+import { Asterisk } from "@/components/common"
 
 // Profile type definition
 interface Permission {
@@ -170,8 +171,8 @@ export function ProfileFormDialog({
       ? "Salvando alterações..."
       : "Cadastrando perfil..."
     : profile
-      ? "Salvar alterações"
-      : "Cadastrar perfil"
+    ? "Salvar alterações"
+    : "Cadastrar perfil"
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -183,7 +184,8 @@ export function ProfileFormDialog({
           <div className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="profile-name" className="text-sm font-medium">
-                Nome do perfil<span className="text-destructive">*</span>
+                Nome do perfil
+                <Asterisk />
               </Label>
               <Input
                 id="profile-name"
@@ -207,7 +209,8 @@ export function ProfileFormDialog({
 
             <div className="space-y-2">
               <Label className="text-sm font-medium">
-                Permissões<span className="text-destructive">*</span>
+                Permissões
+                <Asterisk />
               </Label>
               <div className="space-y-3">
                 {permissions.map((permission) => (

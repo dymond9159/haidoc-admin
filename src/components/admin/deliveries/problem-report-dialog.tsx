@@ -69,7 +69,7 @@ export function ProblemReportDialog({
           <DialogTitle>Reportar problema - {orderId}</DialogTitle>
           <DialogDescription>Informe o ocorrido</DialogDescription>
           <p className="mb-1 text-xs text-muted-foreground">
-            Mensagem ao usuário*
+            Mensagem ao usuário <span>*</span>
           </p>
           <textarea
             className="min-h-[100px] w-full rounded-md border p-2 text-sm"

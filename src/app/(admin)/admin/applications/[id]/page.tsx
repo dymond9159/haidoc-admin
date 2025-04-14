@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react"
 import { useParams, useRouter, useSearchParams } from "next/navigation"
-import { ChevronLeft, Download, FileText } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
@@ -12,6 +11,8 @@ import { ApproveApplicationDialog } from "@/components/admin/applications/approv
 import { RequestDocumentDialog } from "@/components/admin/applications/request-document-dialog"
 import { SuspendApplicationDialog } from "@/components/admin/applications/suspend-application-dialog"
 import { CancelApplicationDialog } from "@/components/admin/applications/cancel-application-dialog"
+import { BackButton } from "@/components/common"
+import { DocumentList } from "@/components/admin/document-list"
 
 interface Document {
   id: string
@@ -146,12 +147,6 @@ export default function ApplicationDetailPage() {
     router.push("/admin/applications")
   }
 
-  // Handle document download
-  const handleDownloadDocument = (document: Document) => {
-    // In a real app, you would download the document
-    console.log(`Downloading document: ${document.name}`)
-  }
-
   // Render action buttons based on application status
   const renderActionButtons = () => {
     switch (applicationStatus) {
@@ -190,15 +185,7 @@ export default function ApplicationDetailPage() {
 
   return (
     <div className="space-y-6">
-      <Button
-        variant="ghost"
-        onClick={handleBack}
-        className="flex items-center text-primary-9 -ml-2"
-      >
-        <ChevronLeft className="mr-1 h-4 w-4" />
-        Detalhes
-      </Button>
-
+      <BackButton onClick={handleBack} />
       <Card className="p-6">
         <h2 className="text-xl font-bold mb-6">Detalhes da aplicação</h2>
 
@@ -260,34 +247,9 @@ export default function ApplicationDetailPage() {
           </div>
 
           <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-2 text-sm font-medium text-primary-9">
-              <div>NOME DO ARQUIVO</div>
-              <div className="text-right">OPÇÕES</div>
-            </div>
-
-            {application.documents.map((doc) => (
-              <div
-                key={doc.id}
-                className="grid grid-cols-2 gap-2 items-center py-2 border-b border-gray-100"
-              >
-                <div className="flex items-center gap-2">
-                  <FileText className="h-4 w-4 text-gray-400" />
-                  <span className="text-sm">
-                    {doc.name.toLowerCase()}.{doc.type}
-                  </span>
-                </div>
-                <div className="text-right">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-primary-9 p-1 h-auto"
-                    onClick={() => handleDownloadDocument(doc)}
-                  >
-                    <Download className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-            ))}
+            <DocumentList
+              documents={(application?.documents as Document[]) || []}
+            />
           </div>
         </div>
       </Card>

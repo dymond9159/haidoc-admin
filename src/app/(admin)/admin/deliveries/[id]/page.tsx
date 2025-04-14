@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from "react"
 import { useParams, useRouter } from "next/navigation"
-import { Loading } from "@/components/common"
+import { BackButton, Loading } from "@/components/common"
 import { Button } from "@/components/ui/button"
 import { useToast } from "@/hooks/use-toast"
-import { ChevronLeft, Loader2 } from "lucide-react"
+import { Loader2 } from "lucide-react"
 import { ProblemReportDialog } from "@/components/admin/deliveries/problem-report-dialog"
 import { DocumentList } from "@/components/admin/document-list"
 import { Card } from "@/components/ui/card"
@@ -240,21 +240,14 @@ export default function DeliveryDetailsPage() {
 
   return (
     <div className="space-y-6">
-      <Button
-        variant="ghost"
-        onClick={handleBack}
-        className="flex items-center text-primary-9 -ml-2"
-      >
-        <ChevronLeft className="mr-1 h-4 w-4" />
-        Detalhes
-      </Button>
+      <BackButton onClick={handleBack} />
       <div className="max-w-xl mx-auto">
-        <Card className="space-y-6 ">
+        <Card className="space-y-0">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-semibold">Pedido {id}</h2>
           </div>
 
-          <div className="mt-6 space-y-6">
+          <div className="space-y-6">
             <section>
               <h3 className="font-medium">Informações do pedido</h3>
               <div className="mt-2 space-y-4">

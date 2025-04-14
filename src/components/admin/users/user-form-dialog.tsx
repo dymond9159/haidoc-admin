@@ -25,6 +25,7 @@ import type { User } from "@/types/user"
 import { useToast } from "@/hooks/use-toast"
 import { MessageCircleQuestionIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { Asterisk } from "@/components/common"
 
 // Form validation schema
 const userFormSchema = z.object({
@@ -157,8 +158,8 @@ export function UserFormDialog({
         ? "Cadastrando usuário..."
         : "Cadastrar usuário"
       : isSubmitting
-        ? "Salvando alterações..."
-        : "Salvar alterações"
+      ? "Salvando alterações..."
+      : "Salvar alterações"
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -170,7 +171,8 @@ export function UserFormDialog({
           <div className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="name" className="text-sm font-medium">
-                Nome completo<span className="text-destructive">*</span>
+                Nome completo
+                <Asterisk />
               </Label>
               <Input
                 id="name"
@@ -191,7 +193,8 @@ export function UserFormDialog({
 
             <div className="space-y-2">
               <Label htmlFor="email" className="text-sm font-medium">
-                E-mail<span className="text-destructive">*</span>
+                E-mail
+                <Asterisk />
               </Label>
               <Input
                 id="email"
@@ -213,7 +216,8 @@ export function UserFormDialog({
 
             <div className="space-y-2">
               <Label htmlFor="profile" className="text-sm font-medium">
-                Perfil<span className="text-destructive">*</span>
+                Perfil
+                <Asterisk />
               </Label>
               <Select
                 value={formData.profile}
