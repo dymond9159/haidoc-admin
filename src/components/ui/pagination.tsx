@@ -4,7 +4,13 @@ import * as React from "react"
 import Link, { LinkProps } from "next/link" // Import LinkProps
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react"
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  ChevronLeft,
+  ChevronRight,
+  MoreHorizontal,
+} from "lucide-react"
 
 // --- PaginationContent (No Changes Needed) ---
 const PaginationContent = React.forwardRef<
@@ -223,51 +229,58 @@ function Pagination({
       aria-label="Pagination Navigation"
       className={cn("mx-auto flex w-full justify-center", className)}
     >
-      <PaginationContent>
+      <PaginationContent className="flex flex-row gap-2 justify-between">
         {/* Using PaginationItem (Button) for Previous */}
         <PaginationItem
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
           aria-label="Go to previous page"
-          className="h-8 w-8" // Consistent size
+          className="cursor-pointer w-fit h-8 text-secondary px-3" // Consistent size
         >
-          <ChevronLeft className="h-4 w-4" />
+          <ArrowLeftIcon className="h-4 w-4" />
+          {"Anterior"}
         </PaginationItem>
 
-        {getPageNumbers().map((pageNumber, index) =>
-          pageNumber === -1 ? (
-            <PaginationEllipsis key={`ellipsis-${index}`} className="h-8 w-8" /> // Consistent size
-          ) : (
-            // Using PaginationItem (Button) for Page Numbers
-            <PaginationItem
-              key={pageNumber}
-              onClick={() => handlePageChange(pageNumber)}
-              // Use aria-current for accessibility on the current page
-              aria-current={pageNumber === currentPage ? "page" : undefined}
-              // Use data attribute for styling the active page
-              data-active={pageNumber === currentPage ? "" : undefined}
-              aria-label={`Page ${pageNumber}`}
-              className={cn(
-                "h-8 w-8", // Consistent size
-                // Example active styling using data attribute selector in CSS/global styles
-                // Or apply classes directly (though data attribute is often cleaner)
-                pageNumber === currentPage &&
-                  "border-secondary bg-secondary text-primary-foreground hover:bg-secondary/90",
-              )}
-            >
-              {pageNumber}
-            </PaginationItem>
-          ),
-        )}
+        <div className="flex flex-row gap-2">
+          {getPageNumbers().map((pageNumber, index) =>
+            pageNumber === -1 ? (
+              <PaginationEllipsis
+                key={`ellipsis-${index}`}
+                className="h-8 w-8"
+              /> // Consistent size
+            ) : (
+              // Using PaginationItem (Button) for Page Numbers
+              <PaginationItem
+                key={pageNumber}
+                onClick={() => handlePageChange(pageNumber)}
+                // Use aria-current for accessibility on the current page
+                aria-current={pageNumber === currentPage ? "page" : undefined}
+                // Use data attribute for styling the active page
+                data-active={pageNumber === currentPage ? "" : undefined}
+                aria-label={`Page ${pageNumber}`}
+                className={cn(
+                  "h-8 w-8", // Consistent size
+                  // Example active styling using data attribute selector in CSS/global styles
+                  // Or apply classes directly (though data attribute is often cleaner)
+                  pageNumber === currentPage &&
+                    "border-secondary bg-secondary text-primary-foreground hover:bg-secondary/90",
+                )}
+              >
+                {pageNumber}
+              </PaginationItem>
+            ),
+          )}
+        </div>
 
         {/* Using PaginationItem (Button) for Next */}
         <PaginationItem
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
           aria-label="Go to next page"
-          className="h-8 w-8" // Consistent size
+          className="cursor-pointer w-fit h-8 text-secondary px-3"
         >
-          <ChevronRight className="h-4 w-4" />
+          {"Proximo"}
+          <ArrowRightIcon className="h-4 w-4" />
         </PaginationItem>
       </PaginationContent>
     </nav>
