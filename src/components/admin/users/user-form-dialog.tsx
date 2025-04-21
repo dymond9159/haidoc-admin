@@ -158,8 +158,8 @@ export function UserFormDialog({
         ? "Cadastrando usuário..."
         : "Cadastrar usuário"
       : isSubmitting
-      ? "Salvando alterações..."
-      : "Salvar alterações"
+        ? "Salvando alterações..."
+        : "Salvar alterações"
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>

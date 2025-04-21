@@ -39,9 +39,6 @@ export default function ApplicationDetailPage() {
   useEffect(() => {
     console.log("Application ID (from useParams):", id)
     console.log("Application Status (from useSearchParams):", applicationStatus)
-
-    if (id) {
-    }
   }, [id, applicationStatus])
 
   const [isRejectDialogOpen, setIsRejectDialogOpen] = useState(false)

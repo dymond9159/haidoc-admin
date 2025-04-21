@@ -235,7 +235,7 @@ function Pagination({
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
           aria-label="Go to previous page"
-          className="cursor-pointer w-fit h-8 text-secondary px-3" // Consistent size
+          className="cursor-pointer w-fit h-8 text-foreground px-3" // Consistent size
         >
           <ArrowLeftIcon className="h-4 w-4" />
           {"Anterior"}
@@ -277,7 +277,7 @@ function Pagination({
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
           aria-label="Go to next page"
-          className="cursor-pointer w-fit h-8 text-secondary px-3"
+          className="cursor-pointer w-fit h-8 text-foreground px-3"
         >
           {"Proximo"}
           <ArrowRightIcon className="h-4 w-4" />

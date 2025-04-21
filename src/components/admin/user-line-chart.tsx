@@ -17,7 +17,7 @@ interface LineChartProps {
   className?: string
 }
 
-export function LineChart({ data, color, className }: LineChartProps) {
+export function UserLineChart({ data, color, className }: LineChartProps) {
   const chartConfig = {
     value: {
       label: "Users",
@@ -70,7 +70,7 @@ export function LineChart({ data, color, className }: LineChartProps) {
           type="monotone"
           stroke="var(--color-value)"
           strokeWidth={1}
-          dot={true}
+          dot={false}
           activeDot={{ r: 3 }}
         />
       </BaseLineChart>

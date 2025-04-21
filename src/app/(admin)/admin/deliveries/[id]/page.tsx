@@ -2,53 +2,21 @@
 
 import { useState, useEffect } from "react"
 import { useParams, useRouter } from "next/navigation"
-import { BackButton, Loading } from "@/components/common"
+import { BackButton, Loading, StatusDropdown } from "@/components/common"
 import { Button } from "@/components/ui/button"
 import { useToast } from "@/hooks/use-toast"
 import { Loader2 } from "lucide-react"
 import { ProblemReportDialog } from "@/components/admin/deliveries/problem-report-dialog"
 import { DocumentList } from "@/components/admin/document-list"
 import { Card } from "@/components/ui/card"
-import { DeliverStatus } from "@/types/admin"
-import { DeliverStatusDropdown } from "@/components/admin/deliveries/deliver-status-dropdown"
-import { OrderStatusList } from "@/lib/constants"
-
-interface DeliveryItem {
-  name: string
-  quantity: number
-  price: string
-}
-
-interface StatusHistoryItem {
-  status: DeliverStatus
-  timestamp: string
-}
-
-interface Document {
-  name: string
-  type: "pdf" | "image"
-}
-
-interface Delivery {
-  id: string
-  patientId: string
-  patientName: string
-  patientPhone: string
-  patientEmail: string
-  patientAddress: string
-  date: string
-  value: string
-  status: DeliverStatus
-  items: DeliveryItem[]
-  statusHistory: StatusHistoryItem[]
-  documents: Document[]
-  paymentMethod: string
-}
+import { Deliver, DeliverStatus } from "@/types/admin"
+import { DeliverStatusList } from "@/lib/constants"
+import { mockDelivery } from "@/lib/mock-data/delivers"
 
 export default function DeliveryDetailsPage() {
   const router = useRouter()
   const { toast } = useToast()
-  const [delivery, setDelivery] = useState<Delivery | null>(null)
+  const [delivery, setDelivery] = useState<Deliver | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [isReportingProblem, setIsReportingProblem] = useState(false)
   const [isChangingStatus, setIsChangingStatus] = useState(false)
@@ -64,40 +32,6 @@ export default function DeliveryDetailsPage() {
         await new Promise((resolve) => setTimeout(resolve, 1000))
 
         // Mock data based on ID
-        const mockDelivery: Delivery = {
-          id,
-          patientId: "123456789",
-          patientName: "Ana Maria Santos de Oliveira",
-          patientPhone: "82 123 4567",
-          patientEmail: "ana.maria@example.com",
-          patientAddress:
-            "Rua do Dão, nº49, 2º Andar, Bairro Central, Cidade de Maputo, Moçambique",
-          date: "04/06/2024",
-          value: "300 MZN",
-          status: DeliverStatus.OnWay,
-          items: [
-            { name: "Paracetamol 500mg", quantity: 2, price: "150 MZN" },
-            { name: "Ibuprofeno 400mg", quantity: 1, price: "150 MZN" },
-          ],
-          statusHistory: [
-            {
-              status: DeliverStatus.OrderPlaced,
-              timestamp: "04/06/2024 10:30",
-            },
-            { status: DeliverStatus.OnWay, timestamp: "04/06/2024 10:35" },
-            {
-              status: DeliverStatus.WaitingDriver,
-              timestamp: "04/06/2024 11:00",
-            },
-          ],
-          documents: [
-            { name: "exame.pdf", type: "pdf" },
-            { name: "historico.pdf", type: "pdf" },
-            { name: "exame.jpeg", type: "image" },
-          ],
-          paymentMethod: "E-mola",
-        }
-
         setDelivery(mockDelivery)
       } catch (error) {
         console.log(error)
@@ -219,7 +153,7 @@ export default function DeliveryDetailsPage() {
   }
 
   if (isLoading) {
-    return <Loading />
+    return <Loading text={"Carregando detalhes da entrega..."} />
   }
 
   if (!delivery) {
@@ -264,9 +198,9 @@ export default function DeliveryDetailsPage() {
                 <div>
                   <p className="text-xs text-muted-foreground">Status</p>
                   <div className="mt-1">
-                    <DeliverStatusDropdown
+                    <StatusDropdown
                       status={delivery.status as DeliverStatus}
-                      availableStatus={OrderStatusList}
+                      availableStatus={DeliverStatusList}
                       onStatusChange={(newStatus) =>
                         handleStatusChange(newStatus)
                       }

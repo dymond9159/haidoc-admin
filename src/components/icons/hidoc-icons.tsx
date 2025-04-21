@@ -20,7 +20,7 @@ export function LogoNoTextIcon(props: LucideProps) {
         d="M30.2217 10.9961C27.7186 8.03965 24.0628 6.11646 19.9911 6.11646C12.4452 6.11646 6.32812 12.7215 6.32812 20.2674C6.32812 27.8132 12.4452 33.4424 19.9911 33.4424C27.5369 33.4424 33.654 27.8132 33.654 20.2674H24.8707L22.4309 24.659L19.9911 13.4359L17.5513 20.2674H11.6957"
         stroke="#FF4141"
         strokeWidth="2.5"
-        stroke-linecap="round"
+        strokeLinecap="round"
         strokeLinejoin="round"
       />
     </svg>

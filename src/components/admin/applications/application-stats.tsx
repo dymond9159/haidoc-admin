@@ -10,10 +10,10 @@ interface ApplicationStatsProps {
 export function ApplicationStats({ className }: ApplicationStatsProps) {
   // Mock data for application counts
   const stats = [
-    { label: "Pendentes", count: 10, value: "pending", color: "secondary-9" },
-    { label: "Aprovadas", count: 108, value: "approved", color: "success-5" },
-    { label: "Reprovadas", count: 5, value: "rejected", color: "error-5" },
-    { label: "Canceladas", count: 12, value: "canceled", color: "warning-5" },
+    { label: "Pendentes", count: 10, value: "pending", color: "info-4" },
+    { label: "Aprovadas", count: 108, value: "approved", color: "success-4" },
+    { label: "Reprovadas", count: 5, value: "rejected", color: "error-4" },
+    { label: "Canceladas", count: 12, value: "canceled", color: "warning-4" },
   ]
 
   return (
@@ -24,7 +24,7 @@ export function ApplicationStats({ className }: ApplicationStatsProps) {
           className={cn("flex-1 border", `border-${stat.color}`)}
         >
           <h3 className="text-sm font-medium text-system-11">{stat.label}</h3>
-          <p className="mt-2 text-3xl font-bold">{stat.count}</p>
+          <p className="text-3xl font-bold">{stat.count}</p>
         </Card>
       ))}
     </div>
