@@ -9,41 +9,22 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { cn } from "@/lib/utils"
-import { DeliverStatus } from "@/types/admin"
+import { statusColorMap } from "@/types/admin"
 
-interface StatusDropdownProps {
-  status: DeliverStatus
-  availableStatus: string[]
-  onStatusChange: (newStatus: DeliverStatus) => Promise<void>
+interface StatusDropdownProps<T> {
+  status: T
+  availableStatus: T[]
+  onStatusChange: (newStatus: T) => Promise<void>
 }
 
-export function DeliverStatusDropdown({
+export function StatusDropdown<T>({
   status,
   availableStatus,
   onStatusChange,
-}: StatusDropdownProps) {
+}: StatusDropdownProps<T>) {
   const [isChanging, setIsChanging] = useState(false)
 
-  const getStatusClass = (status: DeliverStatus) => {
-    switch (status) {
-      case DeliverStatus.WaitingDriver:
-        return "bg-rating-2 text-rating-6"
-      case DeliverStatus.OnWay:
-        return "bg-warning-2 text-warning-5"
-      case DeliverStatus.WaitingSeparation:
-        return "bg-info-2 text-info-5"
-      case DeliverStatus.Delivered:
-        return "bg-success-2 text-success-6"
-      case DeliverStatus.Canceled:
-        return "bg-error-2 text-error-5"
-      case DeliverStatus.OrderPlaced:
-        return "status-order-placed" // Added class for this status
-      default:
-        return ""
-    }
-  }
-
-  const handleStatusChange = async (newStatus: DeliverStatus) => {
+  const handleStatusChange = async (newStatus: T) => {
     setIsChanging(true)
     try {
       await onStatusChange(newStatus)
@@ -58,7 +39,7 @@ export function DeliverStatusDropdown({
         <button
           className={cn(
             "cursor-pointer px-3 py-1 rounded-full text-sm font-medium inline-flex items-center transition-colors duration-150",
-            getStatusClass(status),
+            statusColorMap[status as string],
             isChanging && "bg-transparent text-foreground",
           )}
           disabled={isChanging}
@@ -66,7 +47,7 @@ export function DeliverStatusDropdown({
           {isChanging ? (
             <>
               <Loader2 className="mr-1 h-3 w-3 animate-spin" />
-              Atualizando...
+              Mudando...
             </>
           ) : (
             <>
@@ -80,9 +61,9 @@ export function DeliverStatusDropdown({
         {availableStatus?.map((item, index) => (
           <DropdownMenuItem
             key={index}
-            onClick={() => handleStatusChange(item as DeliverStatus)}
+            onClick={() => handleStatusChange(item as T)}
           >
-            {item}
+            {item as string}
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

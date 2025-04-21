@@ -81,8 +81,8 @@ export function DeliveryStats() {
           key={index}
           title={card.title}
           value={loading ? "..." : card.value}
-          icon={<UserPlus className="h-5 w-5 text-system-11" />}
-          performance={card.performance}
+          icon={<UserPlus />}
+          trend={card.performance}
         />
       ))}
     </div>

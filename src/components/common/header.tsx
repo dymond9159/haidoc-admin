@@ -22,7 +22,6 @@ export function Header() {
   useEffect(() => {
     // Set default page title based on pathname
     const pageTitles: Record<string, string> = {
-      "/admin": "Home",
       "/admin/dashboard": "Dashboard",
       "/admin/users": "Gerenciamento de Usuários",
       "/admin/applications": "Aplicações de usuários business",
@@ -31,9 +30,24 @@ export function Header() {
       "/admin/finances": "Finanças",
       "/admin/activity-log": "Log de Atividades",
       "/admin/taxes": "Taxas",
+      "/admin": "Home",
     }
 
-    setPageTitle(pageTitles[pathname] || "")
+    // Sort paths by length DESC so more specific ones match first
+    Object.keys(pageTitles).sort(
+      (a, b) => b.length - a.length,
+    )
+
+    // Find the most relevant prefix match
+    const match = Object.keys(pageTitles).find((key) =>
+      pathname.startsWith(key),
+    )
+
+    if (match) {
+      setPageTitle(pageTitles[match])
+    } else {
+      setPageTitle("") // fallback
+    }
   }, [pathname])
 
   return (

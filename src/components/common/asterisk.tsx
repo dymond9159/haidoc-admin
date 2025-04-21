@@ -1,3 +1,3 @@
 export const Asterisk = () => {
-  return <Asterisk />
+  return <span className="text-primary">*</span>
 }

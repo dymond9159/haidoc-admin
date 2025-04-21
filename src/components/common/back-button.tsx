@@ -1,19 +1,20 @@
-import { ArrowLeftIcon } from "lucide-react"
+import { ChevronLeftIcon } from "lucide-react"
 import { Button } from "../ui"
 
 interface BackButtonProps {
+  text?: string
   onClick?: () => void
 }
 
-export const BackButton = ({ onClick }: BackButtonProps) => {
+export const BackButton = ({ text = "Detalhes", onClick }: BackButtonProps) => {
   return (
     <Button
-      variant="ghost"
+      variant="link"
       onClick={onClick}
-      className="flex items-center text-secondary -ml-2"
+      className="flex items-center text-foreground hover:text-secondary -ml-2"
     >
-      <ArrowLeftIcon className="mr-1 h-4 w-4" />
-      Detalhes
+      <ChevronLeftIcon className="h-4 w-4" />
+      {text}
     </Button>
   )
 }

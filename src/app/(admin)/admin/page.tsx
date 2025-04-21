@@ -1,35 +1,9 @@
 "use client"
 
-import {
-  DollarSign,
-  UserPlus,
-  UserCheck,
-  Receipt,
-  ScrollText,
-} from "lucide-react"
-import { StatCard, LineChart } from "@/components/common"
+import { DollarSign, UserPlus, Receipt, ScrollText } from "lucide-react"
+import { StatCard } from "@/components/common"
 import { ApplicationStats } from "@/components/admin/applications/application-stats"
-
-// Sample data for the graphs
-const newUsersData = [
-  { day: "Seg", value: 290 },
-  { day: "Ter", value: 260 },
-  { day: "Qua", value: 210 },
-  { day: "Qui", value: 190 },
-  { day: "Sex", value: 140 },
-  { day: "Sáb", value: 90 },
-  { day: "Dom", value: 75 },
-]
-
-const activeUsersData = [
-  { day: "Seg", value: 240 },
-  { day: "Ter", value: 250 },
-  { day: "Qua", value: 260 },
-  { day: "Qui", value: 255 },
-  { day: "Sex", value: 140 },
-  { day: "Sáb", value: 90 },
-  { day: "Dom", value: 300 },
-]
+import { UserStats } from "@/components/admin/users-stats"
 
 export default function AdminHomePage() {
   return (
@@ -37,35 +11,7 @@ export default function AdminHomePage() {
       {/* Users Section */}
       <section>
         <h3 className="mb-4 text-xl font-semibold">Usuários</h3>
-        <div className="grid gap-4 md:grid-cols-2">
-          <StatCard
-            title="Novos Usuários"
-            value="300"
-            icon={<UserPlus className="h-5 w-5 text-system-11" />}
-            performance={-20}
-            chart={
-              <LineChart
-                data={newUsersData}
-                color="#FF4D4F"
-                className="h-full"
-              />
-            }
-          />
-
-          <StatCard
-            title="Usuários ativos"
-            value="300"
-            icon={<UserCheck className="h-5 w-5 text-system-11" />}
-            performance={20}
-            chart={
-              <LineChart
-                data={activeUsersData}
-                className="h-full"
-                color="#52C41A"
-              />
-            }
-          />
-        </div>
+        <UserStats />
       </section>
 
       {/* Applications Section */}
@@ -83,23 +29,23 @@ export default function AdminHomePage() {
             <StatCard
               title="Faturamento total"
               value="MT 300"
-              icon={<DollarSign className="h-5 w-5 text-system-11" />}
-              performance={20}
+              icon={<DollarSign />}
+              trend={20}
             />
 
             <div className="grid gap-4 md:grid-cols-2">
               <StatCard
                 title="Total de Faturas"
                 value="500"
-                icon={<ScrollText className="h-5 w-5 text-system-11" />}
-                performance={20}
+                icon={<ScrollText />}
+                trend={20}
               />
 
               <StatCard
                 title="Total de Recibos"
                 value="500"
-                icon={<Receipt className="h-5 w-5 text-system-11" />}
-                performance={0}
+                icon={<Receipt />}
+                trend={0}
               />
             </div>
           </div>
@@ -112,29 +58,29 @@ export default function AdminHomePage() {
             <StatCard
               title="Aguardando Separação"
               value="300"
-              icon={<UserPlus className="h-5 w-5 text-system-11" />}
-              performance={20}
+              icon={<UserPlus />}
+              trend={20}
             />
 
             <StatCard
               title="Entregues"
               value="300"
-              icon={<UserPlus className="h-5 w-5 text-system-11" />}
-              performance={20}
+              icon={<UserPlus />}
+              trend={20}
             />
 
             <StatCard
               title="Aguardando motorista"
               value="300"
-              icon={<UserPlus className="h-5 w-5 text-system-11" />}
-              performance={20}
+              icon={<UserPlus />}
+              trend={20}
             />
 
             <StatCard
               title="A caminho"
               value="300"
-              icon={<UserPlus className="h-5 w-5 text-system-11" />}
-              performance={20}
+              icon={<UserPlus />}
+              trend={20}
             />
           </div>
         </section>
