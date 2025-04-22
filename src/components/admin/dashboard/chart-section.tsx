@@ -79,6 +79,7 @@ export function ChartSection({ title, data = [] }: ChartSectionProps) {
               orientation="horizontal"
               defaultValue={ChartType.Bar}
               onValueChange={(value) => setChartType(value as ChartType)}
+              className="flex flex-row gap-3"
             >
               <RadioGroupItem value={ChartType.Line}>
                 <ChartLineIcon size="21" />

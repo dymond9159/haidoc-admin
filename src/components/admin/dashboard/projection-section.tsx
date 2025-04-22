@@ -41,7 +41,10 @@ export function DashboardProjectionSection() {
             {Object.entries(ProjectionTabs).map(([key, item], index) => (
               <TabsTrigger
                 key={index}
-                className={cn(index < 2 ? "col-span-2" : "col-span-1")}
+                className={cn(
+                  index < 2 ? "col-span-2" : "col-span-1",
+                  "truncate",
+                )}
                 value={item}
                 variant="button"
                 size="lg"
