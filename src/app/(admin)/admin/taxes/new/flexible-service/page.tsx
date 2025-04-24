@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { Suspense, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -64,108 +64,112 @@ export default function ServicoFixoFeeForm() {
   }
 
   return (
-    <div className="p-6">
-      <div className="mb-6">
+    <Suspense fallback={<div>Carregando...</div>}>
+      <div className="space-y-6">
         <div className="mb-6">
-          <BackButton text="Nova taxa" onClick={() => router.back()} />
+          <div className="mb-6">
+            <BackButton text="Nova taxa" onClick={() => router.back()} />
+          </div>
         </div>
-      </div>
 
-      <Card>
-        <form onSubmit={handleSubmit}>
-          <h2 className="text-lg font-medium text-secondary mb-6">
-            Selecione o serviço
-          </h2>
+        <Card>
+          <form onSubmit={handleSubmit}>
+            <h2 className="text-lg font-medium text-secondary mb-6">
+              Selecione o serviço
+            </h2>
 
-          <div className="grid grid-cols-3 gap-6 mb-6">
-            <div>
-              <label className="block text-sm mb-2">
-                Serviço <Asterisk />
-              </label>
-              <Select
-                value={selectedService}
-                onValueChange={setSelectedService}
-              >
-                <SelectTrigger className="w-full">
-                  <SelectValue>{serviceTypesMap[selectedService]}</SelectValue>
-                </SelectTrigger>
-                <SelectContent>
-                  {Object.entries(serviceTypesMap).map(([id, name]) => (
-                    <SelectItem key={id} value={id}>
-                      {name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div>
-              <label className="block text-sm mb-2">
-                Valor <Asterisk />
-              </label>
-              <Input
-                value={serviceValuesMap[serviceType]}
-                disabled
-                className="bg-gray-50"
-              />
-            </div>
-
-            {selectedService === "entrega-medicamentos" && (
+            <div className="grid grid-cols-3 gap-6 mb-6">
               <div>
                 <label className="block text-sm mb-2">
-                  Porcentagem da taxa <Asterisk />
+                  Serviço <Asterisk />
                 </label>
-                <Input placeholder="%" />
+                <Select
+                  value={selectedService}
+                  onValueChange={setSelectedService}
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue>
+                      {serviceTypesMap[selectedService]}
+                    </SelectValue>
+                  </SelectTrigger>
+                  <SelectContent>
+                    {Object.entries(serviceTypesMap).map(([id, name]) => (
+                      <SelectItem key={id} value={id}>
+                        {name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
-            )}
-          </div>
 
-          <div className="grid grid-cols-2 gap-6 mb-6">
-            <div>
-              <label className="block text-sm mb-2">
-                Nome da taxa <Asterisk />
-              </label>
-              <Input
-                value={feeName}
-                onChange={(e) => setFeeName(e.target.value)}
-                placeholder="Digite aqui"
-              />
+              <div>
+                <label className="block text-sm mb-2">
+                  Valor <Asterisk />
+                </label>
+                <Input
+                  value={serviceValuesMap[serviceType]}
+                  disabled
+                  className="bg-gray-50"
+                />
+              </div>
+
+              {selectedService === "entrega-medicamentos" && (
+                <div>
+                  <label className="block text-sm mb-2">
+                    Porcentagem da taxa <Asterisk />
+                  </label>
+                  <Input placeholder="%" />
+                </div>
+              )}
             </div>
 
-            <div>
-              <label className="block text-sm mb-2">
-                Plano <Asterisk />
-              </label>
-              {/* Pass the options prop to MultiSelect */}
-              <MultiSelect
-                value={selectedPlans}
-                onChange={setSelectedPlans}
-                options={planOptions}
-                placeholder="Selecione o plano"
+            <div className="grid grid-cols-2 gap-6 mb-6">
+              <div>
+                <label className="block text-sm mb-2">
+                  Nome da taxa <Asterisk />
+                </label>
+                <Input
+                  value={feeName}
+                  onChange={(e) => setFeeName(e.target.value)}
+                  placeholder="Digite aqui"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm mb-2">
+                  Plano <Asterisk />
+                </label>
+                {/* Pass the options prop to MultiSelect */}
+                <MultiSelect
+                  value={selectedPlans}
+                  onChange={setSelectedPlans}
+                  options={planOptions}
+                  placeholder="Selecione o plano"
+                >
+                  <MultiSelectContent>
+                    {planOptions.map((plan) => (
+                      <MultiSelectItem key={plan.value} value={plan.value}>
+                        {plan.label}
+                      </MultiSelectItem>
+                    ))}
+                  </MultiSelectContent>
+                </MultiSelect>
+              </div>
+            </div>
+
+            <div className="flex justify-end space-x-4">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => router.back()}
               >
-                <MultiSelectContent>
-                  {planOptions.map((plan) => (
-                    <MultiSelectItem key={plan.value} value={plan.value}>
-                      {plan.label}
-                    </MultiSelectItem>
-                  ))}
-                </MultiSelectContent>
-              </MultiSelect>
+                Cancelar
+              </Button>
+              <Button type="submit">Salvar</Button>
             </div>
-          </div>
-
-          <div className="flex justify-end space-x-4">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => router.back()}
-            >
-              Cancelar
-            </Button>
-            <Button type="submit">Salvar</Button>
-          </div>
-        </form>
-      </Card>
-    </div>
+          </form>
+        </Card>
+      </div>
+    </Suspense>
   )
 }

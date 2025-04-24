@@ -8,7 +8,6 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogClose,
 } from "@/components/ui/dialog"
 import { ActivityLogEntry } from "@/types"
 import { PdfFileIcon } from "@/components/icons"

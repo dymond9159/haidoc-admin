@@ -3,7 +3,7 @@
 import { useState, useMemo, useCallback } from "react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Pencil, Trash, Trash2 } from "lucide-react"
+import { Pencil, Trash2 } from "lucide-react"
 import { UserFormDialog } from "@/components/admin/users/user-form-dialog"
 import { DeleteUserDialog } from "@/components/admin/users/delete-user-dialog"
 import type { User } from "@/types/user"

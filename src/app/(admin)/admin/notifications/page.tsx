@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { useToast } from "@/hooks/use-toast"
-import { Loader2 } from "lucide-react"
 import { NotificationType, Notifications } from "@/types"
 import { mockNotifications } from "@/lib/mock-data/notifications"
 import { NotificationFilters } from "@/components/common/notification-filters"

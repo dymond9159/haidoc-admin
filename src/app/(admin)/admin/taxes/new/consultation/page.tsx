@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useEffect, useState } from "react"
+import { Suspense, useEffect, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { ChevronLeft, Plus } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -104,169 +104,173 @@ export default function ConsultaFeeForm() {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="mb-6">
-        <BackButton text="Nova taxa" onClick={() => router.back()} />
-      </div>
+    <Suspense fallback={<div>Carregando...</div>}>
+      <div className="space-y-6">
+        <div className="mb-6">
+          <BackButton text="Nova taxa" onClick={() => router.back()} />
+        </div>
 
-      <Card>
-        <form onSubmit={handleSubmit}>
-          <h3 className="text-lg font-medium text-secondary mb-4">Serviço</h3>
-          <div className="grid grid-cols-2 gap-6 mb-6">
-            <div>
-              <label className="block text-sm mb-2">
-                Serviço <Asterisk />
-              </label>
-              <Select
-                value={selectedService}
-                onValueChange={setSelectedService}
-              >
-                <SelectTrigger className="w-full">
-                  <SelectValue>{serviceTypesMap[selectedService]}</SelectValue>
-                </SelectTrigger>
-                <SelectContent>
-                  {Object.entries(serviceTypesMap).map(([id, name]) => (
-                    <SelectItem key={id} value={id}>
-                      {name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            {selectedService !== "consulta-chat" && (
+        <Card>
+          <form onSubmit={handleSubmit}>
+            <h3 className="text-lg font-medium text-secondary mb-4">Serviço</h3>
+            <div className="grid grid-cols-2 gap-6 mb-6">
               <div>
                 <label className="block text-sm mb-2">
-                  Categoria <Asterisk />
+                  Serviço <Asterisk />
                 </label>
                 <Select
-                  value={selectedCategory}
-                  onValueChange={setSelectedCategory}
+                  value={selectedService}
+                  onValueChange={setSelectedService}
                 >
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Selecione a categoria" />
+                    <SelectValue>
+                      {serviceTypesMap[selectedService]}
+                    </SelectValue>
                   </SelectTrigger>
                   <SelectContent>
-                    {categoryOptions.map((category) => (
-                      <SelectItem key={category.id} value={category.id}>
-                        {category.name}
+                    {Object.entries(serviceTypesMap).map(([id, name]) => (
+                      <SelectItem key={id} value={id}>
+                        {name}
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
               </div>
-            )}
-          </div>
 
-          <div className="grid grid-cols-2 gap-6 mb-6">
-            <div>
-              <label className="block text-sm mb-2">
-                Nome da taxa <Asterisk />
-              </label>
-              <Input
-                value={feeName}
-                onChange={(e) => setFeeName(e.target.value)}
-                placeholder="Digite aqui"
-              />
+              {selectedService !== "consulta-chat" && (
+                <div>
+                  <label className="block text-sm mb-2">
+                    Categoria <Asterisk />
+                  </label>
+                  <Select
+                    value={selectedCategory}
+                    onValueChange={setSelectedCategory}
+                  >
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Selecione a categoria" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {categoryOptions.map((category) => (
+                        <SelectItem key={category.id} value={category.id}>
+                          {category.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              )}
             </div>
 
-            <div>
-              <label className="block text-sm mb-2">
-                Plano <Asterisk />
-              </label>
-              <MultiSelect
-                options={planOptions}
-                value={selectedPlans}
-                onChange={setSelectedPlans}
-              >
-                <MultiSelectTrigger>
-                  <MultiSelectValue />
-                </MultiSelectTrigger>
-                <MultiSelectContent>
-                  {planOptions.map((plan) => (
-                    <MultiSelectItem key={plan.value} value={plan.value}>
-                      {plan.label}
-                    </MultiSelectItem>
-                  ))}
-                </MultiSelectContent>
-              </MultiSelect>
-            </div>
-          </div>
+            <div className="grid grid-cols-2 gap-6 mb-6">
+              <div>
+                <label className="block text-sm mb-2">
+                  Nome da taxa <Asterisk />
+                </label>
+                <Input
+                  value={feeName}
+                  onChange={(e) => setFeeName(e.target.value)}
+                  placeholder="Digite aqui"
+                />
+              </div>
 
-          <h3 className="text-lg font-medium text-secondary mb-4">
-            Parametrização
-          </h3>
-
-          {parameters.map((param, index) => (
-            <div key={param.id} className="mb-6">
-              <h4 className="text-sm font-medium mb-3">
-                Parâmetro {index + 1}
-              </h4>
-              <div className="grid grid-cols-3 gap-4">
-                <div>
-                  <label className="block text-sm mb-2">
-                    Valor mínimo <Asterisk />
-                  </label>
-                  <Input
-                    value={param.minValue}
-                    onChange={(e) =>
-                      updateParameter(param.id, "minValue", e.target.value)
-                    }
-                    placeholder="Digite aqui"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm mb-2">
-                    Valor máximo <Asterisk />
-                  </label>
-                  <Input
-                    value={param.maxValue}
-                    onChange={(e) =>
-                      updateParameter(param.id, "maxValue", e.target.value)
-                    }
-                    placeholder="Digite aqui"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm mb-2">
-                    Porcentagem da taxa <Asterisk />
-                  </label>
-                  <Input
-                    value={param.percentage}
-                    onChange={(e) =>
-                      updateParameter(param.id, "percentage", e.target.value)
-                    }
-                    placeholder="%"
-                  />
-                </div>
+              <div>
+                <label className="block text-sm mb-2">
+                  Plano <Asterisk />
+                </label>
+                <MultiSelect
+                  options={planOptions}
+                  value={selectedPlans}
+                  onChange={setSelectedPlans}
+                >
+                  <MultiSelectTrigger>
+                    <MultiSelectValue />
+                  </MultiSelectTrigger>
+                  <MultiSelectContent>
+                    {planOptions.map((plan) => (
+                      <MultiSelectItem key={plan.value} value={plan.value}>
+                        {plan.label}
+                      </MultiSelectItem>
+                    ))}
+                  </MultiSelectContent>
+                </MultiSelect>
               </div>
             </div>
-          ))}
 
-          <Button
-            type="button"
-            variant="ghost"
-            className="text-red-500 mb-6"
-            onClick={addParameter}
-          >
-            <Plus size={16} className="mr-2" />
-            Novo parâmetro
-          </Button>
+            <h3 className="text-lg font-medium text-secondary mb-4">
+              Parametrização
+            </h3>
 
-          <div className="flex justify-end space-x-4">
+            {parameters.map((param, index) => (
+              <div key={param.id} className="mb-6">
+                <h4 className="text-sm font-medium mb-3">
+                  Parâmetro {index + 1}
+                </h4>
+                <div className="grid grid-cols-3 gap-4">
+                  <div>
+                    <label className="block text-sm mb-2">
+                      Valor mínimo <Asterisk />
+                    </label>
+                    <Input
+                      value={param.minValue}
+                      onChange={(e) =>
+                        updateParameter(param.id, "minValue", e.target.value)
+                      }
+                      placeholder="Digite aqui"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm mb-2">
+                      Valor máximo <Asterisk />
+                    </label>
+                    <Input
+                      value={param.maxValue}
+                      onChange={(e) =>
+                        updateParameter(param.id, "maxValue", e.target.value)
+                      }
+                      placeholder="Digite aqui"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm mb-2">
+                      Porcentagem da taxa <Asterisk />
+                    </label>
+                    <Input
+                      value={param.percentage}
+                      onChange={(e) =>
+                        updateParameter(param.id, "percentage", e.target.value)
+                      }
+                      placeholder="%"
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
+
             <Button
               type="button"
-              variant="outline"
-              onClick={() => router.back()}
+              variant="ghost"
+              className="text-primary mb-6"
+              onClick={addParameter}
             >
-              Cancelar
+              <Plus size={16} className="mr-2" />
+              Novo parâmetro
             </Button>
-            <Button type="submit">Salvar</Button>
-          </div>
-        </form>
-      </Card>
-    </div>
+
+            <div className="flex justify-end space-x-4">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => router.back()}
+              >
+                Cancelar
+              </Button>
+              <Button type="submit">Salvar</Button>
+            </div>
+          </form>
+        </Card>
+      </div>
+    </Suspense>
   )
 }

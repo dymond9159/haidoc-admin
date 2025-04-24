@@ -2,7 +2,6 @@
 
 import Link from "next/link"
 import {
-  Bell,
   ShoppingBag,
   ChevronDown,
   LogOutIcon,

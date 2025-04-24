@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { PackageIcon, UserPlus } from "lucide-react"
+import { PackageIcon } from "lucide-react"
 import { StatCard } from "@/components/common"
 import {
   DeployedHistoryIcon,

@@ -1,10 +1,7 @@
 "use client"
 
-import { useState } from "react"
-import Link from "next/link"
-import { Search, Plus } from "lucide-react"
+import { Plus } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { TaxesTable } from "@/components/admin/taxes/taxes-table"
 import { useRouter } from "next/navigation"
 

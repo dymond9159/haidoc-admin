@@ -1,19 +1,14 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
-import { ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Pagination } from "@/components/ui/pagination"
 import { ActivityLogEntry } from "@/types"
-import { useRouter } from "next/navigation"
 import { ActivityDetailDialog } from "@/components/admin/activity-log/activity-detail-dialog"
 import { activities as mockActivities } from "@/lib/mock-data/activity-log"
 import { BackButton } from "@/components/common"
 
 export default function AdminActivitiesPage() {
-  const router = useRouter()
-
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedActivity, setSelectedActivity] =
     useState<ActivityLogEntry | null>(null)

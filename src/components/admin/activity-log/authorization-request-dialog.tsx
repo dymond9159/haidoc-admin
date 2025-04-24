@@ -9,7 +9,6 @@ import {
   DialogHeader,
   DialogTitle,
   DialogClose,
-  DialogDescription,
 } from "@/components/ui/dialog"
 
 export type AuthorizationRequestType = "medical" | "documents"
@@ -25,14 +24,7 @@ interface AuthorizationRequestDialogProps {
 
 export const AuthorizationRequestDialog: React.FC<
   AuthorizationRequestDialogProps
-> = ({
-  open,
-  onOpenChange,
-  requestType,
-  patientName,
-  onConfirm,
-  currentDate,
-}) => {
+> = ({ open, onOpenChange, requestType, onConfirm, currentDate }) => {
   const titleText = "Nome da Operação:"
   const descriptionText =
     requestType === "medical"
