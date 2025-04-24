@@ -13,6 +13,15 @@ export function formatDate(date: Date): string {
   })
 }
 
+// const getFormattedDate = (): string => {
+//   const today = new Date()
+//   return new Intl.DateTimeFormat("pt-BR", {
+//     day: "2-digit",
+//     month: "2-digit",
+//     year: "numeric",
+//   }).format(today)
+// }
+
 import html2canvas from "html2canvas"
 import { jsPDF } from "jspdf"
 

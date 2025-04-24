@@ -38,9 +38,11 @@ export function DeleteProfileDialog({
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Excluir perfil</AlertDialogTitle>
-          <AlertDialogDescription>
+          <AlertDialogTitle>
             Tem certeza que deseja excluir este perfil de usuário?
+          </AlertDialogTitle>
+          <AlertDialogDescription>
+            Essa ação não pode ser desfeita.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <div className="text-destructive font-medium text-sm mb-4">

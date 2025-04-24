@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Pencil, Trash, Plus } from "lucide-react"
+import { Pencil, Plus, Trash2Icon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Switch } from "@/components/ui/switch"
 import { ProfileFormDialog } from "@/components/admin/users/profile-form-dialog"
@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/accordion"
 import { Pagination } from "@/components/ui/pagination"
 import { useToast } from "@/hooks/use-toast"
-import { Separator } from "@radix-ui/react-dropdown-menu"
+import { Separator } from "@/components/ui/separator"
 
 // Profile type definition
 interface Permission {
@@ -228,83 +228,78 @@ export function ProfilesTab() {
         </Button>
       </div>
 
-      <div className="rounded-md border bg-white overflow-hidden">
-        <Accordion type="multiple" className="w-full">
-          {profiles.map((profile) => (
-            <AccordionItem
-              key={profile.id}
-              value={profile.id}
-              className="border-b"
-            >
-              <div className="flex items-center justify-between px-4">
-                <AccordionTrigger className="flex-1 py-4 hover:no-underline">
+      <Accordion type="multiple" className="w-full">
+        {profiles.map((profile) => (
+          <AccordionItem key={profile.id} value={profile.id} className="w-full">
+            <div>
+              <AccordionTrigger className="w-full py-4 flex items-center hover:no-underline">
+                <div className="flex-1 flex items-center justify-between">
                   <span className="font-medium">{profile.name}</span>
-                </AccordionTrigger>
-                <div className="flex gap-2 pr-2">
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      handleEditProfile(profile)
-                    }}
-                    aria-label={`Editar perfil ${profile.name}`}
-                  >
-                    <Pencil className="h-4 w-4" />
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      handleDeleteProfile(profile)
-                    }}
-                    aria-label={`Excluir perfil ${profile.name}`}
-                  >
-                    <Trash className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-              <AccordionContent className="px-4 pb-4">
-                <div className="space-y-4">
-                  {profile.permissions.map((permission) => (
-                    <div
-                      key={permission.id}
-                      className="flex items-start gap-3 rounded-md border p-3"
+                  <div className="flex gap-2 pr-2">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handleEditProfile(profile)
+                      }}
+                      aria-label={`Editar perfil ${profile.name}`}
                     >
-                      <Switch
-                        id={`permission-${profile.id}-${permission.id}`}
-                        checked={permission.enabled}
-                        className="mt-0.5"
-                        disabled
-                      />
-                      <div className="flex-1">
-                        <label
-                          htmlFor={`permission-${profile.id}-${permission.id}`}
-                          className="block font-medium"
-                        >
-                          {permission.name}
-                        </label>
-                        <p className="text-sm text-muted-foreground">
-                          {permission.description}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
+                      <Pencil className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="ghost-destructive"
+                      size="icon"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handleDeleteProfile(profile)
+                      }}
+                      aria-label={`Excluir perfil ${profile.name}`}
+                    >
+                      <Trash2Icon className="h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </div>
-      <Separator className="my-2" />
-      <div className="flex items-center justify-center">
-        <Pagination
-          currentPage={currentPage}
-          totalPages={10}
-          onPageChange={setCurrentPage}
-        />
-      </div>
+              </AccordionTrigger>
+            </div>
+            <AccordionContent className="px-4 pb-4">
+              <Separator className="mt-2 mb-4" />
+              <div className="space-y-4">
+                {profile.permissions.map((permission) => (
+                  <div
+                    key={permission.id}
+                    className="flex items-start gap-3 p-3"
+                  >
+                    <Switch
+                      id={`permission-${profile.id}-${permission.id}`}
+                      checked={permission.enabled}
+                      className="mt-0.5"
+                      disabled
+                    />
+                    <div className="flex-1">
+                      <label
+                        htmlFor={`permission-${profile.id}-${permission.id}`}
+                        className="block font-medium"
+                      >
+                        {permission.name}
+                      </label>
+                      <p className="text-sm text-muted-foreground">
+                        {permission.description}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+      <Separator className="my-4" />
+      <Pagination
+        currentPage={currentPage}
+        totalPages={10}
+        onPageChange={setCurrentPage}
+      />
 
       {/* Profile Form Dialog */}
       <ProfileFormDialog

@@ -134,6 +134,36 @@ export interface Consultation {
 }
 
 /*
+ * Activity-log
+ */
+export interface ActivityLogEntry {
+  id: string | number
+  name: string
+  date: string
+  time: string
+  type: number
+  description?: string
+  beforeDocument?: string
+  afterDocument?: string
+}
+
+/*
+ * Taxes
+ */
+
+export enum TaxStatus {
+  Active = "Ativo",
+  Inactive = "Inativo",
+}
+
+export interface Tax {
+  id: number
+  name: string
+  percentage: string
+  status: TaxStatus
+}
+
+/*
  *  Status Color
  */
 export const statusColorMap: Record<string, string> = {

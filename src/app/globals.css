@@ -89,26 +89,26 @@
     --info-6: #163E48; /* 217 100% 61% */
 
     /* Shadcn UI required variables */
-    /* --background: var(--system-1); */
-    /* --foreground: var(--system-13); */
-    /* --card: var(--system-1); */
-    /* --card-foreground: var(--system-13); */
-    /* --popover: var(--system-1); */
-    /* --popover-foreground: var(--system-13); */
-    /* --primary: var(--primary-9);
+    --background: var(--system-1);
+    --foreground: var(--system-13);
+    --card: var(--system-1);
+    --card-foreground: var(--system-13);
+    --popover: var(--system-1);
+    --popover-foreground: var(--system-13);
+    --primary: var(--primary-9);
     --primary-foreground: var(--system-1);
     --secondary: var(--secondary-9);
-    --secondary-foreground: var(--system-1); */
-    /* --muted: var(--system-3); */
-    /* --muted-foreground: var(--system-10); */
-    /* --accent: var(--system-3); */
-    /* --accent-foreground: var(--system-13); */
-    /* --destructive: var(--error-6); */
-    /* --destructive-foreground: var(--system-1); */
-    /* --border: var(--system-5); */
-    /* --input: var(--system-5); */
-    /* --ring: var(--system-7); */
-    /* --radius: 0.5rem; */  
+    --secondary-foreground: var(--system-1);
+    --muted: var(--system-3);
+    --muted-foreground: var(--system-10);
+    --accent: var(--system-3);
+    --accent-foreground: var(--system-13);
+    --destructive: var(--error-5);
+    --destructive-foreground: var(--system-1);
+    --border: var(--system-5);
+    --input: var(--system-5);
+    --ring: var(--system-7);
+    --radius: 0.5rem;  
   }
 }
 
@@ -244,7 +244,7 @@
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);
   --accent-foreground: var(--color-secondary);
-  --destructive: oklch(0.577 0.245 27.325);
+  --destructive: var(--error-5);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);

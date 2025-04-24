@@ -1,8 +1,8 @@
 export function DollarRightImageIcon() {
   return (
     <svg
-      width="236"
-      height="117"
+      width="240"
+      height="125"
       viewBox="0 0 236 117"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

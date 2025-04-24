@@ -1,7 +1,12 @@
 "use client"
 
 import Link from "next/link"
-import { Bell, ShoppingBag, ChevronDown } from "lucide-react"
+import {
+  ShoppingBag,
+  ChevronDown,
+  LogOutIcon,
+  CircleUserRoundIcon,
+} from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import {
@@ -12,10 +17,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
+import { NotificationsDropdown } from "./notifications-dropdown"
 
 export function Header() {
+  const router = useRouter()
   const pathname = usePathname()
   const [pageTitle, setPageTitle] = useState("Home")
 
@@ -30,13 +37,12 @@ export function Header() {
       "/admin/finances": "Finanças",
       "/admin/activity-log": "Log de Atividades",
       "/admin/taxes": "Taxas",
+      "/admin/notifications": "Notificações",
       "/admin": "Home",
     }
 
     // Sort paths by length DESC so more specific ones match first
-    Object.keys(pageTitles).sort(
-      (a, b) => b.length - a.length,
-    )
+    Object.keys(pageTitles).sort((a, b) => b.length - a.length)
 
     // Find the most relevant prefix match
     const match = Object.keys(pageTitles).find((key) =>
@@ -65,16 +71,7 @@ export function Header() {
           <span className="text-sm">Visitar loja</span>
         </Link>
 
-        <Button
-          variant="outline"
-          size="icon"
-          className="text-system-11 relative rounded-full"
-        >
-          <Bell className="h-5 w-5" />
-          <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary-9 text-[10px] font-medium text-white">
-            3
-          </span>
-        </Button>
+        <NotificationsDropdown />
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -97,11 +94,15 @@ export function Header() {
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-56">
             <DropdownMenuLabel>Minha Conta</DropdownMenuLabel>
+            <DropdownMenuItem onClick={() => router.push("/admin/profile")}>
+              <CircleUserRoundIcon size="14" />
+              Informações Pessoais
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Perfil</DropdownMenuItem>
-            <DropdownMenuItem>Configurações</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Sair</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => router.push("/admin/login")}>
+              <LogOutIcon size="14" />
+              Sair
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

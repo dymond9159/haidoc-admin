@@ -8,12 +8,18 @@ import { cva } from "class-variance-authority"
 
 function Tabs({
   className,
+  orientation = "horizontal",
   ...props
 }: React.ComponentProps<typeof TabsPrimitive.Root>) {
   return (
     <TabsPrimitive.Root
       data-slot="tabs"
-      className={cn("flex flex-col gap-2", className)}
+      orientation={orientation}
+      className={cn(
+        "flex",
+        orientation === "vertical" ? "flex-row gap-4" : "flex-col gap-2",
+        className,
+      )}
       {...props}
     />
   )
@@ -21,13 +27,17 @@ function Tabs({
 
 function TabsList({
   className,
+  orientation = "horizontal",
   ...props
-}: React.ComponentProps<typeof TabsPrimitive.List>) {
+}: React.ComponentProps<typeof TabsPrimitive.List> & {
+  orientation?: "horizontal" | "vertical"
+}) {
   return (
     <TabsPrimitive.List
       data-slot="tabs-list"
       className={cn(
-        "bg-transparent text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-lg p-[3px]",
+        "flex flex-row items-center justify-center w-fit h-9 bg-muted text-muted-foreground rounded-lg p-[3px]",
+        orientation === "vertical" && "h-fit flex-col items-start",
         className,
       )}
       {...props}
@@ -42,7 +52,7 @@ interface TabTriggerProps
 }
 
 const tabTriggerVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:text-secondary-11",
   {
     variants: {
       variant: {

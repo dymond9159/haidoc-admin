@@ -116,7 +116,7 @@ export function EnhancedTable<T>({
         />
       )}
       <DataTable
-        data={maxRecords ? filteredData.slice(0, 3) : filteredData}
+        data={maxRecords ? filteredData.slice(0, maxRecords) : filteredData}
         columns={columns}
         isLoading={isLoading}
         itemsPerPage={itemsPerPage}

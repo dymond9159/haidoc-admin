@@ -3,9 +3,10 @@ import { LucideProps } from "lucide-react"
 export function UserSettingsIcon(props: LucideProps) {
   return (
     <svg
-      width="20"
-      height="21"
+      width={props?.size || "20"}
+      height={props?.size || "21"}
       viewBox="0 0 20 21"
+      {...props}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}

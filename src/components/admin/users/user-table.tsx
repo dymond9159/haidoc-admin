@@ -3,7 +3,7 @@
 import { useState, useMemo, useCallback } from "react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Pencil, Trash } from "lucide-react"
+import { Pencil, Trash2 } from "lucide-react"
 import { UserFormDialog } from "@/components/admin/users/user-form-dialog"
 import { DeleteUserDialog } from "@/components/admin/users/delete-user-dialog"
 import type { User } from "@/types/user"
@@ -79,23 +79,23 @@ export function UserTable() {
         header: "AÇÕES",
         className: "w-[10%] text-center",
         cell: (row) => (
-          <div className="flex gap-2">
+          <div className="flex gap-2 items-center justify-center">
             <Button
               variant="ghost"
               size="icon"
               onClick={() => handleEditUser(row)}
               aria-label={`Editar usuário ${row.name}`}
             >
-              <Pencil className="h-4 w-4" />
+              <Pencil size="18" />
             </Button>
             <Button
-              variant="ghost"
+              variant="ghost-destructive"
               size="icon"
               onClick={() => handleDeleteUser(row)}
               aria-label={`Excluir usuário ${row.name}`}
               disabled={row.isCurrentUser}
             >
-              <Trash className="h-4 w-4" />
+              <Trash2 size="18" />
             </Button>
           </div>
         ),

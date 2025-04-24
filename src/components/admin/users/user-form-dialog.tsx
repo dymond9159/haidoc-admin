@@ -67,8 +67,8 @@ export function UserFormDialog({
     if (mode === "edit" && user) {
       setFormData({
         name: user.name,
-        email: user.email,
-        profile: user.profile,
+        email: user.email || "",
+        profile: user.profile || "",
       })
     } else if (mode === "create") {
       // Reset form for create mode

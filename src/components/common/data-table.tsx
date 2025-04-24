@@ -103,7 +103,7 @@ export function DataTable<T>({
         <TableBody>
           {isLoading ? (
             <TableRow>
-              <TableCell colSpan={columns.length} className="h-24 text-center">
+              <TableCell colSpan={columns.length} className="h-80 text-center">
                 <div className="flex items-center justify-center">
                   <Loader2 className="h-6 w-6 animate-spin text-secondary" />
                   <span className="ml-2">{loadingMessage}</span>
@@ -112,7 +112,7 @@ export function DataTable<T>({
             </TableRow>
           ) : paginatedData.length > 0 ? (
             paginatedData.map((row, rowIndex) => (
-              <TableRow key={effectiveGetRowId(row, rowIndex)}>
+              <TableRow key={effectiveGetRowId(row, rowIndex)} className="h-15">
                 {columns.map((column) => {
                   // Determine the cell content
                   let cellContent: React.ReactNode
