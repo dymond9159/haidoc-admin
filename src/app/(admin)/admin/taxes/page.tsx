@@ -2,8 +2,8 @@
 
 import { Plus } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { TaxesTable } from "@/components/admin/taxes/taxes-table"
 import { useRouter } from "next/navigation"
+import { TaxesTable } from "@/components/admin/taxes/taxes-table"
 
 export default function TaxasPage() {
   const router = useRouter()
