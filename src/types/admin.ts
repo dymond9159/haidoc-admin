@@ -134,6 +134,20 @@ export interface Consultation {
 }
 
 /*
+ * Activity-log
+ */
+export interface ActivityLogEntry {
+  id: string | number
+  name: string
+  date: string
+  time: string
+  type: number
+  description?: string
+  beforeDocument?: string
+  afterDocument?: string
+}
+
+/*
  *  Status Color
  */
 export const statusColorMap: Record<string, string> = {
