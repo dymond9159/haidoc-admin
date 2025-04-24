@@ -77,7 +77,7 @@ export default function AdminActivitiesPage() {
                 className="text-primary h-auto p-0"
                 onClick={() => handleViewActivity(activity)}
               >
-                Visualizar Detalhes
+                Visualizar
               </Button>
             </div>
           ))

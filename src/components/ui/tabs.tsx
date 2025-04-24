@@ -8,12 +8,18 @@ import { cva } from "class-variance-authority"
 
 function Tabs({
   className,
+  orientation = "horizontal",
   ...props
 }: React.ComponentProps<typeof TabsPrimitive.Root>) {
   return (
     <TabsPrimitive.Root
       data-slot="tabs"
-      className={cn("flex flex-col gap-2", className)}
+      orientation={orientation}
+      className={cn(
+        "flex",
+        orientation === "vertical" ? "flex-row gap-4" : "flex-col gap-2",
+        className,
+      )}
       {...props}
     />
   )
@@ -21,13 +27,17 @@ function Tabs({
 
 function TabsList({
   className,
+  orientation = "horizontal",
   ...props
-}: React.ComponentProps<typeof TabsPrimitive.List>) {
+}: React.ComponentProps<typeof TabsPrimitive.List> & {
+  orientation?: "horizontal" | "vertical"
+}) {
   return (
     <TabsPrimitive.List
       data-slot="tabs-list"
       className={cn(
-        "bg-transparent text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-lg p-[3px]",
+        "flex flex-row items-center justify-center w-fit h-9 bg-muted text-muted-foreground rounded-lg p-[3px]",
+        orientation === "vertical" && "h-fit flex-col items-start",
         className,
       )}
       {...props}

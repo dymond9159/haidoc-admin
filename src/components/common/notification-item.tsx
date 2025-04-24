@@ -104,7 +104,7 @@ export function NotificationItem({
             <Button
               variant="link"
               onClick={() => router.push(notification.actionUrl || "")}
-              className="text-xs font-medium text-secondary"
+              className="text-xs font-medium text-secondary pl-0"
             >
               Ver detalhes
             </Button>

@@ -164,12 +164,13 @@ export function NotificationsDropdown() {
         <div className="max-h-[60vh] overflow-y-auto">
           {notifications.length > 0 ? (
             <DropdownMenuGroup>
-              {notifications.map((notification) => (
+              {notifications.map((notification, index) => (
                 <div key={notification.id} className="relative">
                   <DropdownMenuItem
                     className={cn(
                       "flex cursor-default gap-3 p-4 focus:bg-system-2 rounded-none border-b last:border-none",
                       !notification.read && "bg-system-3",
+                      index === notifications.length - 1 && "border-none",
                     )}
                   >
                     <div className="flex-shrink-0 mt-0.5">

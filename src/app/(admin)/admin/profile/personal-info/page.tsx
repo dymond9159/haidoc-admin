@@ -2,7 +2,16 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { ArrowLeft, Eye, EyeOff, Pencil, Trash2 } from "lucide-react"
+import {
+  ArrowLeft,
+  ChevronRightIcon,
+  Eye,
+  EyeOff,
+  LockKeyholeIcon,
+  Pencil,
+  Trash2,
+  UserRoundIcon,
+} from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -12,6 +21,7 @@ import { useToast } from "@/hooks/use-toast"
 import { ConfirmationDialog } from "@/components/common/confirm-dialog"
 import { Asterisk, BackButton } from "@/components/common"
 import { cn } from "@/lib/utils"
+import { useMobile } from "@/hooks/use-mobile"
 
 export default function AdminRegistrationInfoPage() {
   const { toast } = useToast()
@@ -24,6 +34,9 @@ export default function AdminRegistrationInfoPage() {
   const [confirmPassword, setConfirmPassword] = useState("")
   const [isFormChanged, setIsFormChanged] = useState(false)
   const [showConfirmationModal, setShowConfirmationModal] = useState(false)
+
+  const isMobile = useMobile()
+  const tabOrientation = isMobile ? "horizontal" : "vertical"
 
   const handleInputChange = () => {
     setIsFormChanged(true)
@@ -59,10 +72,27 @@ export default function AdminRegistrationInfoPage() {
         defaultValue="dados-cadastrais"
         value={activeTab}
         onValueChange={setActiveTab}
+        orientation={tabOrientation}
       >
-        <TabsList className="mb-6 grid w-full grid-cols-2">
-          <TabsTrigger value="dados-cadastrais">Dados cadastrais</TabsTrigger>
-          <TabsTrigger value="senha">Senha</TabsTrigger>
+        <TabsList className="mb-3" orientation={tabOrientation}>
+          <TabsTrigger value="dados-cadastrais" className="w-full">
+            <div className="w-full flex flex-row items-center justify-between gap-2">
+              <div className="flex flex-row gap-2">
+                <UserRoundIcon />
+                <span>Dados Cadastrais</span>
+              </div>
+              {!isMobile && <ChevronRightIcon />}
+            </div>
+          </TabsTrigger>
+          <TabsTrigger value="senha" className="w-full">
+            <div className="w-full flex flex-row items-center justify-between gap-2">
+              <div className="flex flex-row gap-2">
+                <LockKeyholeIcon />
+                <span>Senha</span>
+              </div>
+              {!isMobile && <ChevronRightIcon />}
+            </div>
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="dados-cadastrais">
