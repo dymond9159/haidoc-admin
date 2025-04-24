@@ -13,16 +13,19 @@ import {
 import { ActivityLogEntry } from "@/types"
 import { PdfFileIcon } from "@/components/icons"
 
-interface ActivityDescriptionDialogProps {
+interface ActivityDetailDialogProps {
   activity: ActivityLogEntry | null
   open: boolean
   onOpenChange: (open: boolean) => void
   onViewDocument?: (documentName: string, type: "before" | "after") => void
 }
 
-export const ActivityDescriptionDialog: React.FC<
-  ActivityDescriptionDialogProps
-> = ({ activity, open, onOpenChange, onViewDocument }) => {
+export const ActivityDetailDialog: React.FC<ActivityDetailDialogProps> = ({
+  activity,
+  open,
+  onOpenChange,
+  onViewDocument,
+}) => {
   // Prevent rendering if no activity data or wrong type
   if (!activity || activity.type !== 2) {
     return null

@@ -1,46 +1,58 @@
 "use client"
 
 import * as React from "react"
-import Link, { LinkProps } from "next/link" // Import LinkProps
+import Link, { LinkProps } from "next/link"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+// Import useMobile instead of useMediaQuery
+import { useMobile } from "@/hooks/use-mobile" // <-- Adjust path as needed
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
-  ChevronLeft,
-  ChevronRight,
+  ChevronLeft, // Keep if used in PaginationPrevious/Next Link components
+  ChevronRight, // Keep if used in PaginationPrevious/Next Link components
   MoreHorizontal,
 } from "lucide-react"
 
-// --- PaginationContent (No Changes Needed) ---
+// --- Sub Components (PaginationContent, PaginationItem, PaginationLink, PaginationEllipsis, PaginationPrevious, PaginationNext) ---
+// --- No changes needed in these sub-components from the previous version ---
+// --- (Keep your corrected versions of PaginationLink, PaginationPrevious, PaginationNext if you plan to use them elsewhere) ---
+
 const PaginationContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex w-full items-center justify-center gap-2", className)}
+    className={cn(
+      "flex w-full items-center justify-center gap-1 md:gap-2",
+      className,
+    )} // Use md: breakpoint
     {...props}
   />
 ))
 PaginationContent.displayName = "PaginationContent"
 
-// --- PaginationItem (No Changes Needed - Uses Button) ---
 const PaginationItem = React.forwardRef<
   HTMLButtonElement,
-  React.ButtonHTMLAttributes<HTMLButtonElement>
->(({ className, ...props }, ref) => (
+  React.ButtonHTMLAttributes<HTMLButtonElement> & { isActive?: boolean }
+>(({ className, isActive, ...props }, ref) => (
   <Button
     ref={ref}
-    variant="outline"
+    variant={isActive ? "outline" : "ghost"}
     size="icon"
-    className={cn("h-8 w-8", className)}
+    className={cn(
+      "h-8 w-8 p-0",
+      isActive &&
+        "border-secondary bg-secondary text-primary-foreground hover:bg-secondary/90 hover:text-primary-foreground cursor-default",
+      !isActive && "hover:bg-accent hover:text-accent-foreground",
+      className,
+    )}
     {...props}
   />
 ))
 PaginationItem.displayName = "PaginationItem"
 
-// --- PaginationLink (Corrected Props) ---
 type PaginationLinkProps = Omit<
   React.AnchorHTMLAttributes<HTMLAnchorElement>,
   keyof LinkProps
@@ -51,26 +63,25 @@ const PaginationLink = React.forwardRef<HTMLAnchorElement, PaginationLinkProps>(
   ({ className, active, ...props }, ref) => (
     <Link
       ref={ref}
-      aria-current={active ? "page" : undefined} // Use aria-current for active state
-      data-active={active ? "" : undefined} // Optional: Add data attribute if needed for styling
+      aria-current={active ? "page" : undefined}
+      data-active={active ? "" : undefined}
       className={cn(
-        "flex h-8 w-8 items-center justify-center rounded-md border border-input bg-background text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[active]:border-primary data-[active]:bg-primary data-[active]:text-primary-foreground", // Adjusted active styles
+        "flex h-8 w-8 items-center justify-center rounded-md border border-input bg-background p-0 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[active]:border-secondary data-[active]:bg-secondary data-[active]:text-primary-foreground",
         className,
       )}
-      {...props} // Spread the rest of the LinkProps (including required href)
+      {...props}
     />
   ),
 )
 PaginationLink.displayName = "PaginationLink"
 
-// --- PaginationEllipsis (No Changes Needed) ---
 const PaginationEllipsis = React.forwardRef<
   HTMLSpanElement,
   React.HTMLAttributes<HTMLSpanElement>
 >(({ className, ...props }, ref) => (
   <span
     ref={ref}
-    aria-hidden // Indicate it's decorative
+    aria-hidden
     className={cn(
       "flex h-8 w-8 select-none items-center justify-center text-sm font-medium",
       className,
@@ -83,7 +94,6 @@ const PaginationEllipsis = React.forwardRef<
 ))
 PaginationEllipsis.displayName = "PaginationEllipsis"
 
-// --- PaginationPrevious (Corrected Props) ---
 type PaginationPreviousProps = Omit<
   React.AnchorHTMLAttributes<HTMLAnchorElement>,
   keyof LinkProps
@@ -96,20 +106,18 @@ const PaginationPrevious = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <Link
     ref={ref}
-    aria-label="Go to previous page" // Use aria-label
+    aria-label="Go to previous page"
     className={cn(
-      "flex h-8 w-8 items-center justify-center rounded-md border border-input bg-background p-0 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50", // Adjusted padding/flex
+      "flex h-8 w-8 items-center justify-center rounded-md border border-input bg-background p-0 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
       className,
     )}
-    {...props} // Spread LinkProps (including required href)
+    {...props}
   >
     <ChevronLeft className="h-4 w-4" />
-    {/* Screen reader text removed, handled by aria-label */}
   </Link>
 ))
 PaginationPrevious.displayName = "PaginationPrevious"
 
-// --- PaginationNext (Corrected Props) ---
 type PaginationNextProps = Omit<
   React.AnchorHTMLAttributes<HTMLAnchorElement>,
   keyof LinkProps
@@ -120,31 +128,25 @@ const PaginationNext = React.forwardRef<HTMLAnchorElement, PaginationNextProps>(
   ({ className, ...props }, ref) => (
     <Link
       ref={ref}
-      aria-label="Go to next page" // Use aria-label
+      aria-label="Go to next page"
       className={cn(
-        "flex h-8 w-8 items-center justify-center rounded-md border border-input bg-background p-0 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50", // Adjusted padding/flex
+        "flex h-8 w-8 items-center justify-center rounded-md border border-input bg-background p-0 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
         className,
       )}
-      {...props} // Spread LinkProps (including required href)
+      {...props}
     >
       <ChevronRight className="h-4 w-4" />
-      {/* Screen reader text removed, handled by aria-label */}
     </Link>
   ),
 )
 PaginationNext.displayName = "PaginationNext"
 
-// --- Main Pagination Component (Using Buttons/Callbacks - No Change Needed Here) ---
-// NOTE: This component currently uses PaginationItem (Buttons), NOT the Link components above.
-// If you wanted URL-based pagination, you would refactor this component
-// to use PaginationLink, PaginationPrevious, PaginationNext and pass appropriate href props.
+// --- Main Pagination Component (Using useMobile) ---
 interface PaginationProps {
   currentPage?: number
   totalPages: number
-  onPageChange?: (page: number) => void // Used for button-based pagination
+  onPageChange?: (page: number) => void
   className?: string
-  // If using Link components, you'd need props to construct hrefs, e.g.:
-  // buildHref?: (page: number) => string | UrlObject;
 }
 
 function Pagination({
@@ -153,59 +155,51 @@ function Pagination({
   onPageChange,
   className,
 }: PaginationProps) {
+  // Use your custom useMobile hook
+  const isMobile = useMobile() // Returns true if window.innerWidth < 768
+
   const getPageNumbers = () => {
     const pageNumbers = []
-    const maxPagesToShow = 5 // Define how many page numbers max (excluding ellipsis, first, last)
+    // Adjust max pages shown based on screen size (using 768px breakpoint)
+    const maxPagesToShow = isMobile ? 3 : 5 // Show 3 on mobile (<768px), 5 otherwise
 
+    // ... (The rest of the getPageNumbers logic remains the same as before) ...
     if (totalPages <= maxPagesToShow + 2) {
-      // Show all if total is small enough
       for (let i = 1; i <= totalPages; i++) {
         pageNumbers.push(i)
       }
     } else {
-      const showEllipsisStart = currentPage > maxPagesToShow - 1
-      const showEllipsisEnd = currentPage < totalPages - (maxPagesToShow - 2)
+      const showEllipsisStart =
+        currentPage >
+        Math.ceil(maxPagesToShow / 2) + (maxPagesToShow % 2 === 0 ? 0 : 0)
+      const showEllipsisEnd =
+        currentPage < totalPages - Math.floor(maxPagesToShow / 2)
 
-      pageNumbers.push(1) // Always show first page
+      pageNumbers.push(1)
+      if (showEllipsisStart) pageNumbers.push(-1)
 
-      if (showEllipsisStart) {
-        pageNumbers.push(-1) // Ellipsis
-      }
-
-      // Determine the range of middle pages to show
       let startPage: number, endPage: number
-      const pagesInMiddle = maxPagesToShow - 2 // Pages between first/last and potential ellipsis
+      const sidePages = Math.floor((maxPagesToShow - 1) / 2)
 
       if (!showEllipsisStart) {
-        // Near the start
         startPage = 2
-        endPage = pagesInMiddle + 1
+        endPage = maxPagesToShow + (showEllipsisEnd ? 0 : 1)
       } else if (!showEllipsisEnd) {
-        // Near the end
-        startPage = totalPages - pagesInMiddle
+        startPage = totalPages - maxPagesToShow + (showEllipsisStart ? 0 : 1)
         endPage = totalPages - 1
       } else {
-        // In the middle
-        const sidePages = Math.floor((pagesInMiddle - 1) / 2) // -1 for current page
         startPage = currentPage - sidePages
-        endPage = currentPage + (pagesInMiddle - 1 - sidePages)
+        endPage = currentPage + sidePages
       }
 
       for (let i = startPage; i <= endPage; i++) {
-        // Don't add page 1 or totalPages again if they fall into this range
         if (i > 1 && i < totalPages) {
           pageNumbers.push(i)
         }
       }
 
-      if (showEllipsisEnd) {
-        pageNumbers.push(-1) // Ellipsis
-      }
-
-      if (totalPages > 1) {
-        // Avoid adding last page if it's the same as the first
-        pageNumbers.push(totalPages) // Always show last page
-      }
+      if (showEllipsisEnd) pageNumbers.push(-1)
+      if (totalPages > 1) pageNumbers.push(totalPages)
     }
 
     return pageNumbers
@@ -213,13 +207,16 @@ function Pagination({
 
   const handlePageChange = (page: number) => {
     if (page >= 1 && page <= totalPages && page !== currentPage) {
-      // Prevent redundant calls
-      onPageChange?.(page) // Use optional chaining for onPageChange
+      onPageChange?.(page)
     }
   }
 
-  // Guard against invalid states
   if (totalPages <= 0) {
+    return null
+  }
+
+  // Avoid rendering only Prev/Next if only 1 page on mobile
+  if (totalPages === 1 && isMobile) {
     return null
   }
 
@@ -229,42 +226,43 @@ function Pagination({
       aria-label="Pagination Navigation"
       className={cn("mx-auto flex w-full justify-center", className)}
     >
-      <PaginationContent className="flex flex-row gap-2 justify-between">
-        {/* Using PaginationItem (Button) for Previous */}
-        <PaginationItem
+      <PaginationContent>
+        {/* Previous Button: Use md: breakpoint */}
+        <Button
+          variant="ghost"
+          size="icon"
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
           aria-label="Go to previous page"
-          className="cursor-pointer w-fit h-8 text-foreground px-3" // Consistent size
+          className={cn(
+            "h-8 text-foreground disabled:opacity-50 disabled:pointer-events-none",
+            // Icon only by default (mobile < 768px)
+            // Auto width, padding, text, gap at md (>= 768px) and up
+            "w-8 md:w-auto md:px-3 md:gap-1",
+          )}
         >
-          <ArrowLeftIcon className="h-4 w-4" />
-          {"Anterior"}
-        </PaginationItem>
+          <ArrowLeftIcon className="h-4 w-4 flex-shrink-0" />
+          {/* Text hidden below md (768px) */}
+          <span className="hidden md:inline">Anterior</span>
+        </Button>
 
-        <div className="flex flex-row gap-2">
+        {/* Page Numbers and Ellipsis */}
+        <div className="flex items-center gap-1 md:gap-1">
+          {" "}
+          {/* Adjusted gap */}
           {getPageNumbers().map((pageNumber, index) =>
             pageNumber === -1 ? (
               <PaginationEllipsis
                 key={`ellipsis-${index}`}
                 className="h-8 w-8"
-              /> // Consistent size
+              />
             ) : (
-              // Using PaginationItem (Button) for Page Numbers
               <PaginationItem
                 key={pageNumber}
                 onClick={() => handlePageChange(pageNumber)}
-                // Use aria-current for accessibility on the current page
                 aria-current={pageNumber === currentPage ? "page" : undefined}
-                // Use data attribute for styling the active page
-                data-active={pageNumber === currentPage ? "" : undefined}
-                aria-label={`Page ${pageNumber}`}
-                className={cn(
-                  "h-8 w-8", // Consistent size
-                  // Example active styling using data attribute selector in CSS/global styles
-                  // Or apply classes directly (though data attribute is often cleaner)
-                  pageNumber === currentPage &&
-                    "border-secondary bg-secondary text-primary-foreground hover:bg-secondary/90",
-                )}
+                aria-label={`Go to page ${pageNumber}`}
+                isActive={pageNumber === currentPage}
               >
                 {pageNumber}
               </PaginationItem>
@@ -272,16 +270,24 @@ function Pagination({
           )}
         </div>
 
-        {/* Using PaginationItem (Button) for Next */}
-        <PaginationItem
+        {/* Next Button: Use md: breakpoint */}
+        <Button
+          variant="ghost"
+          size="icon"
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
           aria-label="Go to next page"
-          className="cursor-pointer w-fit h-8 text-foreground px-3"
+          className={cn(
+            "h-8 text-foreground disabled:opacity-50 disabled:pointer-events-none",
+            // Icon only by default (mobile < 768px)
+            // Auto width, padding, text, gap at md (>= 768px) and up
+            "w-8 md:w-auto md:px-3 md:gap-1",
+          )}
         >
-          {"Proximo"}
-          <ArrowRightIcon className="h-4 w-4" />
-        </PaginationItem>
+          {/* Text hidden below md (768px) */}
+          <span className="hidden md:inline">Proximo</span>
+          <ArrowRightIcon className="h-4 w-4 flex-shrink-0" />
+        </Button>
       </PaginationContent>
     </nav>
   )
@@ -292,8 +298,8 @@ export {
   Pagination,
   PaginationContent,
   PaginationItem,
-  PaginationLink, // Correctly typed now, but unused by main Pagination
+  PaginationLink,
   PaginationEllipsis,
-  PaginationPrevious, // Correctly typed now, but unused by main Pagination
-  PaginationNext, // Correctly typed now, but unused by main Pagination
+  PaginationPrevious,
+  PaginationNext,
 }

@@ -79,7 +79,7 @@ export function UserTable() {
         header: "AÇÕES",
         className: "w-[10%] text-center",
         cell: (row) => (
-          <div className="flex gap-2">
+          <div className="flex gap-2 items-center justify-center">
             <Button
               variant="ghost"
               size="icon"

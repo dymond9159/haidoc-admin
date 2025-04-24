@@ -19,6 +19,8 @@ export * from "./blood-pressure-icon"
 export * from "./history-icon"
 export * from "./file-copy-icon"
 export * from "./pdf-file-icon"
+export * from "./deployed-history-icon"
+export * from "./order-bucket-icon"
 
 export * from "./plan-right-image-icon"
 export * from "./dollar-right-image-icon"

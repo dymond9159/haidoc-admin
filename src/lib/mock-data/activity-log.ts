@@ -117,3 +117,88 @@ export const activities = [
     description: "Problemas com o agendamento de consultas.",
   },
 ]
+
+// Mock data for activities
+export const myActivities = [
+  {
+    id: 1,
+    name: "Suspensão de Usuário Business",
+    date: "22/09/2023",
+    time: "11:49",
+    type: "type1",
+    description:
+      "Foi solicitado ao usuário João Paulo Machado da Cruz, ID 123456789, médico cardiologista, o envio de sua licença médica atualizada. O prazo para a operação, de 5 dias úteis, não foi cumprido.",
+  },
+  {
+    id: 2,
+    name: "Suspensão de Usuário Business",
+    date: "22/09/2023",
+    time: "11:49",
+    type: "type1",
+    description:
+      "Foi solicitado ao usuário João Paulo Machado da Cruz, ID 123456789, médico cardiologista, o envio de sua licença médica atualizada. O prazo para a operação, de 5 dias úteis, não foi cumprido.",
+  },
+  {
+    id: 3,
+    name: "Redefinição de Dados Cadastrais",
+    date: "22/09/2023",
+    time: "11:49",
+    type: "type2",
+    beforeDocument: {
+      name: "Documento01",
+      url: "#",
+    },
+    afterDocument: {
+      name: "Documento02",
+      url: "#",
+    },
+  },
+  {
+    id: 4,
+    name: "Redefinição de Dados Cadastrais",
+    date: "22/09/2023",
+    time: "11:49",
+    type: "type2",
+    beforeDocument: {
+      name: "Documento01",
+      url: "#",
+    },
+    afterDocument: {
+      name: "Documento02",
+      url: "#",
+    },
+  },
+  {
+    id: 5,
+    name: "Suspensão de Usuário Business",
+    date: "22/09/2023",
+    time: "11:49",
+    type: "type1",
+    description:
+      "Foi solicitado ao usuário João Paulo Machado da Cruz, ID 123456789, médico cardiologista, o envio de sua licença médica atualizada. O prazo para a operação, de 5 dias úteis, não foi cumprido.",
+  },
+  {
+    id: 6,
+    name: "Suspensão de Usuário Business",
+    date: "22/09/2023",
+    time: "11:49",
+    type: "type1",
+    description:
+      "Foi solicitado ao usuário João Paulo Machado da Cruz, ID 123456789, médico cardiologista, o envio de sua licença médica atualizada. O prazo para a operação, de 5 dias úteis, não foi cumprido.",
+  },
+  {
+    id: 7,
+    name: "Redefinição de Dados Cadastrais",
+    date: "22/09/2023",
+    time: "11:49",
+    type: "type2",
+    beforeDocument: {
+      name: "Documento01",
+      url: "#",
+    },
+    afterDocument: {
+      name: "Documento02",
+      url: "#",
+    },
+  },
+]

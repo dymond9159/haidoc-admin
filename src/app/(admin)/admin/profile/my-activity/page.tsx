@@ -1,32 +1,29 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
+import { ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Pagination } from "@/components/ui/pagination"
-import { activities as mockActivities } from "@/lib/mock-data/activity-log"
+import { ActivityLogEntry } from "@/types"
 import { useRouter } from "next/navigation"
-import { BackButton } from "@/components/common"
-import type { ActivityLogEntry } from "@/types"
-
 import { ActivityDetailDialog } from "@/components/admin/activity-log/activity-detail-dialog"
+import { activities as mockActivities } from "@/lib/mock-data/activity-log"
+import { BackButton } from "@/components/common"
 
-interface DetailedActivitiesClientProps {
-  activityId: string
-}
-
-export default function DetailedActivitiesClient({
-  activityId,
-}: DetailedActivitiesClientProps) {
+export default function AdminActivitiesPage() {
   const router = useRouter()
 
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedActivity, setSelectedActivity] =
     useState<ActivityLogEntry | null>(null)
 
+  // Mock data for activities
+  const activities = mockActivities
+
   // TODO: Fetch or filter activities based on the `activityId` prop
   // Example: const activities = await fetchActivitiesForUser(activityId);
   // For now, using the full mock list
-  const activities = mockActivities
 
   const handleViewActivity = (activity: ActivityLogEntry) => {
     setSelectedActivity(activity)
@@ -40,9 +37,7 @@ export default function DetailedActivitiesClient({
     documentName: string,
     type: "before" | "after",
   ) => {
-    console.log(
-      `Request to view ${type} document: ${documentName} for user ${activityId}`,
-    )
+    console.log(`Request to view ${type} document: ${documentName}`)
     // Implement actual document viewing logic here
     // Maybe open a new tab, or trigger another modal/view
     alert(`Simulating view for ${type} document: ${documentName}`)
@@ -60,8 +55,8 @@ export default function DetailedActivitiesClient({
 
   return (
     <div className="space-y-6">
-      <div>
-        <BackButton text="Atividade do Usuário" onClick={() => router.back()} />
+      <div className="mb-6">
+        <BackButton text="Minhas Atividades" />
       </div>
 
       <div className="space-y-4">

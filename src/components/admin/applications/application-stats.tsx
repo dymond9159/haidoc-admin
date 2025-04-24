@@ -21,7 +21,8 @@ export function ApplicationStats({ className }: ApplicationStatsProps) {
       {stats.map((stat) => (
         <Card
           key={stat.value}
-          className={cn("flex-1 border", `border-${stat.color}`)}
+          className={cn("flex-1 border")}
+          style={{ borderColor: `var(--${stat.color})` }}
         >
           <h3 className="text-sm font-medium text-system-11">{stat.label}</h3>
           <p className="text-3xl font-bold">{stat.count}</p>

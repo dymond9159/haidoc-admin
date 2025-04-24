@@ -8,21 +8,17 @@ import { UserStats } from "@/components/admin/users-stats"
 export default function AdminHomePage() {
   return (
     <div className="space-y-8">
-      {/* Users Section */}
       <section>
         <h3 className="mb-4 text-xl font-semibold">Usuários</h3>
         <UserStats />
       </section>
 
-      {/* Applications Section */}
       <section>
         <h3 className="mb-4 text-xl font-semibold">Aplicações</h3>
         <ApplicationStats />
       </section>
 
-      {/* Finance and Delivery Sections */}
       <div className="grid gap-8 md:grid-cols-2">
-        {/* Finance Section */}
         <section>
           <h3 className="mb-4 text-xl font-semibold">Finanças</h3>
           <div className="space-y-4">

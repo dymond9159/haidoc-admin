@@ -22,7 +22,7 @@ export default function UsersPageClient() {
             <TabsTrigger value="users">Usuários</TabsTrigger>
             <TabsTrigger value="profiles">Perfis</TabsTrigger>
           </TabsList>
-          <TabsContent value="users" className="mt-6">
+          <TabsContent value="users">
             <div className="flex justify-end mb-4">
               <Button onClick={() => setIsAddUserDialogOpen(true)}>
                 <UserPlus className="mr-2 h-4 w-4" />
@@ -31,7 +31,7 @@ export default function UsersPageClient() {
             </div>
             <UserTable />
           </TabsContent>
-          <TabsContent value="profiles" className="mt-6">
+          <TabsContent value="profiles">
             <ProfilesTab />
           </TabsContent>
         </Tabs>

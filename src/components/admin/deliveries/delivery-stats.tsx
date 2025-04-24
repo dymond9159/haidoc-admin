@@ -1,8 +1,13 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { UserPlus } from "lucide-react"
+import { PackageIcon, UserPlus } from "lucide-react"
 import { StatCard } from "@/components/common"
+import {
+  DeployedHistoryIcon,
+  OrderBucketIcon,
+  TruckIcon,
+} from "@/components/icons"
 
 interface DeliveryStatsData {
   waitingSeparation: number
@@ -56,21 +61,25 @@ export function DeliveryStats() {
       title: "Aguardando Separação",
       value: stats.waitingSeparation,
       performance: stats.waitingSeparationChange,
+      icon: <OrderBucketIcon />,
     },
     {
       title: "Aguardando motorista",
       value: stats.waitingDriver,
       performance: stats.waitingDriverChange,
+      icon: <DeployedHistoryIcon />,
     },
     {
       title: "À caminho",
       value: stats.onWay,
       performance: stats.onWayChange,
+      icon: <TruckIcon />,
     },
     {
       title: "Entregues",
       value: stats.delivered,
       performance: stats.deliveredChange,
+      icon: <PackageIcon />,
     },
   ]
 
@@ -81,7 +90,7 @@ export function DeliveryStats() {
           key={index}
           title={card.title}
           value={loading ? "..." : card.value}
-          icon={<UserPlus />}
+          icon={card?.icon}
           trend={card.performance}
         />
       ))}

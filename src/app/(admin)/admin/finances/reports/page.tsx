@@ -43,6 +43,7 @@ export default function ReportsPage() {
             icon={item.icon}
             illustration={item.illustration}
             href={item.href}
+            className="pb-0 pt-0"
           />
         ))}
       </div>
