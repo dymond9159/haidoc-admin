@@ -142,7 +142,7 @@ export function Sidebar() {
               <Separator className="mb-3" />
               <nav className="space-y-1">
                 {navItems.map((item) => {
-                  const isActive = pathname === item.href
+                  const isActive = pathname.startsWith(item.href)
                   const Icon = item.icon
 
                   return (
@@ -217,7 +217,7 @@ export function Sidebar() {
           <div className="flex-1 overflow-y-auto px-2 py-4">
             <nav className="space-y-1">
               {navItems.map((item) => {
-                const isActive = pathname === item.href
+                const isActive = pathname.startsWith(item.href)
                 const Icon = item.icon
 
                 return (
