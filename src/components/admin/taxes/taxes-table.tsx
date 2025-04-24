@@ -87,7 +87,7 @@ export function TaxesTable() {
       header: "AÇÕES",
       className: "w-[150px]",
       cell: (row) => (
-        <div className="flex space-x-2">
+        <div className="flex space-x-2 justify-center items-center">
           <Button
             variant="ghost"
             size="icon"
