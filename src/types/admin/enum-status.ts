@@ -8,6 +8,14 @@ export enum ChartOptions {
 }
 
 /*
+ * Harvest Type
+ */
+export enum HarvestType {
+  Laboratory = "Laboratório",
+  Home = "Domicilio",
+}
+
+/*
  *  Deliver
  */
 export enum DeliverStatus {
@@ -50,7 +58,6 @@ export enum PaymentMethod {
 /*
  * Taxes
  */
-
 export enum TaxStatus {
   Active = "Ativo",
   Inactive = "Inativo",

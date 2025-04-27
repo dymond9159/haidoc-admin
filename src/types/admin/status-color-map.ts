@@ -1,4 +1,4 @@
-import { DeliverStatus, PatientStatus } from "./enum-status"
+import { DeliverStatus, HarvestType, PatientStatus } from "./enum-status"
 
 /*
  *  Status Color
@@ -17,4 +17,7 @@ export const statusColorMap: Record<string, string> = {
   [PatientStatus.Waiting]: "bg-info-2 text-info-5",
   [PatientStatus.Rejected]: "bg-error-2 text-error-5",
   [PatientStatus.Completed]: "bg-success-2 text-success-6",
+
+  [HarvestType.Laboratory]: "bg-warning-2 text-warning-5",
+  [HarvestType.Home]: "bg-success-2 text-success-6",
 }

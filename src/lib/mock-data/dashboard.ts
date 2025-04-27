@@ -1,13 +1,25 @@
 import {
   HarvestsColumns,
+  HarvestType,
   MedicalAppointmentColumns,
   OnlineConsultationColumns,
   PersonConsultationColumns,
   PharmacyDeliveriesColumns,
 } from "@/types/admin"
 
-// Helper function to generate a random ID (you can use a library like 'uuid' for more robust ID generation)
-const generateId = () => Math.random().toString(36).substring(2, 15)
+const generatedIds = new Set<string>()
+let sequenceNumber = 1 // Keep track of the sequence number
+const generateId = () => {
+  const today = new Date()
+  const yearPart = today.getFullYear().toString().slice(-2) // Get last two digits of year
+  const monthPart = String(today.getMonth() + 1).padStart(2, "0") // Months are 0-indexed
+  const dayPart = String(today.getDate()).padStart(2, "0")
+  const sequencePart = String(sequenceNumber).padStart(4, "0") // 4-digit sequence
+  const id = yearPart + monthPart + dayPart + sequencePart
+  generatedIds.add(id)
+  sequenceNumber++ // Increment the sequence number
+  return id
+}
 
 // Helper function to generate a random date string
 const generateDate = (start: Date, end: Date) => {
@@ -28,9 +40,10 @@ const generateTime = () => {
 // Mock data for Consultation
 const mockConsultations: MedicalAppointmentColumns[] = []
 for (let i = 0; i < 30; i++) {
+  const id = generateId()
   mockConsultations.push({
-    id: generateId(),
-    patientId: generateId(),
+    id: id,
+    patientId: id,
     value: (Math.random() * 100 + 50).toFixed(2), // Random value between 50 and 150
     date: generateDate(new Date(2024, 0, 1), new Date()), // Random date from 2024-01-01 to today
     time: generateTime(),
@@ -58,17 +71,16 @@ const mockPersonConsultations: PersonConsultationColumns[] =
 const mockPharmacyDeliveries: PharmacyDeliveriesColumns[] =
   mockConsultations.map((consultation) => ({
     ...consultation,
-    pharmacy: `Pharmacy ${String.fromCharCode(65 + Math.floor(Math.random() * 3))}`, // Random pharmacy (A, B, or C)
+    pharmacy: `Pharmacy ${String.fromCharCode(65 + Math.floor(Math.random() * 3))}`,
   }))
 
 // Mock data for Harvests (inherits from Consultation)
 const mockHarvests: HarvestsColumns[] = mockConsultations.map(
   (consultation) => ({
     ...consultation,
-    harvestType: `Harvest Type ${String.fromCharCode(
-      65 + Math.floor(Math.random() * 3),
-    )}`, // Random harvest type (A, B, or C)
-    laboratory: `Laboratory ${String.fromCharCode(65 + Math.floor(Math.random() * 3))}`, // Random laboratory (A, B, or C)
+    harvestType:
+      Math.random() < 0.5 ? HarvestType.Laboratory : HarvestType.Home,
+    laboratory: `Laboratory ${String.fromCharCode(65 + Math.floor(Math.random() * 3))}`,
   }),
 )
 

@@ -38,13 +38,41 @@ export const DashboardDefaultSection = () => {
   const renderTable = useMemo(() => {
     switch (currentItem) {
       case ProjectionTabs.OnlineConsultation:
-        return <OnlineConsultTable />
+        return (
+          <OnlineConsultTable
+            viewMore
+            filterable={false}
+            onViewMoreClick={handleViewMoreClick}
+            maxRecords={3}
+          />
+        )
       case ProjectionTabs.PrecenseConsultation:
-        return <PersonConsultTable />
+        return (
+          <PersonConsultTable
+            viewMore
+            filterable={false}
+            onViewMoreClick={handleViewMoreClick}
+            maxRecords={3}
+          />
+        )
       case ProjectionTabs.PharmacyDeliveries:
-        return <PharmacyDeliveriesTable />
+        return (
+          <PharmacyDeliveriesTable
+            viewMore
+            filterable={false}
+            onViewMoreClick={handleViewMoreClick}
+            maxRecords={3}
+          />
+        )
       case ProjectionTabs.Harvests:
-        return <HarvestsTable />
+        return (
+          <HarvestsTable
+            viewMore
+            filterable={false}
+            onViewMoreClick={handleViewMoreClick}
+            maxRecords={3}
+          />
+        )
       default:
         return <p className="text-sm text-muted-foreground">Página inválida</p>
     }

@@ -2,11 +2,15 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react"
 
+import { StatusLabel } from "@/components/common"
 import { ColumnDef } from "@/components/common/data-table"
 import { EnhancedTable } from "@/components/common/enhanced-table" // Import EnhancedTable
 import { FilterConfig } from "@/components/common/table-filter"
+import { HomeIcon } from "@/components/icons"
 import { mockHarvests } from "@/lib/mock-data/dashboard"
-import { HarvestsColumns } from "@/types/admin"
+import { formatDate } from "@/lib/utils"
+import { HarvestsColumns, HarvestType } from "@/types/admin"
+import { FlaskConicalIcon } from "lucide-react"
 
 interface HarvestsTableProps {
   maxRecords?: number
@@ -62,10 +66,36 @@ export function HarvestsTable({
         header: "ID DO PACIENTE",
         className: "font-medium",
       },
-      { accessorKey: "harvestType", header: "TIPO DE COLHEITA" },
+      {
+        accessorKey: "harvestType",
+        header: "TIPO DE COLHEITA",
+        cell: (row) => (
+          <StatusLabel
+            icon={
+              row.harvestType === HarvestType.Home ? (
+                <HomeIcon size={12} />
+              ) : (
+                <FlaskConicalIcon size={14} />
+              )
+            }
+            status={row.harvestType}
+          />
+        ),
+      },
       { accessorKey: "laboratory", header: "LABORATÓRIO" },
       { accessorKey: "value", header: "VALOR" },
-      { accessorKey: "date", header: "DATA E HORA" },
+      {
+        accessorKey: "date",
+        header: "DATA E HORA",
+        cell: (row) => (
+          <div>
+            <span className="text-sm block">{row?.time}</span>
+            <span className="text-xs text-system-9">
+              {formatDate(new Date(row?.date))}
+            </span>
+          </div>
+        ),
+      },
     ],
     [],
   )
@@ -82,7 +112,7 @@ export function HarvestsTable({
       },
       {
         type: "search",
-        label: "Pesquisar Especialidade",
+        label: "Tipo de Colheita",
         accessorKey: "harvestType",
         placeholder: "Selecione um Tipo",
         value: filters.harvestType,
@@ -90,7 +120,7 @@ export function HarvestsTable({
       },
       {
         type: "search",
-        label: "Pesquisar Laboratório",
+        label: "Laboratório",
         accessorKey: "laboratory",
         placeholder: "Nome do Laboratório",
         value: filters.laboratory,

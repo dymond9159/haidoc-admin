@@ -4,6 +4,7 @@
 
 import {
   DeliverStatus,
+  HarvestType,
   InvoiceStatus,
   PatientStatus,
   PaymentMethod,
@@ -103,7 +104,7 @@ export interface PharmacyDeliveriesColumns extends MedicalAppointmentColumns {
  * Harvests
  */
 export interface HarvestsColumns extends MedicalAppointmentColumns {
-  harvestType: string
+  harvestType: HarvestType
   laboratory: string
 }
 

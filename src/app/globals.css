@@ -6,87 +6,87 @@
 @layer base {
   :root {
     /* System colors */
-    --system-0: #FFFFFF; /* 0 0% 100% */
-    --system-1: #FCFCFD; /* 240 5% 99% */
-    --system-2: #F9FAFB; /* 240 10% 98% */
-    --system-3: #F0F1F4; /* 240 14% 95% */
-    --system-4: #E8E9ED; /* 240 16% 92% */
-    --system-5: #DFE1E6; /* 240 18% 89% */
-    --system-6: #D8DBE0; /* 240 20% 86% */
-    --system-7: #CED2D9; /* 240 21% 82% */
-    --system-8: #B8BCC6; /* 240 22% 75% */
-    --system-9: #8A8E99; /* 240 10% 57% */
-    --system-10: #7E828C; /* 240 10% 53% */
-    --system-11: #5B5F6B; /* 240 12% 40% */
-    --system-12: #1A1A26; /* 240 20% 13% */
+    --system-0: #ffffff; /* 0 0% 100% */
+    --system-1: #fcfcfd; /* 240 5% 99% */
+    --system-2: #f9fafb; /* 240 10% 98% */
+    --system-3: #f0f1f4; /* 240 14% 95% */
+    --system-4: #e8e9ed; /* 240 16% 92% */
+    --system-5: #dfe1e6; /* 240 18% 89% */
+    --system-6: #d8dbe0; /* 240 20% 86% */
+    --system-7: #ced2d9; /* 240 21% 82% */
+    --system-8: #b8bcc6; /* 240 22% 75% */
+    --system-9: #8a8e99; /* 240 10% 57% */
+    --system-10: #7e828c; /* 240 10% 53% */
+    --system-11: #5b5f6b; /* 240 12% 40% */
+    --system-12: #1a1a26; /* 240 20% 13% */
 
     /* Primary colors */
-    --primary-1: #FFFCFC; /* 0 100% 99% */
-    --primary-2: #FFF9F9; /* 0 100% 98% */
-    --primary-3: #FFEBEA; /* 6 100% 96% */
-    --primary-4: #FFDAD8; /* 6 100% 92% */
-    --primary-5: #FFC8C5; /* 6 100% 88% */
-    --primary-6: #FFB9B4; /* 6 100% 85% */
-    --primary-7: #FFA6A0; /* 6 98% 82% */
-    --primary-8: #FF8D82; /* 6 95% 73% */
-    --primary-9: #FF4242; /* 0 100% 63% */
-    --primary-10: #E93D48; /* 358 89% 56% */
-    --primary-11: #D5143A; /* 350 97% 44% */
-    --primary-12: #5E121E; /* 350 80% 24% */
+    --primary-1: #fffcfc; /* 0 100% 99% */
+    --primary-2: #fff9f9; /* 0 100% 98% */
+    --primary-3: #ffebea; /* 6 100% 96% */
+    --primary-4: #ffdad8; /* 6 100% 92% */
+    --primary-5: #ffc8c5; /* 6 100% 88% */
+    --primary-6: #ffb9b4; /* 6 100% 85% */
+    --primary-7: #ffa6a0; /* 6 98% 82% */
+    --primary-8: #ff8d82; /* 6 95% 73% */
+    --primary-9: #ff4242; /* 0 100% 63% */
+    --primary-10: #e93d48; /* 358 89% 56% */
+    --primary-11: #d5143a; /* 350 97% 44% */
+    --primary-12: #5e121e; /* 350 80% 24% */
 
     /* Secondary colors */
-    --secondary-1: #F7FFFF; /* 192 100% 99% */
-    --secondary-2: #F0FEFF; /* 195 100% 97% */
-    --secondary-3: #E0F7FA; /* 192 93% 94% */
-    --secondary-4: #CCEFF5; /* 192 85% 90% */
-    --secondary-5: #ACDFEA; /* 192 75% 85% */
-    --secondary-6: #8DD0E0; /* 192 67% 79% */
-    --secondary-7: #68BFD3; /* 192 60% 71% */
-    --secondary-8: #40A1B8; /* 192 54% 58% */
-    --secondary-9: #48B9D7; /* 192 70% 60% */
-    --secondary-10: #3AA4BF; /* 192 60% 56% */
-    --secondary-11: #0094BD; /* 192 100% 29% */
-    --secondary-12: #133F4D; /* 196 60% 19% */
+    --secondary-1: #f7ffff; /* 192 100% 99% */
+    --secondary-2: #f0feff; /* 195 100% 97% */
+    --secondary-3: #e0f7fa; /* 192 93% 94% */
+    --secondary-4: #cceff5; /* 192 85% 90% */
+    --secondary-5: #acdfea; /* 192 75% 85% */
+    --secondary-6: #8dd0e0; /* 192 67% 79% */
+    --secondary-7: #68bfd3; /* 192 60% 71% */
+    --secondary-8: #40a1b8; /* 192 54% 58% */
+    --secondary-9: #48b9d7; /* 192 70% 60% */
+    --secondary-10: #3aa4bf; /* 192 60% 56% */
+    --secondary-11: #0094bd; /* 192 100% 29% */
+    --secondary-12: #133f4d; /* 196 60% 19% */
 
     /* Success colors (already HEX) */
-    --success-1: #F5FCF3;
-    --success-2: #DBF8D1;
-    --success-3: #BAE9A9;
-    --success-4: #7ACD5C;
-    --success-5: #72CB51;
+    --success-1: #f5fcf3;
+    --success-2: #dbf8d1;
+    --success-3: #bae9a9;
+    --success-4: #7acd5c;
+    --success-5: #72cb51;
     --success-6: #234816;
 
     /* Error colors */
-    --error-1: #FFF7F6; /* 359 100% 97% */
-    --error-2: #FFDBD6; /* 359 100% 94% */
-    --error-3: #FFBAB2; /* 360 100% 90% */
-    --error-4: #F5897F; /* 360 91% 83% */
-    --error-5: #F12E33; /* 360 85% 73% */
+    --error-1: #fff7f6; /* 359 100% 97% */
+    --error-2: #ffdbd6; /* 359 100% 94% */
+    --error-3: #ffbab2; /* 360 100% 90% */
+    --error-4: #f5897f; /* 360 91% 83% */
+    --error-5: #f12e33; /* 360 85% 73% */
     --error-6: #691213; /* 358 75% 59% */
 
     /* Warning colors */
-    --warning-1: #FCF7F3; /* 39 100% 97% */
-    --warning-2: #F8E1D1; /* 40 100% 92% */
-    --warning-3: #E9C8A9; /* 42 100% 84% */
-    --warning-4: #CD8B5C; /* 43 96% 75% */
-    --warning-5: #933D00; /* 43 100% 64% */
-    --warning-6: #482B16; /* 36 100% 50% */
+    --warning-1: #fcf7f3; /* 39 100% 97% */
+    --warning-2: #f8e1d1; /* 40 100% 92% */
+    --warning-3: #e9c8a9; /* 42 100% 84% */
+    --warning-4: #cd8b5c; /* 43 96% 75% */
+    --warning-5: #933d00; /* 43 100% 64% */
+    --warning-6: #482b16; /* 36 100% 50% */
 
     /* Rating colors (already HEX) */
-    --rating-1: #FCF9F3;
-    --rating-2: #F8EBD1;
-    --rating-3: #E9D4A9;
-    --rating-4: #F5BD4C;
+    --rating-1: #fcf9f3;
+    --rating-2: #f8ebd1;
+    --rating-3: #e9d4a9;
+    --rating-4: #f5bd4c;
     --rating-5: #936200;
     --rating-6: #483716;
 
     /* Info colors */
-    --info-1: #F3FAFC; /* 214 100% 98% */
-    --info-2: #D1EFF8; /* 214 100% 94% */
-    --info-3: #A9DBE9; /* 213 100% 88% */
-    --info-4: #5CB5CD; /* 212 100% 80% */
-    --info-5: #007A93; /* 213 100% 71% */
-    --info-6: #163E48; /* 217 100% 61% */
+    --info-1: #f3fafc; /* 214 100% 98% */
+    --info-2: #d1eff8; /* 214 100% 94% */
+    --info-3: #a9dbe9; /* 213 100% 88% */
+    --info-4: #5cb5cd; /* 212 100% 80% */
+    --info-5: #007a93; /* 213 100% 71% */
+    --info-6: #163e48; /* 217 100% 61% */
 
     /* Shadcn UI required variables */
     --background: var(--system-1);
@@ -108,7 +108,7 @@
     --border: var(--system-5);
     --input: var(--system-5);
     --ring: var(--system-7);
-    --radius: 0.5rem;  
+    --radius: 0.5rem;
   }
 }
 
@@ -295,7 +295,7 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
-} 
+}
 
 @layer base {
   * {

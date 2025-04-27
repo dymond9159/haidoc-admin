@@ -6,6 +6,7 @@ import { ColumnDef } from "@/components/common/data-table"
 import { EnhancedTable } from "@/components/common/enhanced-table" // Import EnhancedTable
 import { FilterConfig } from "@/components/common/table-filter"
 import { mockPersonConsultations } from "@/lib/mock-data/dashboard"
+import { formatDate } from "@/lib/utils"
 import { PersonConsultationColumns } from "@/types/admin"
 
 interface PersonConsultTableProps {
@@ -66,7 +67,18 @@ export function PersonConsultTable({
       { accessorKey: "doctor", header: "MÉDICO" },
       { accessorKey: "clinica", header: "CLÍNICA" },
       { accessorKey: "value", header: "VALOR" },
-      { accessorKey: "date", header: "DATA E HORA" },
+      {
+        accessorKey: "date",
+        header: "DATA E HORA",
+        cell: (row) => (
+          <div>
+            <span className="text-sm block">{row?.time}</span>
+            <span className="text-xs text-system-9">
+              {formatDate(new Date(row?.date))}
+            </span>
+          </div>
+        ),
+      },
     ],
     [],
   )
