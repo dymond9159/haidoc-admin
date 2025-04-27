@@ -1,10 +1,10 @@
-import { Application } from "@/types/admin"
+import { ApplicationColumns } from "@/types/admin"
 import { addDays } from "date-fns"
 
 const mockStatuses = ["pending", "approved", "rejected"] as const
 type Status = (typeof mockStatuses)[number]
 
-export const mockApplications: Application[] = Array.from(
+export const mockApplications: ApplicationColumns[] = Array.from(
   { length: 20 },
   (_, i) => {
     const status: Status =

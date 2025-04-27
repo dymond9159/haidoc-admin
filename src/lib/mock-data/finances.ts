@@ -1,6 +1,6 @@
-import { Invoice, InvoiceStatus, PaymentMethod } from "@/types/admin"
+import { InvoiceColumns, InvoiceStatus, PaymentMethod } from "@/types/admin"
 
-export const mockInvoice: Invoice[] = [
+export const mockInvoice: InvoiceColumns[] = [
   {
     id: "1",
     number: "INV-0001",
@@ -58,7 +58,7 @@ export const mockInvoice: Invoice[] = [
   },
 ]
 
-export const mockInvoiceDetails = {
+export const mockInvoiceDetails: InvoiceColumns = {
   id: "123456789",
   number: "123456789",
   issueDate: "09/07/2024",

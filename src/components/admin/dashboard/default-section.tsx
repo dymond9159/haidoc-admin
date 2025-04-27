@@ -1,23 +1,26 @@
 "use client"
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { UserStats } from "../users-stats"
 import { StatCard } from "@/components/common"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import {
   LaptopMinimal,
   MicroscopeIcon,
   PillBottleIcon,
   StethoscopeIcon,
 } from "lucide-react"
-import { useState } from "react"
-import { OnlineConsultTable } from "./online-consult-table"
-import { ProjectionTabs } from "./projection-section"
 import { useRouter } from "next/navigation"
+import { useMemo, useState } from "react"
+import { UserStats } from "../users-stats"
+import { HarvestsTable } from "./harvests-table"
+import { OnlineConsultTable } from "./online-consult-table"
+import { PersonConsultTable } from "./person-consult-table"
+import { PharmacyDeliveriesTable } from "./pharmacy-deliveries-table"
+import { ProjectionTabs } from "./projection-section"
 
-// enum AppointmentTab {
-//   REALIZADAS = "realizadas",
-//   AGENDADAS = "agendadas",
-// }
+export enum AppointmentTab {
+  Complete = "realizadas",
+  Scheduled = "agendadas",
+}
 
 export const DashboardDefaultSection = () => {
   const router = useRouter()
@@ -32,15 +35,30 @@ export const DashboardDefaultSection = () => {
     router.push(`/admin/dashboard/details?mode=${currentItem}`)
   }
 
+  const renderTable = useMemo(() => {
+    switch (currentItem) {
+      case ProjectionTabs.OnlineConsultation:
+        return <OnlineConsultTable />
+      case ProjectionTabs.PrecenseConsultation:
+        return <PersonConsultTable />
+      case ProjectionTabs.PharmacyDeliveries:
+        return <PharmacyDeliveriesTable />
+      case ProjectionTabs.Harvests:
+        return <HarvestsTable />
+      default:
+        return <p className="text-sm text-muted-foreground">Página inválida</p>
+    }
+  }, [currentItem])
+
   return (
     <div className="space-y-8">
       <UserStats />
-      <Tabs defaultValue="realizadas">
+      <Tabs defaultValue={AppointmentTab.Complete}>
         <TabsList>
-          <TabsTrigger value="realizadas">Realizadas</TabsTrigger>
-          <TabsTrigger value="agendadas">Agendadas</TabsTrigger>
+          <TabsTrigger value={AppointmentTab.Complete}>Realizadas</TabsTrigger>
+          <TabsTrigger value={AppointmentTab.Scheduled}>Agendadas</TabsTrigger>
         </TabsList>
-        <TabsContent value="realizadas" className="mt-4">
+        <TabsContent value={AppointmentTab.Complete} className="mt-4">
           <div className="grid gap-4 md:grid-cols-4">
             <StatCard
               title="Consultas Online"
@@ -81,16 +99,9 @@ export const DashboardDefaultSection = () => {
               onClick={() => setCurrentItem(ProjectionTabs.Harvests)}
             />
           </div>
+          {renderTable}
         </TabsContent>
       </Tabs>
-
-      {/* <DeliveryTable /> */}
-      <OnlineConsultTable
-        filterable={false}
-        viewMore
-        maxRecords={3}
-        onViewMoreClick={handleViewMoreClick}
-      />
     </div>
   )
 }

@@ -1,23 +1,22 @@
 "use client"
 
-import * as React from "react"
-import { useState, useEffect, useMemo } from "react"
-import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { PencilIcon, Trash2 } from "lucide-react"
-import { EnhancedTable } from "@/components/common/enhanced-table"
 import { ColumnDef } from "@/components/common/data-table"
+import { EnhancedTable } from "@/components/common/enhanced-table"
 import { FilterConfig } from "@/components/common/table-filter"
-import { Tax } from "@/types"
-import { mockFees } from "@/lib/mock-data/tax"
-import { DeleteFeeDialog } from "./delete-fee-dialog"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import { useToast } from "@/hooks/use-toast"
+import { mockFees } from "@/lib/mock-data/tax"
+import { TaxColumns } from "@/types/admin"
+import { PencilIcon, Trash2 } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { useEffect, useMemo, useState } from "react"
+import { DeleteFeeDialog } from "./delete-fee-dialog"
 
 export function TaxesTable() {
   const router = useRouter()
   const { toast } = useToast()
-  const [fees, setFees] = useState<Tax[]>([])
+  const [fees, setFees] = useState<TaxColumns[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [filters, setFilters] = useState<{ name?: string }>({})
 
@@ -56,7 +55,7 @@ export function TaxesTable() {
     }
   }
 
-  const columns: ColumnDef<Tax>[] = [
+  const columns: ColumnDef<TaxColumns>[] = [
     {
       accessorKey: "name",
       header: "TAXA",
@@ -107,7 +106,7 @@ export function TaxesTable() {
     },
   ]
 
-  const filterConfigs: FilterConfig<Tax>[] = useMemo(
+  const filterConfigs: FilterConfig<TaxColumns>[] = useMemo(
     () => [
       {
         type: "search",

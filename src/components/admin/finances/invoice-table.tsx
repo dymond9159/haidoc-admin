@@ -1,15 +1,14 @@
 "use client"
 
-import * as React from "react"
-import { useState, useEffect, useMemo, useCallback } from "react"
 import { useRouter } from "next/navigation"
+import { useCallback, useEffect, useMemo, useState } from "react"
 
 import { ColumnDef } from "@/components/common/data-table"
 import { EnhancedTable } from "@/components/common/enhanced-table"
 import { FilterConfig } from "@/components/common/table-filter"
-import { Invoice } from "@/types/admin"
-import { mockInvoice } from "@/lib/mock-data/finances"
 import { Button } from "@/components/ui"
+import { mockInvoice } from "@/lib/mock-data/finances"
+import { InvoiceColumns } from "@/types/admin"
 
 interface InvoiceTableProps {
   maxRecords?: number
@@ -27,7 +26,7 @@ export function InvoiceTable({
   viewMore,
 }: InvoiceTableProps) {
   const router = useRouter()
-  const [allData, setAllData] = useState<Invoice[]>([])
+  const [allData, setAllData] = useState<InvoiceColumns[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [filters, setFilters] = useState<filterOption>({}) // Initialize filter state
 
@@ -55,7 +54,7 @@ export function InvoiceTable({
     router.push(`/admin/finances/invoices/${id}`)
   }
 
-  const columns: ColumnDef<Invoice>[] = useMemo(
+  const columns: ColumnDef<InvoiceColumns>[] = useMemo(
     () => [
       {
         accessorKey: "id",
@@ -83,7 +82,7 @@ export function InvoiceTable({
   )
 
   // Define Filter Configurations for Invoices (Example - adjust as needed)
-  const filterConfigs: FilterConfig<Invoice>[] = useMemo(
+  const filterConfigs: FilterConfig<InvoiceColumns>[] = useMemo(
     () => [
       {
         type: "search",

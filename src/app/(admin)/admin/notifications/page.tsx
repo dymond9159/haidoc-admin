@@ -1,18 +1,20 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { useToast } from "@/hooks/use-toast"
-import { NotificationType, Notifications } from "@/types"
-import { mockNotifications } from "@/lib/mock-data/notifications"
+import { useEffect, useState } from "react"
+
+import { Loading } from "@/components/common"
 import { NotificationFilters } from "@/components/common/notification-filters"
 import { NotificationItem } from "@/components/common/notification-item"
-import { Loading } from "@/components/common"
+import { Button } from "@/components/ui/button"
+
+import { useToast } from "@/hooks/use-toast"
+import { mockNotifications } from "@/lib/mock-data/notifications"
+import { NotificationColumns, NotificationType } from "@/types"
 
 export default function NotificationsPage() {
-  const [notifications, setNotifications] = useState<Notifications[]>([])
+  const [notifications, setNotifications] = useState<NotificationColumns[]>([])
   const [filteredNotifications, setFilteredNotifications] = useState<
-    Notifications[]
+    NotificationColumns[]
   >([])
   const [selectedType, setSelectedType] = useState<NotificationType | "all">(
     "all",

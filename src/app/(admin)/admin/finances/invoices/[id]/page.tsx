@@ -1,6 +1,10 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
+import { useRouter } from "next/navigation"
+import { useEffect, useRef, useState } from "react"
+
+import { BackButton } from "@/components/common"
+import { QRCode } from "@/components/common/qr-code"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -8,16 +12,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { QRCode } from "@/components/common/qr-code"
-import { exportElementAsJpeg, exportElementAsPdf } from "@/lib/utils"
+
 import { mockInvoiceDetails } from "@/lib/mock-data/finances"
-import { Invoice } from "@/types/admin"
-import { BackButton } from "@/components/common"
-import { useRouter } from "next/navigation"
+import { exportElementAsJpeg, exportElementAsPdf } from "@/lib/utils"
+import { InvoiceColumns } from "@/types/admin"
 
 export default function InvoiceDetailPage() {
   const router = useRouter()
-  const [invoice, setInvoice] = useState<Invoice | null>(null)
+  const [invoice, setInvoice] = useState<InvoiceColumns | null>(null)
   const [isExporting, setIsExporting] = useState(false)
   const invoiceRef = useRef<HTMLDivElement>(null)
 
@@ -55,7 +57,10 @@ export default function InvoiceDetailPage() {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="flex justify-between items-start mb-6">
-      <BackButton text={`Fatura ${invoice?.number}`} onClick={() => router.back()} />
+        <BackButton
+          text={`Fatura ${invoice?.number}`}
+          onClick={() => router.back()}
+        />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
@@ -69,9 +74,7 @@ export default function InvoiceDetailPage() {
             <DropdownMenuItem onClick={() => handleExport("pdf")}>
               PDF
             </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => handleExport("jpeg")}
-            >
+            <DropdownMenuItem onClick={() => handleExport("jpeg")}>
               JPEG
             </DropdownMenuItem>
           </DropdownMenuContent>
@@ -213,10 +216,7 @@ export default function InvoiceDetailPage() {
         >
           Exportar PDF
         </Button>
-        <Button
-          onClick={() => handleExport("jpeg")}
-          disabled={isExporting}
-        >
+        <Button onClick={() => handleExport("jpeg")} disabled={isExporting}>
           Exportar JPEG
         </Button>
       </div>

@@ -1,6 +1,6 @@
-import { Patient, PatientStatus } from "@/types/admin"
+import { PatientColumns, PatientStatus } from "@/types/admin"
 
-export const mockPatient: Patient = {
+export const mockPatient: PatientColumns = {
   id: "123556",
   patientId: "123456",
   patientName: "Ana Maria Santos",
@@ -13,7 +13,7 @@ export const mockPatient: Patient = {
   status: PatientStatus.Completed,
 }
 
-export const mockPatients: Patient[] = [
+export const mockPatients: PatientColumns[] = [
   {
     id: "123556",
     patientId: "123456",
@@ -88,7 +88,7 @@ export const mockPatients: Patient[] = [
   },
 ]
 
-export const mockCompletedPatients: Patient[] = [
+export const mockCompletedPatients: PatientColumns[] = [
   {
     id: "123556",
     patientId: "123456",

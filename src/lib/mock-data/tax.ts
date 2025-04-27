@@ -1,7 +1,7 @@
-import { Tax, TaxStatus } from "@/types"
+import { TaxColumns, TaxStatus } from "@/types/admin"
 
 // Mock data for demonstration
-export const mockFees: Tax[] = [
+export const mockFees: TaxColumns[] = [
   { id: 1, name: "Nome da taxa", percentage: "25%", status: TaxStatus.Active },
   { id: 2, name: "Nome da taxa", percentage: "32%", status: TaxStatus.Active },
   {

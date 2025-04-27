@@ -1,7 +1,11 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import { useParams, useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
+
+import { Loader2 } from "lucide-react"
+
+import { ProblemReportDialog } from "@/components/admin/pre-assessments/problem-report-dialog"
 import {
   BackButton,
   Loading,
@@ -9,18 +13,18 @@ import {
   StatusDropdown,
 } from "@/components/common"
 import { Button } from "@/components/ui/button"
-import { useToast } from "@/hooks/use-toast"
-import { Loader2 } from "lucide-react"
 import { Card } from "@/components/ui/card"
-import { Patient, PatientStatus } from "@/types/admin"
 import { PatientStatusList } from "@/lib/constants"
+
+import { useToast } from "@/hooks/use-toast"
+
 import { mockPatient } from "@/lib/mock-data/patients"
-import { ProblemReportDialog } from "@/components/admin/pre-assessments/problem-report-dialog"
+import { PatientColumns, PatientStatus } from "@/types/admin"
 
 export default function PatientDetailsPage() {
   const router = useRouter()
   const { toast } = useToast()
-  const [patient, setPatient] = useState<Patient | null>(null)
+  const [patient, setPatient] = useState<PatientColumns | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [isReportingProblem, setIsReportingProblem] = useState(false)
   const [isChangingStatus, setIsChangingStatus] = useState(false)

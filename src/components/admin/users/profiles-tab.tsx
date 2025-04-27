@@ -1,20 +1,20 @@
 "use client"
 
-import { useState } from "react"
-import { Pencil, Plus, Trash2Icon } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Switch } from "@/components/ui/switch"
-import { ProfileFormDialog } from "@/components/admin/users/profile-form-dialog"
 import { DeleteProfileDialog } from "@/components/admin/users/delete-profile-dialog"
+import { ProfileFormDialog } from "@/components/admin/users/profile-form-dialog"
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import { Button } from "@/components/ui/button"
 import { Pagination } from "@/components/ui/pagination"
-import { useToast } from "@/hooks/use-toast"
 import { Separator } from "@/components/ui/separator"
+import { Switch } from "@/components/ui/switch"
+import { useToast } from "@/hooks/use-toast"
+import { Pencil, Plus, Trash2Icon } from "lucide-react"
+import { useState } from "react"
 
 // Profile type definition
 interface Permission {
@@ -232,7 +232,10 @@ export function ProfilesTab() {
         {profiles.map((profile) => (
           <AccordionItem key={profile.id} value={profile.id} className="w-full">
             <div>
-              <AccordionTrigger className="w-full py-4 flex items-center hover:no-underline">
+              <AccordionTrigger
+                asChild
+                className="w-full py-4 flex items-center hover:no-underline"
+              >
                 <div className="flex-1 flex items-center justify-between">
                   <span className="font-medium">{profile.name}</span>
                   <div className="flex gap-2 pr-2">

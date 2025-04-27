@@ -1,13 +1,15 @@
 "use client"
+import { useState } from "react"
 
+import { ChartNoAxesCombinedIcon } from "lucide-react"
+
+import { DashboardDefaultSection } from "@/components/admin/dashboard/default-section"
+import { DashboardProjectionSection } from "@/components/admin/dashboard/projection-section"
+import { Switch } from "@/components/ui/switch"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Toggle } from "@/components/ui/toggle"
-import { ChartNoAxesCombinedIcon } from "lucide-react"
-import { useState } from "react"
-import { TimeframeOptions } from "@/types/admin"
-import { DashboardProjectionSection } from "@/components/admin/dashboard/projection-section"
-import { DashboardDefaultSection } from "@/components/admin/dashboard/default-section"
-import { Switch } from "@/components/ui/switch"
+
+import { TimeframeOptions } from "@/types"
 
 export default function DashboardPage() {
   const [isProjectionActive, setIsProjectionActive] = useState(false)

@@ -1,26 +1,23 @@
 "use client"
 
-import { useState } from "react"
+import { ActivityDetailDialog } from "@/components/admin/activity-log/activity-detail-dialog"
+import { BackButton } from "@/components/common"
 import { Button } from "@/components/ui/button"
 import { Pagination } from "@/components/ui/pagination"
-import { ActivityLogEntry } from "@/types"
-import { ActivityDetailDialog } from "@/components/admin/activity-log/activity-detail-dialog"
+import { ActivityLogColumns } from "@/types/admin"
+import { useState } from "react"
+
 import { activities as mockActivities } from "@/lib/mock-data/activity-log"
-import { BackButton } from "@/components/common"
 
 export default function AdminActivitiesPage() {
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedActivity, setSelectedActivity] =
-    useState<ActivityLogEntry | null>(null)
+    useState<ActivityLogColumns | null>(null)
 
   // Mock data for activities
   const activities = mockActivities
 
-  // TODO: Fetch or filter activities based on the `activityId` prop
-  // Example: const activities = await fetchActivitiesForUser(activityId);
-  // For now, using the full mock list
-
-  const handleViewActivity = (activity: ActivityLogEntry) => {
+  const handleViewActivity = (activity: ActivityLogColumns) => {
     setSelectedActivity(activity)
   }
 

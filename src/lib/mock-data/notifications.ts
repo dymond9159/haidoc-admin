@@ -1,4 +1,4 @@
-import { NotificationType, Notifications } from "@/types"
+import { NotificationColumns, NotificationType } from "@/types"
 import { subDays } from "date-fns"
 
 // Helper function to generate random dates within the last 30 days
@@ -9,7 +9,7 @@ function randomDate(start: Date, end: Date) {
 }
 
 // Generate 50 mock notifications
-export function generateMockNotifications(count = 50): Notifications[] {
+export function generateMockNotifications(count = 50): NotificationColumns[] {
   const now = new Date()
   const thirtyDaysAgo = subDays(now, 30)
 
@@ -90,7 +90,7 @@ export function generateMockNotifications(count = 50): Notifications[] {
     "Dra. Patricia Sousa",
   ]
 
-  const notifications: Notifications[] = []
+  const notifications: NotificationColumns[] = []
 
   for (let i = 0; i < count; i++) {
     const id = (i + 1).toString()

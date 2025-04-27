@@ -1,16 +1,20 @@
-import { useCallback, useEffect, useMemo, useState } from "react"
-import { useRouter } from "next/navigation"
+"use client"
+
 import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
-import { Button } from "@/components/ui"
-import { EnhancedTable } from "@/components/common/enhanced-table"
-import { ColumnDef, StatusDropdown, StatusLabel } from "@/components/common"
-import { FilterConfig, StatusOption } from "@/components/common/table-filter"
+import { useRouter } from "next/navigation"
+import { useCallback, useEffect, useMemo, useState } from "react"
+
 import { PatientTabOption } from "@/app/(admin)/admin/pre-assessments/page"
-import { PatientStatusList } from "@/lib/constants"
-import { Patient, PatientStatus } from "@/types/admin"
+import { ColumnDef, StatusDropdown, StatusLabel } from "@/components/common"
+import { EnhancedTable } from "@/components/common/enhanced-table"
+import { FilterConfig, StatusOption } from "@/components/common/table-filter"
+import { Button } from "@/components/ui"
+
 import { useToast } from "@/hooks/use-toast"
+import { PatientStatusList } from "@/lib/constants"
 import { mockCompletedPatients, mockPatients } from "@/lib/mock-data/patients"
+import { PatientColumns, PatientStatus } from "@/types/admin"
 
 interface PatientTableProps {
   mode?: PatientTabOption
@@ -28,7 +32,7 @@ export function PatientTable({
   mode = PatientTabOption.Received,
 }: PatientTableProps) {
   const router = useRouter()
-  const [allData, setAllData] = useState<Patient[]>([])
+  const [allData, setAllData] = useState<PatientColumns[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [filters, setFilters] = useState<FilterOptions>({})
 
@@ -85,7 +89,7 @@ export function PatientTable({
   }
 
   // Define Columns
-  const columns: ColumnDef<Patient>[] = [
+  const columns: ColumnDef<PatientColumns>[] = [
     {
       accessorKey: "patientId",
       header: "ID DO PACIENTE",
@@ -143,7 +147,7 @@ export function PatientTable({
   )
 
   // Define Filter Configurations
-  const filterConfigs: FilterConfig<Patient>[] = useMemo(
+  const filterConfigs: FilterConfig<PatientColumns>[] = useMemo(
     () => [
       {
         type: "search",

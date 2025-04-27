@@ -1,17 +1,14 @@
 "use client"
 
-import * as React from "react"
-import { useState, useEffect, useMemo, useCallback } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 
 import { ColumnDef } from "@/components/common/data-table"
-import { mockPharmacy } from "@/lib/mock-data/delivers"
-import { ProjectionTabs } from "./projection-section"
-import { Consultation } from "@/types/admin"
 import { EnhancedTable } from "@/components/common/enhanced-table" // Import EnhancedTable
 import { FilterConfig } from "@/components/common/table-filter"
+import { mockPharmacyDeliveries } from "@/lib/mock-data/dashboard"
+import { PharmacyDeliveriesColumns } from "@/types/admin"
 
 interface PharmacyDeliveriesTableProps {
-  mode?: ProjectionTabs
   maxRecords?: number
   filterable?: boolean
   viewMore?: boolean
@@ -20,18 +17,17 @@ interface PharmacyDeliveriesTableProps {
 
 interface FilterOption {
   patientId?: string
-  specialty?: string
-  doctor?: string
+  pharmacy?: string
+  date?: string
 }
 
 export function PharmacyDeliveriesTable({
-  mode = ProjectionTabs.OnlineConsultation,
   filterable = true,
   viewMore = false,
   maxRecords,
   onViewMoreClick,
 }: PharmacyDeliveriesTableProps) {
-  const [allData, setAllData] = useState<Consultation[]>([])
+  const [allData, setAllData] = useState<PharmacyDeliveriesColumns[]>([])
   const [filters, setFilters] = useState<FilterOption>({}) // Initialize filter state
   const [isLoading, setIsLoading] = useState(true)
 
@@ -48,39 +44,31 @@ export function PharmacyDeliveriesTable({
       setIsLoading(true)
       await new Promise((resolve) => setTimeout(resolve, 1000))
 
-      let data: Consultation[] = []
+      let data: PharmacyDeliveriesColumns[] = []
 
-      switch (mode) {
-        case ProjectionTabs.OnlineConsultation:
-        case ProjectionTabs.PrecenseConsultation:
-        case ProjectionTabs.PharmacyDeliveries:
-        case ProjectionTabs.Harvests:
-          data = mockPharmacy
-          break
-      }
+      data = mockPharmacyDeliveries
 
       setAllData(data)
       setIsLoading(false)
     }
     fetchData()
-  }, [mode])
+  }, [])
 
-  const columns: ColumnDef<Consultation>[] = useMemo(
+  const columns: ColumnDef<PharmacyDeliveriesColumns>[] = useMemo(
     () => [
       {
         accessorKey: "patientId",
         header: "ID DO PACIENTE",
         className: "font-medium",
       },
-      { accessorKey: "specialty", header: "ESPECIALIDADE" },
-      { accessorKey: "doctor", header: "MÉDICO" },
+      { accessorKey: "pharmacy", header: "FARMACIA" },
       { accessorKey: "value", header: "VALOR" },
       { accessorKey: "date", header: "DATA E HORA" },
     ],
     [],
   )
 
-  const filterConfigs: FilterConfig<Consultation>[] = useMemo(
+  const filterConfigs: FilterConfig<PharmacyDeliveriesColumns>[] = useMemo(
     () => [
       {
         type: "search",
@@ -92,21 +80,20 @@ export function PharmacyDeliveriesTable({
       },
       {
         type: "search",
-        label: "Pesquisar Especialidade",
-        accessorKey: "specialty",
-        placeholder: "Pesquisar por Especialidade",
-        value: filters.specialty,
-        onChange: (value) => handleFilterChange("specialty", value),
+        label: "Farmácia",
+        accessorKey: "pharmacy",
+        placeholder: "Nome da Farmácia",
+        value: filters.pharmacy,
+        onChange: (value) => handleFilterChange("pharmacy", value),
       },
       {
-        type: "search",
-        label: "Pesquisar Médico",
-        accessorKey: "doctor",
-        placeholder: "Pesquisar por Médico",
-        value: filters.doctor,
-        onChange: (value) => handleFilterChange("doctor", value),
+        type: "date",
+        label: "Data",
+        accessorKey: "date",
+        placeholder: "Selecione uma Data",
+        value: filters.date,
+        onChange: (value) => handleFilterChange("date", value),
       },
-      // Add more filters as needed
     ],
     [filters, handleFilterChange],
   )

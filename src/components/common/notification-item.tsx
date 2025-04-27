@@ -1,6 +1,9 @@
 "use client"
-
+import { formatDistanceToNow } from "date-fns"
+import { ptBR } from "date-fns/locale"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
+
 import {
   Bell,
   Check,
@@ -10,16 +13,15 @@ import {
   ShieldAlert,
   Trash2Icon,
 } from "lucide-react"
-import { formatDistanceToNow } from "date-fns"
-import { ptBR } from "date-fns/locale"
-import { Button } from "@/components/ui/button"
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button"
+
 import { cn } from "@/lib/utils"
-import { NotificationType, Notifications } from "@/types"
-import { useRouter } from "next/navigation"
+import { NotificationColumns, NotificationType } from "@/types"
 
 interface NotificationItemProps {
-  notification: Notifications
+  notification: NotificationColumns
   onMarkAsRead: (id: string) => void
   onMarkAsUnread: (id: string) => void
   onDelete: (id: string) => void

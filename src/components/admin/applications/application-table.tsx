@@ -1,14 +1,14 @@
 "use client"
 
-import { useState, useEffect, useCallback, useMemo } from "react"
-import { Button } from "@/components/ui/button"
 import { ColumnDef } from "@/components/common/data-table"
-import { formatDate } from "@/lib/utils"
-import { useRouter } from "next/navigation"
 import { EnhancedTable } from "@/components/common/enhanced-table"
-import { mockApplications } from "@/lib/mock-data/applications"
-import { Application } from "@/types/admin"
 import { FilterConfig } from "@/components/common/table-filter"
+import { Button } from "@/components/ui/button"
+import { mockApplications } from "@/lib/mock-data/applications"
+import { formatDate } from "@/lib/utils"
+import { ApplicationColumns } from "@/types/admin"
+import { useRouter } from "next/navigation"
+import { useCallback, useEffect, useMemo, useState } from "react"
 
 interface ApplicationTableProps {
   status: "pending" | "approved" | "rejected" | "canceled"
@@ -16,7 +16,7 @@ interface ApplicationTableProps {
 
 export function ApplicationTable({ status }: ApplicationTableProps) {
   const router = useRouter()
-  const [applications, setApplications] = useState<Application[]>([])
+  const [applications, setApplications] = useState<ApplicationColumns[]>([])
   const [isLoading, setIsLoading] = useState(true) // You might want to handle loading state
   const [filters, setFilters] = useState<{
     businessName?: string
@@ -48,7 +48,7 @@ export function ApplicationTable({ status }: ApplicationTableProps) {
   }, [status])
 
   // Define Columns for Applications
-  const columns: ColumnDef<Application>[] = useMemo(
+  const columns: ColumnDef<ApplicationColumns>[] = useMemo(
     () => [
       {
         accessorKey: "businessName",
@@ -83,7 +83,7 @@ export function ApplicationTable({ status }: ApplicationTableProps) {
   )
 
   // Define Filter Configurations for Applications
-  const filterConfigs: FilterConfig<Application>[] = useMemo(
+  const filterConfigs: FilterConfig<ApplicationColumns>[] = useMemo(
     () => [
       {
         type: "search",

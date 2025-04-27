@@ -1,17 +1,14 @@
 "use client"
 
-import * as React from "react"
-import { useState, useEffect, useMemo, useCallback } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 
 import { ColumnDef } from "@/components/common/data-table"
-import { mockPharmacy } from "@/lib/mock-data/delivers"
-import { ProjectionTabs } from "./projection-section"
-import { Consultation } from "@/types/admin"
 import { EnhancedTable } from "@/components/common/enhanced-table" // Import EnhancedTable
 import { FilterConfig } from "@/components/common/table-filter"
+import { mockOnlineConsultations } from "@/lib/mock-data/dashboard"
+import { OnlineConsultationColumns } from "@/types/admin"
 
 interface OnlineConsultTableProps {
-  mode?: ProjectionTabs
   maxRecords?: number
   filterable?: boolean
   viewMore?: boolean
@@ -20,18 +17,18 @@ interface OnlineConsultTableProps {
 
 interface FilterOption {
   patientId?: string
-  specialty?: string
+  professional?: string
   doctor?: string
+  date?: string
 }
 
 export function OnlineConsultTable({
-  mode = ProjectionTabs.OnlineConsultation,
   filterable = true,
   viewMore = false,
   maxRecords,
   onViewMoreClick,
 }: OnlineConsultTableProps) {
-  const [allData, setAllData] = useState<Consultation[]>([])
+  const [allData, setAllData] = useState<OnlineConsultationColumns[]>([])
   const [filters, setFilters] = useState<FilterOption>({}) // Initialize filter state
   const [isLoading, setIsLoading] = useState(true)
 
@@ -48,31 +45,24 @@ export function OnlineConsultTable({
       setIsLoading(true)
       await new Promise((resolve) => setTimeout(resolve, 1000))
 
-      let data: Consultation[] = []
+      let data: OnlineConsultationColumns[] = []
 
-      switch (mode) {
-        case ProjectionTabs.OnlineConsultation:
-        case ProjectionTabs.PrecenseConsultation:
-        case ProjectionTabs.PharmacyDeliveries:
-        case ProjectionTabs.Harvests:
-          data = mockPharmacy
-          break
-      }
+      data = mockOnlineConsultations
 
       setAllData(data)
       setIsLoading(false)
     }
     fetchData()
-  }, [mode])
+  }, [])
 
-  const columns: ColumnDef<Consultation>[] = useMemo(
+  const columns: ColumnDef<OnlineConsultationColumns>[] = useMemo(
     () => [
       {
         accessorKey: "patientId",
         header: "ID DO PACIENTE",
         className: "font-medium",
       },
-      { accessorKey: "specialty", header: "ESPECIALIDADE" },
+      { accessorKey: "professional", header: "ESPECIALIDADE" },
       { accessorKey: "doctor", header: "MÉDICO" },
       { accessorKey: "value", header: "VALOR" },
       { accessorKey: "date", header: "DATA E HORA" },
@@ -80,11 +70,11 @@ export function OnlineConsultTable({
     [],
   )
 
-  const filterConfigs: FilterConfig<Consultation>[] = useMemo(
+  const filterConfigs: FilterConfig<OnlineConsultationColumns>[] = useMemo(
     () => [
       {
         type: "search",
-        label: "Pesquisar ID",
+        label: "Pesquisar",
         accessorKey: "patientId",
         placeholder: "Pesquisar por ID",
         value: filters.patientId,
@@ -92,21 +82,28 @@ export function OnlineConsultTable({
       },
       {
         type: "search",
-        label: "Pesquisar Especialidade",
-        accessorKey: "specialty",
-        placeholder: "Pesquisar por Especialidade",
-        value: filters.specialty,
-        onChange: (value) => handleFilterChange("specialty", value),
+        label: "Especialidade",
+        accessorKey: "professional",
+        placeholder: "Selecione uma Especialidade",
+        value: filters.professional,
+        onChange: (value) => handleFilterChange("professional", value),
       },
       {
         type: "search",
-        label: "Pesquisar Médico",
+        label: "Médico",
         accessorKey: "doctor",
-        placeholder: "Pesquisar por Médico",
+        placeholder: "Nome do Médico",
         value: filters.doctor,
         onChange: (value) => handleFilterChange("doctor", value),
       },
-      // Add more filters as needed
+      {
+        type: "date",
+        label: "Data",
+        accessorKey: "date",
+        placeholder: "Selecione uma Data",
+        value: filters.date,
+        onChange: (value) => handleFilterChange("date", value),
+      },
     ],
     [filters, handleFilterChange],
   )

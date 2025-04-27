@@ -1,12 +1,14 @@
 "use client"
-
 import { useState } from "react"
+
+import { ChartColumnIncreasingIcon, ChartLineIcon } from "lucide-react"
+
+import { Chart } from "@/components/common"
 import { Card } from "@/components/ui/card"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { ChartColumnIncreasingIcon, ChartLineIcon } from "lucide-react"
-import { ChartType } from "@/types/admin"
-import { Chart } from "@/components/common"
+
 import { ThemeColor } from "@/lib/constants"
+import { ChartOptions } from "@/types/admin"
 
 export type ChartDataType = {
   month: string
@@ -36,7 +38,7 @@ interface ChartSectionProps {
 }
 
 export function ChartSection({ title, data = [] }: ChartSectionProps) {
-  const [chartType, setChartType] = useState<ChartType>(ChartType.Bar)
+  const [chartType, setChartType] = useState<ChartOptions>(ChartOptions.Bar)
 
   // Calculate averages for the scenarios
   const optimisticAvg = Math.round(
@@ -77,14 +79,14 @@ export function ChartSection({ title, data = [] }: ChartSectionProps) {
             <h3 className="text-sm font-medium">Tipo de Visualização:</h3>
             <RadioGroup
               orientation="horizontal"
-              defaultValue={ChartType.Bar}
-              onValueChange={(value) => setChartType(value as ChartType)}
+              defaultValue={ChartOptions.Bar}
+              onValueChange={(value) => setChartType(value as ChartOptions)}
               className="flex flex-row gap-3"
             >
-              <RadioGroupItem value={ChartType.Line}>
+              <RadioGroupItem value={ChartOptions.Line}>
                 <ChartLineIcon size="21" />
               </RadioGroupItem>
-              <RadioGroupItem value={ChartType.Bar}>
+              <RadioGroupItem value={ChartOptions.Bar}>
                 <ChartColumnIncreasingIcon size="21" />
               </RadioGroupItem>
             </RadioGroup>
