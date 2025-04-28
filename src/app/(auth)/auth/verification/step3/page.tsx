@@ -2,10 +2,10 @@
 
 import type React from "react"
 
-import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
-import { CodeInput } from "@/components/ui/code-input"
 import { Button } from "@/components/ui/button"
+import { CodeInput } from "@/components/ui/code-input"
+import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
 
 export default function VerificationStep3() {
   const router = useRouter()
@@ -16,10 +16,7 @@ export default function VerificationStep3() {
 
   useEffect(() => {
     // Get the verification method from sessionStorage
-    const storedMethod = sessionStorage.getItem("verificationMethod") as
-      | "email"
-      | "sms"
-      | null
+    const storedMethod = sessionStorage.getItem("verificationMethod") as "email" | "sms" | null
     setMethod(storedMethod)
   }, [])
 
@@ -53,40 +50,24 @@ export default function VerificationStep3() {
     <div className="space-y-6">
       <div className="space-y-2">
         {method === "email" ? (
-          <p className="text-md text-system-12">
-            Digite abaixo o código enviado para o seu e-mail.
-          </p>
+          <p className="text-md text-system-12">Digite abaixo o código enviado para o seu e-mail.</p>
         ) : method === "sms" ? (
-          <p className="text-md text-system-12">
-            Digite abaixo o código enviado para o seu número de telefone.
-          </p>
+          <p className="text-md text-system-12">Digite abaixo o código enviado para o seu número de telefone.</p>
         ) : (
-          <p className="text-md text-system-12">
-            Digite abaixo o código enviado.
-          </p>
+          <p className="text-md text-system-12">Digite abaixo o código enviado.</p>
         )}
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="space-y-2">
           <label htmlFor="code" className="block text-sm font-medium">
-            Código<span className="text-error-6">*</span>
+            Código<span className="text-error-5">*</span>
           </label>
-          <CodeInput
-            id="code"
-            placeholder="Ex: ABC123"
-            value={code}
-            onChangeCode={setCode}
-            required
-          />
-          {error && <p className="text-xs text-error-6">{error}</p>}
+          <CodeInput id="code" placeholder="Ex: ABC123" value={code} onChangeCode={setCode} required />
+          {error && <p className="text-xs text-error-5">{error}</p>}
         </div>
 
-        <Button
-          type="submit"
-          className="w-full"
-          disabled={isLoading || code.length !== 6}
-        >
+        <Button type="submit" className="w-full" disabled={isLoading || code.length !== 6}>
           {isLoading ? "Verificando..." : "Próximo"}
         </Button>
       </form>

@@ -2,14 +2,14 @@
 
 import type React from "react"
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import Link from "next/link"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { EyeIcon, EyeOffIcon } from "lucide-react"
-import { PhoneInput } from "@/components/ui/phone-input"
 import { Logo } from "@/components/logo"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { PhoneInput } from "@/components/ui/phone-input"
+import { EyeIcon, EyeOffIcon } from "lucide-react"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 
 export default function RegisterPage() {
   const router = useRouter()
@@ -49,14 +49,12 @@ export default function RegisterPage() {
         </div>
 
         <h1 className="text-center text-2xl font-bold">Crie sua conta</h1>
-        <p className="text-center text-sm text-system-10">
-          Preencha os campos abaixo para criar sua conta no HaiDoc
-        </p>
+        <p className="text-center text-sm text-system-10">Preencha os campos abaixo para criar sua conta no HaiDoc</p>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
             <label htmlFor="name" className="block text-sm font-medium">
-              Nome completo<span className="text-error-6">*</span>
+              Nome completo<span className="text-error-5">*</span>
             </label>
             <Input
               id="name"
@@ -70,7 +68,7 @@ export default function RegisterPage() {
 
           <div className="space-y-2">
             <label htmlFor="email" className="block text-sm font-medium">
-              E-mail<span className="text-error-6">*</span>
+              E-mail<span className="text-error-5">*</span>
             </label>
             <Input
               id="email"
@@ -84,7 +82,7 @@ export default function RegisterPage() {
 
           <div className="space-y-2">
             <label htmlFor="phone" className="block text-sm font-medium">
-              Telefone<span className="text-error-6">*</span>
+              Telefone<span className="text-error-5">*</span>
             </label>
             <PhoneInput
               id="phone"
@@ -97,7 +95,7 @@ export default function RegisterPage() {
 
           <div className="space-y-2">
             <label htmlFor="password" className="block text-sm font-medium">
-              Senha<span className="text-error-6">*</span>
+              Senha<span className="text-error-5">*</span>
             </label>
             <div className="relative">
               <Input
@@ -114,24 +112,15 @@ export default function RegisterPage() {
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-system-10"
                 onClick={() => setShowPassword(!showPassword)}
               >
-                {showPassword ? (
-                  <EyeOffIcon className="h-5 w-5" />
-                ) : (
-                  <EyeIcon className="h-5 w-5" />
-                )}
+                {showPassword ? <EyeOffIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
               </button>
             </div>
-            <p className="text-xs text-system-10">
-              A senha deve ter pelo menos 8 caracteres
-            </p>
+            <p className="text-xs text-system-10">A senha deve ter pelo menos 8 caracteres</p>
           </div>
 
           <div className="space-y-2">
-            <label
-              htmlFor="confirmPassword"
-              className="block text-sm font-medium"
-            >
-              Confirmar senha<span className="text-error-6">*</span>
+            <label htmlFor="confirmPassword" className="block text-sm font-medium">
+              Confirmar senha<span className="text-error-5">*</span>
             </label>
             <div className="relative">
               <Input
@@ -147,35 +136,20 @@ export default function RegisterPage() {
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-system-10"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
               >
-                {showConfirmPassword ? (
-                  <EyeOffIcon className="h-5 w-5" />
-                ) : (
-                  <EyeIcon className="h-5 w-5" />
-                )}
+                {showConfirmPassword ? <EyeOffIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
               </button>
             </div>
           </div>
 
-          {error && (
-            <div className="rounded-md bg-error-2 p-3 text-sm text-error-6">
-              {error}
-            </div>
-          )}
+          {error && <div className="rounded-md bg-error-2 p-3 text-sm text-error-5">{error}</div>}
 
-          <Button
-            type="submit"
-            className="w-full bg-primary-9 hover:bg-primary-10"
-            disabled={isLoading}
-          >
+          <Button type="submit" className="w-full bg-primary-9 hover:bg-primary-10" disabled={isLoading}>
             {isLoading ? "Criando conta..." : "Criar conta"}
           </Button>
 
           <div className="text-center text-sm">
             Já tem uma conta?{" "}
-            <Link
-              href="/login"
-              className="text-primary-9 hover:text-primary-10"
-            >
+            <Link href="/login" className="text-primary-9 hover:text-primary-10">
               Faça login
             </Link>
           </div>

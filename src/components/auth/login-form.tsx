@@ -1,13 +1,13 @@
 "use client"
 
-import type React from "react"
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Input } from "@/components/ui/input"
+import { LogoIcon } from "@/components/icons/hidoc-icons"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import { EyeIcon, EyeOffIcon } from "lucide-react"
 import Link from "next/link"
-import { LogoIcon } from "@/components/icons/hidoc-icons"
+import { useRouter } from "next/navigation"
+import type React from "react"
+import { useState } from "react"
 
 export const LoginForm = () => {
   const router = useRouter()
@@ -36,7 +36,7 @@ export const LoginForm = () => {
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="space-y-2">
           <label htmlFor="email" className="block text-sm font-medium">
-            E-mail<span className="text-error-6">*</span>
+            E-mail<span className="text-error-5">*</span>
           </label>
           <Input
             id="email"
@@ -51,7 +51,7 @@ export const LoginForm = () => {
 
         <div className="space-y-2">
           <label htmlFor="password" className="block text-sm font-medium">
-            Senha<span className="text-error-6">*</span>
+            Senha<span className="text-error-5">*</span>
           </label>
           <div className="relative">
             <Input
@@ -68,29 +68,17 @@ export const LoginForm = () => {
               className="absolute right-3 top-1/2 -translate-y-1/2 text-system-10"
               onClick={() => setShowPassword(!showPassword)}
             >
-              {showPassword ? (
-                <EyeOffIcon className="h-5 w-5" />
-              ) : (
-                <EyeIcon className="h-5 w-5" />
-              )}
+              {showPassword ? <EyeOffIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
             </button>
           </div>
         </div>
 
-        <Button
-          variant="primary"
-          className="w-full"
-          type="submit"
-          disabled={isLoading}
-        >
+        <Button variant="primary" className="w-full" type="submit" disabled={isLoading}>
           {isLoading ? "Carregando..." : "Entrar"}
         </Button>
 
         <div className="">
-          <Link
-            href="/auth/forgot-password"
-            className="font-bold text-primary-9 hover:text-primary-10 text-sm"
-          >
+          <Link href="/auth/forgot-password" className="font-bold text-primary-9 hover:text-primary-10 text-sm">
             Esqueci minha senha
           </Link>
         </div>

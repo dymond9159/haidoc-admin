@@ -1,9 +1,9 @@
 "use client"
-import { Icon } from "@/components/icons/icons"
 import { Container, Section } from "@/components/common"
+import { Icon } from "@/components/icons/icons"
+import { Logo } from "@/components/logo"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Button } from "@/components/ui"
-import { Logo } from "@/components/logo"
 
 export default function ComponentShowcase() {
   return (
@@ -26,7 +26,7 @@ export default function ComponentShowcase() {
           <Icon name="doctor" className="h-6 w-6 text-info-6" />
           <Icon name="patient" className="h-6 w-6 text-success-6" />
           <Icon name="prescription" className="h-6 w-6 text-warning-6" />
-          <Icon name="lab-result" className="h-6 w-6 text-error-6" />
+          <Icon name="lab-result" className="h-6 w-6 text-error-5" />
         </div>
       </Section>
       <Section className="space-y-4">

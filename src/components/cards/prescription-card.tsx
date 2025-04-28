@@ -1,10 +1,10 @@
 "use client"
 
-import { cn } from "@/lib/utils"
 import { Icon } from "@/components/icons/icons"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { cn } from "@/lib/utils"
 
 interface PrescriptionCardProps {
   medication: string
@@ -33,7 +33,7 @@ export function PrescriptionCard({
 }: PrescriptionCardProps) {
   const statusStyles = {
     active: "bg-success-2 text-success-6",
-    expired: "bg-error-2 text-error-6",
+    expired: "bg-error-2 text-error-5",
     "refill-requested": "bg-warning-2 text-warning-6",
   }
 
@@ -73,12 +73,7 @@ export function PrescriptionCard({
         </div>
       </CardContent>
       <CardFooter className="flex justify-between border-t border-system-5 px-4 py-3">
-        <Button
-          variant="outline"
-          size="sm"
-          className="w-full"
-          onClick={onViewDetails}
-        >
+        <Button variant="outline" size="sm" className="w-full" onClick={onViewDetails}>
           View Details
         </Button>
         {status !== "refill-requested" && (

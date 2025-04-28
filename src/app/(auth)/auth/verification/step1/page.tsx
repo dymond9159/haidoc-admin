@@ -2,12 +2,12 @@
 
 import type React from "react"
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { PhoneInput } from "@/components/ui/phone-input"
-import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 
 export default function VerificationStep1() {
   const router = useRouter()
@@ -37,15 +37,15 @@ export default function VerificationStep1() {
     <div className="space-y-6">
       <div className="space-y-2">
         <p className="text-md text-system-12">
-          Para completar seu Login com sucesso, por favor efetue a autenticação
-          de seus dados. Escolha por qual meio deseja receber o código.
+          Para completar seu Login com sucesso, por favor efetue a autenticação de seus dados. Escolha por qual meio
+          deseja receber o código.
         </p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="space-y-2">
           <label htmlFor="email" className="block text-sm font-medium">
-            E-mail<span className="text-error-6">*</span>
+            E-mail<span className="text-error-5">*</span>
           </label>
           <Input
             id="email"
@@ -70,7 +70,7 @@ export default function VerificationStep1() {
 
         <div className="space-y-2">
           <label htmlFor="phone" className="block text-sm font-medium">
-            SMS<span className="text-error-6">*</span>
+            SMS<span className="text-error-5">*</span>
           </label>
           <PhoneInput
             id="phone"
@@ -89,12 +89,7 @@ export default function VerificationStep1() {
         <Button
           type="submit"
           className="w-full"
-          disabled={
-            isLoading ||
-            !method ||
-            (method === "email" && !email) ||
-            (method === "sms" && !phone)
-          }
+          disabled={isLoading || !method || (method === "email" && !email) || (method === "sms" && !phone)}
         >
           {isLoading ? "Enviando..." : "Enviar"}
         </Button>

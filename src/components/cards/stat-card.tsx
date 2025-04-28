@@ -17,14 +17,7 @@ interface StatCardProps {
   className?: string
 }
 
-export function StatCard({
-  title,
-  value,
-  description,
-  icon,
-  trend,
-  className,
-}: StatCardProps) {
+export function StatCard({ title, value, description, icon, trend, className }: StatCardProps) {
   return (
     <Card className={cn("", className)}>
       <CardHeader className="flex flex-row items-center justify-between pb-2">
@@ -44,13 +37,13 @@ export function StatCard({
               name={trend.isPositive ? "chevron-up" : "chevron-down"}
               className={cn("mr-1 h-3 w-3", {
                 "text-success-6": trend.isPositive,
-                "text-error-6": !trend.isPositive,
+                "text-error-5": !trend.isPositive,
               })}
             />
             <span
               className={cn({
                 "text-success-6": trend.isPositive,
-                "text-error-6": !trend.isPositive,
+                "text-error-5": !trend.isPositive,
               })}
             >
               {trend.value}%
