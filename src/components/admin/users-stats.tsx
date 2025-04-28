@@ -1,17 +1,31 @@
+"use client"
+
 import { UserCheck, UserPlus } from "lucide-react"
+
 import { StatCard } from "../common"
-import { ThemeColor } from "@/lib/constants"
-import { activeUsersData, newUsersData } from "@/lib/mock-data/users"
 import { UserLineChart } from "./user-line-chart"
 
-export const UserStats = () => {
+import { ThemeColor } from "@/lib/constants"
+import { generateUserData } from "@/lib/mock-data/users"
+import { calculateTrend } from "@/lib/utils"
+import { TimeframeOptions } from "@/types"
+
+interface UserStatsProps {
+  timeframe?: TimeframeOptions
+}
+
+export const UserStats = ({
+  timeframe = TimeframeOptions.SevenDays,
+}: UserStatsProps) => {
+  const { newUsersData, activeUsersData } = generateUserData(timeframe)
+
   return (
     <div className="grid gap-4 md:grid-cols-2">
       <StatCard
         title="Novos Usuários"
-        value="300"
+        value={newUsersData.reduce((a, b) => a + b.value, 0).toString()}
         icon={<UserPlus />}
-        trend={-20}
+        trend={calculateTrend(newUsersData)} // You can calculate dynamically later
         chart={
           <UserLineChart
             data={newUsersData}
@@ -23,14 +37,14 @@ export const UserStats = () => {
 
       <StatCard
         title="Usuários ativos"
-        value="300"
+        value={activeUsersData.reduce((a, b) => a + b.value, 0).toString()}
         icon={<UserCheck />}
-        trend={20}
+        trend={calculateTrend(activeUsersData)}
         chart={
           <UserLineChart
             data={activeUsersData}
-            className="h-full"
             color={ThemeColor.success[5]}
+            className="h-full"
           />
         }
       />

@@ -1,6 +1,6 @@
-import { Header, Sidebar } from "@/components/common"
-import { Suspense, type ReactNode } from "react"
+import { Header, Loading, Sidebar } from "@/components/common"
 import type { Metadata } from "next"
+import { Suspense, type ReactNode } from "react"
 
 export const metadata: Metadata = {
   title: {
@@ -21,7 +21,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
       <Sidebar />
       <div className="w-screen h-screen flex-1 flex flex-col">
         <Header />
-        <Suspense fallback={<div>Carregando...</div>}>
+        <Suspense fallback={<Loading text="Carregando..." />}>
           <main className="flex-1 p-6 overflow-y-auto">{children}</main>
         </Suspense>
       </div>

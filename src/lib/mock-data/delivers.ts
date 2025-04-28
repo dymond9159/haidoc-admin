@@ -1,6 +1,6 @@
-import { Consultation, Deliver, DeliverStatus } from "@/types/admin"
+import { DeliverColumns, DeliverStatus } from "@/types/admin"
 
-export const mockDelivery: Deliver = {
+export const mockDelivery: DeliverColumns = {
   id: "1",
   patientId: "123456789",
   patientName: "Ana Maria Santos de Oliveira",
@@ -35,7 +35,7 @@ export const mockDelivery: Deliver = {
 }
 
 // Mock data using Enum
-export const mockDelivers: Deliver[] = [
+export const mockDelivers: DeliverColumns[] = [
   {
     id: "123556",
     patientId: "123456",
@@ -494,7 +494,7 @@ export const mockDelivers: Deliver[] = [
   },
 ]
 
-export const mockDeliverHistory: Deliver[] = [
+export const mockDeliverHistory: DeliverColumns[] = [
   {
     id: "123556",
     patientId: "123456",
@@ -950,35 +950,5 @@ export const mockDeliverHistory: Deliver[] = [
       { name: "Comprovante de pagamento.jpg", type: "image" },
     ],
     paymentMethod: "Transferência bancária",
-  },
-]
-
-export const mockPharmacy: Consultation[] = [
-  {
-    id: "1",
-    patientId: "123456789",
-    specialty: "Nome do Remédio",
-    doctor: "Farmácia com o nome muuuuito grande",
-    value: "300 MZN",
-    date: "04/06/2024",
-    time: "18:45",
-  },
-  {
-    id: "2",
-    patientId: "123456789",
-    specialty: "Nome do Remédio",
-    doctor: "Farmácia com o nome muuuuito grande",
-    value: "300 MZN",
-    date: "04/06/2024",
-    time: "18:45",
-  },
-  {
-    id: "3",
-    patientId: "123456789",
-    specialty: "Nome do Remédio",
-    doctor: "Farmácia com o nome muuuuito grande",
-    value: "300 MZN",
-    date: "04/06/2024",
-    time: "18:45",
   },
 ]

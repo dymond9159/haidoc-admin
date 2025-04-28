@@ -1,7 +1,7 @@
 // src/components/dialogs/ActivityDiffDialog.tsx
 "use client"
 
-import type React from "react"
+import { PdfFileIcon } from "@/components/icons"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -9,11 +9,11 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
-import { ActivityLogEntry } from "@/types"
-import { PdfFileIcon } from "@/components/icons"
+import { ActivityLogColumns } from "@/types/admin"
+import type React from "react"
 
 interface ActivityDetailDialogProps {
-  activity: ActivityLogEntry | null
+  activity: ActivityLogColumns | null
   open: boolean
   onOpenChange: (open: boolean) => void
   onViewDocument?: (documentName: string, type: "before" | "after") => void

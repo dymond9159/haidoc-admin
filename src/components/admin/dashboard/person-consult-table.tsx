@@ -1,17 +1,15 @@
 "use client"
 
-import * as React from "react"
-import { useState, useEffect, useMemo, useCallback } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 
 import { ColumnDef } from "@/components/common/data-table"
-import { mockPharmacy } from "@/lib/mock-data/delivers"
-import { ProjectionTabs } from "./projection-section"
-import { Consultation } from "@/types/admin"
 import { EnhancedTable } from "@/components/common/enhanced-table" // Import EnhancedTable
 import { FilterConfig } from "@/components/common/table-filter"
+import { mockPersonConsultations } from "@/lib/mock-data/dashboard"
+import { formatDate } from "@/lib/utils"
+import { PersonConsultationColumns } from "@/types/admin"
 
-interface PresenceConsultTableProps {
-  mode?: ProjectionTabs
+interface PersonConsultTableProps {
   maxRecords?: number
   filterable?: boolean
   viewMore?: boolean
@@ -20,18 +18,18 @@ interface PresenceConsultTableProps {
 
 interface FilterOption {
   patientId?: string
-  specialty?: string
-  doctor?: string
+  professional?: string
+  clinica?: string
+  date?: string
 }
 
-export function PresenceConsultTable({
-  mode = ProjectionTabs.OnlineConsultation,
+export function PersonConsultTable({
   filterable = true,
   viewMore = false,
   maxRecords,
   onViewMoreClick,
-}: PresenceConsultTableProps) {
-  const [allData, setAllData] = useState<Consultation[]>([])
+}: PersonConsultTableProps) {
+  const [allData, setAllData] = useState<PersonConsultationColumns[]>([])
   const [filters, setFilters] = useState<FilterOption>({}) // Initialize filter state
   const [isLoading, setIsLoading] = useState(true)
 
@@ -48,43 +46,48 @@ export function PresenceConsultTable({
       setIsLoading(true)
       await new Promise((resolve) => setTimeout(resolve, 1000))
 
-      let data: Consultation[] = []
+      let data: PersonConsultationColumns[] = []
 
-      switch (mode) {
-        case ProjectionTabs.OnlineConsultation:
-        case ProjectionTabs.PrecenseConsultation:
-        case ProjectionTabs.PharmacyDeliveries:
-        case ProjectionTabs.Harvests:
-          data = mockPharmacy
-          break
-      }
+      data = mockPersonConsultations
 
       setAllData(data)
       setIsLoading(false)
     }
     fetchData()
-  }, [mode])
+  }, [])
 
-  const columns: ColumnDef<Consultation>[] = useMemo(
+  const columns: ColumnDef<PersonConsultationColumns>[] = useMemo(
     () => [
       {
         accessorKey: "patientId",
         header: "ID DO PACIENTE",
         className: "font-medium",
       },
-      { accessorKey: "specialty", header: "ESPECIALIDADE" },
+      { accessorKey: "professional", header: "ESPECIALIDADE" },
       { accessorKey: "doctor", header: "MÉDICO" },
+      { accessorKey: "clinica", header: "CLÍNICA" },
       { accessorKey: "value", header: "VALOR" },
-      { accessorKey: "date", header: "DATA E HORA" },
+      {
+        accessorKey: "date",
+        header: "DATA E HORA",
+        cell: (row) => (
+          <div>
+            <span className="text-sm block">{row?.time}</span>
+            <span className="text-xs text-system-9">
+              {formatDate(new Date(row?.date))}
+            </span>
+          </div>
+        ),
+      },
     ],
     [],
   )
 
-  const filterConfigs: FilterConfig<Consultation>[] = useMemo(
+  const filterConfigs: FilterConfig<PersonConsultationColumns>[] = useMemo(
     () => [
       {
         type: "search",
-        label: "Pesquisar ID",
+        label: "Pesquisar",
         accessorKey: "patientId",
         placeholder: "Pesquisar por ID",
         value: filters.patientId,
@@ -92,21 +95,28 @@ export function PresenceConsultTable({
       },
       {
         type: "search",
-        label: "Pesquisar Especialidade",
-        accessorKey: "specialty",
-        placeholder: "Pesquisar por Especialidade",
-        value: filters.specialty,
-        onChange: (value) => handleFilterChange("specialty", value),
+        label: "Especialidade",
+        accessorKey: "professional",
+        placeholder: "Selecione uma Especialidade",
+        value: filters.professional,
+        onChange: (value) => handleFilterChange("professional", value),
       },
       {
         type: "search",
-        label: "Pesquisar Médico",
-        accessorKey: "doctor",
-        placeholder: "Pesquisar por Médico",
-        value: filters.doctor,
-        onChange: (value) => handleFilterChange("doctor", value),
+        label: "Clínica",
+        accessorKey: "clinica",
+        placeholder: "Nome da Clínica",
+        value: filters.clinica,
+        onChange: (value) => handleFilterChange("clinica", value),
       },
-      // Add more filters as needed
+      {
+        type: "date",
+        label: "Data",
+        accessorKey: "date",
+        placeholder: "Selecione uma Data",
+        value: filters.date,
+        onChange: (value) => handleFilterChange("date", value),
+      },
     ],
     [filters, handleFilterChange],
   )

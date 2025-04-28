@@ -26,8 +26,9 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
-import { ChartType } from "@/types/admin"
+
 import { cn } from "@/lib/utils"
+import { ChartOptions } from "@/types/admin"
 
 interface ChartProps {
   title?: string
@@ -35,7 +36,7 @@ interface ChartProps {
   footer?: React.ReactNode
   data: any[]
   config: ChartConfig
-  chartType: ChartType
+  chartType: ChartOptions
   height?: string
 }
 
@@ -48,8 +49,8 @@ export function Chart({
   chartType,
   height,
 }: ChartProps) {
-  const ChartComponent = chartType === ChartType.Bar ? BarChart : LineChart
-  const DataComponent = chartType === ChartType.Bar ? Bar : Line
+  const ChartComponent = chartType === ChartOptions.Bar ? BarChart : LineChart
+  const DataComponent = chartType === ChartOptions.Bar ? Bar : Line
 
   return (
     <Card className="p-6 pt-2 pl-0 pb-2">

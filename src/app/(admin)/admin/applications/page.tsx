@@ -1,9 +1,9 @@
 "use client"
 
-import { useState } from "react"
+import { ApplicationStats } from "@/components/admin/applications/application-stats"
 import { ApplicationTable } from "@/components/admin/applications/application-table"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ApplicationStats } from "@/components/admin/applications/application-stats"
+import { useState } from "react"
 
 export default function ApplicationsPageClient() {
   const [activeTab, setActiveTab] = useState<

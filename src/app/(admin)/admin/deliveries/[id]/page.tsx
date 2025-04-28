@@ -1,22 +1,26 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import { useParams, useRouter } from "next/navigation"
-import { BackButton, Loading, StatusDropdown } from "@/components/common"
-import { Button } from "@/components/ui/button"
-import { useToast } from "@/hooks/use-toast"
+import { useEffect, useState } from "react"
+
 import { Loader2 } from "lucide-react"
+
 import { ProblemReportDialog } from "@/components/admin/deliveries/problem-report-dialog"
 import { DocumentList } from "@/components/admin/document-list"
+import { BackButton, Loading, StatusDropdown } from "@/components/common"
+import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { Deliver, DeliverStatus } from "@/types/admin"
+
+import { useToast } from "@/hooks/use-toast"
+
 import { DeliverStatusList } from "@/lib/constants"
 import { mockDelivery } from "@/lib/mock-data/delivers"
+import { DeliverColumns, DeliverStatus } from "@/types/admin"
 
 export default function DeliveryDetailsPage() {
   const router = useRouter()
   const { toast } = useToast()
-  const [delivery, setDelivery] = useState<Deliver | null>(null)
+  const [delivery, setDelivery] = useState<DeliverColumns | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [isReportingProblem, setIsReportingProblem] = useState(false)
   const [isChangingStatus, setIsChangingStatus] = useState(false)

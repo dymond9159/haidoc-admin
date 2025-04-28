@@ -1,6 +1,6 @@
-import { Invoice, InvoiceStatus, PaymentMethod } from "@/types/admin"
+import { InvoiceColumns, InvoiceStatus, PaymentMethod, ReceiptColumns } from "@/types/admin"
 
-export const mockInvoice: Invoice[] = [
+export const mockInvoice: InvoiceColumns[] = [
   {
     id: "1",
     number: "INV-0001",
@@ -58,7 +58,7 @@ export const mockInvoice: Invoice[] = [
   },
 ]
 
-export const mockInvoiceDetails = {
+export const mockInvoiceDetails: InvoiceColumns = {
   id: "123456789",
   number: "123456789",
   issueDate: "09/07/2024",
@@ -66,6 +66,34 @@ export const mockInvoiceDetails = {
   plansCount: "01",
   paymentMethod: PaymentMethod.CreditCard,
   status: InvoiceStatus.Paid,
+  issuer: {
+    name: "HaiDoc, LDA",
+    nuit: "401701826",
+    address:
+      "Rua do Dão, nº49, 2º Andar, Bairro Central, Cidade de Maputo, Moçambique",
+    email: "Email@exemplo.com",
+    phone: "(00) 00000-0000",
+  },
+  customer: {
+    name: "Farmácia com nome muuuuito graaaaaaaaaaaaande",
+    nuit: "401701826",
+    address:
+      "Rua do Dão, nº49, 2º Andar, Bairro Central, Cidade de Maputo, Moçambique",
+    email: "Email@exemplo.com",
+    phone: "(00) 00000-0000",
+  },
+  subtotal: 300,
+  totalWithTaxes: 350,
+  dueDate: "20/07/2024",
+}
+
+export const mockReceiptDetails: ReceiptColumns = {
+  id: "123456789",
+  number: "123456789",
+  issueDate: "09/07/2024",
+  unitValue: 350,
+  plansCount: "01",
+  paymentMethod: PaymentMethod.CreditCard,
   issuer: {
     name: "HaiDoc, LDA",
     nuit: "401701826",

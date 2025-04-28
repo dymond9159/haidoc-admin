@@ -1,15 +1,15 @@
 "use client"
 
-import React from "react"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogClose,
 } from "@/components/ui/dialog"
+import React from "react"
 
 export type AuthorizationRequestType = "medical" | "documents"
 

@@ -13,6 +13,27 @@ export function formatDate(date: Date): string {
   })
 }
 
+export const calculateTrend = (
+  data: { timeframe: string; value: number }[],
+) => {
+  if (data.length < 2) return 0
+
+  const mid = Math.floor(data.length / 2)
+
+  const prevTotal = data
+    .slice(0, mid)
+    .reduce((sum, item) => sum + item.value, 0)
+  const currentTotal = data
+    .slice(mid)
+    .reduce((sum, item) => sum + item.value, 0)
+
+  if (prevTotal === 0) return 100
+
+  const trend = ((currentTotal - prevTotal) / prevTotal) * 100
+
+  return Math.round(trend) // Return integer %
+}
+
 // const getFormattedDate = (): string => {
 //   const today = new Date()
 //   return new Intl.DateTimeFormat("pt-BR", {

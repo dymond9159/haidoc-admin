@@ -1,7 +1,7 @@
 // Define notification types
 export type NotificationType = "alert" | "message" | "system" | "document"
 
-export interface Notifications {
+export interface NotificationColumns {
   id: string
   type: NotificationType
   title: string

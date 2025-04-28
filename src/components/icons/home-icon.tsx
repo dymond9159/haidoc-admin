@@ -4,9 +4,10 @@ export function HomeIcon(props: LucideProps) {
   const color = props?.fill || "currentColor"
   return (
     <svg
-      width="16"
-      height="18"
+      width={props?.size || "16"}
+      height={props?.size || "18"}
       viewBox="0 0 16 18"
+      {...props}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}

@@ -1,11 +1,13 @@
-export const mockInvoice = {
+import { InvoiceColumns, InvoiceStatus, PaymentMethod } from "@/types/admin"
+
+export const mockInvoice: InvoiceColumns = {
   id: "123456789",
   number: "123456789",
   issueDate: "09/07/2024",
-  unitValue: "MT 350,00",
+  unitValue: 350,
   plansCount: "01",
-  paymentMethod: "Cartão de crédito",
-  status: "Paga",
+  paymentMethod: PaymentMethod.CreditCard,
+  status: InvoiceStatus.Paid,
   issuer: {
     name: "HaiDoc, LDA",
     nuit: "401701826",
@@ -22,7 +24,7 @@ export const mockInvoice = {
     email: "Email@exemplo.com",
     phone: "(00) 00000-0000",
   },
-  subtotal: "MT 300,00",
-  totalWithTaxes: "MT 350,00",
+  subtotal: 300,
+  totalWithTaxes: 350,
   dueDate: "20/07/2024",
 }

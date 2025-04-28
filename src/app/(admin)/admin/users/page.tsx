@@ -1,18 +1,16 @@
 "use client"
 
-import { useState } from "react"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Button } from "@/components/ui/button"
-import { UserPlus } from "lucide-react"
-import { UserTable } from "@/components/admin/users/user-table"
 import { ProfilesTab } from "@/components/admin/users/profiles-tab"
 import { UserFormDialog } from "@/components/admin/users/user-form-dialog"
+import { UserTable } from "@/components/admin/users/user-table"
+import { Button } from "@/components/ui/button"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { UserPlus } from "lucide-react"
+import { useState } from "react"
 import { Toaster } from "sonner"
 
 export default function UsersPageClient() {
   const [isAddUserDialogOpen, setIsAddUserDialogOpen] = useState(false)
-
-  // document.title = "HaiDoc Admin | Gerenciamento de Usuários"
 
   return (
     <div className="space-y-6">

@@ -1,7 +1,9 @@
-import { cn } from "@/lib/utils"
+"use client"
+
+import type { IconName } from "@/components/icons/icons"
 import { Icon } from "@/components/icons/icons"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import type { IconName } from "@/components/icons/icons"
+import { cn } from "@/lib/utils"
 
 interface StatCardProps {
   title: string

@@ -1,21 +1,22 @@
 "use client"
 
-import * as React from "react"
-import { useState, useEffect, useCallback, useMemo } from "react"
-import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { useToast } from "@/hooks/use-toast"
-import { DeliverStatus, Deliver } from "@/types/admin"
-
-import { ColumnDef } from "@/components/common/data-table"
 import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
-import { mockDeliverHistory, mockDelivers } from "@/lib/mock-data/delivers"
+import { useRouter } from "next/navigation"
+import { useCallback, useEffect, useMemo, useState } from "react"
+
 import { DeliverTabOption } from "@/app/(admin)/admin/deliveries/page"
 import { StatusDropdown, StatusLabel } from "@/components/common"
-import { DeliverStatusList } from "@/lib/constants"
-import { EnhancedTable } from "@/components/common/enhanced-table" // Import EnhancedTable
+import { ColumnDef } from "@/components/common/data-table"
+import { EnhancedTable } from "@/components/common/enhanced-table"
 import { FilterConfig, StatusOption } from "@/components/common/table-filter"
+import { Button } from "@/components/ui/button"
+import { mockDeliverHistory, mockDelivers } from "@/lib/mock-data/delivers"
+
+import { useToast } from "@/hooks/use-toast"
+
+import { DeliverStatusList } from "@/lib/constants"
+import { DeliverColumns, DeliverStatus } from "@/types/admin"
 
 interface DeliverTableProps {
   mode?: DeliverTabOption
@@ -25,7 +26,7 @@ export function DeliverTable({
   mode = DeliverTabOption.Order,
 }: DeliverTableProps) {
   const router = useRouter()
-  const [allData, setAllData] = useState<Deliver[]>([])
+  const [allData, setAllData] = useState<DeliverColumns[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const { toast } = useToast()
   const [filters, setFilters] = useState<{
@@ -103,7 +104,7 @@ export function DeliverTable({
   }
 
   // Define Columns for Deliveries
-  const columns: ColumnDef<Deliver>[] = [
+  const columns: ColumnDef<DeliverColumns>[] = [
     {
       accessorKey: "patientId",
       header: "ID DO PACIENTE",
@@ -154,7 +155,7 @@ export function DeliverTable({
     }))
 
   // Define Filter Configurations for Deliveries
-  const filterConfigs: FilterConfig<Deliver>[] = useMemo(
+  const filterConfigs: FilterConfig<DeliverColumns>[] = useMemo(
     () => [
       {
         type: "search",

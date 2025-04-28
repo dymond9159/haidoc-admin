@@ -6,7 +6,7 @@ import { LogoIcon } from "./icons/hidoc-icons"
 
 interface LogoProps {
   className?: string
-  size?: "sm" | "md" | "lg"
+  size?: "xs" | "sm" | "md" | "lg"
   href?: string
   onClick?: () => void
 }
@@ -18,6 +18,7 @@ export function Logo({
   onClick,
 }: LogoProps) {
   const sizeClasses = {
+    xs: "h-8",
     sm: "h-10",
     md: "h-13",
     lg: "h-14",
