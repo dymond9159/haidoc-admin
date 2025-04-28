@@ -1,11 +1,11 @@
 "use client"
 
-import { cn } from "@/lib/utils"
 import { Icon } from "@/components/icons/icons"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { cn } from "@/lib/utils"
 
 interface AppointmentCardProps {
   patient: {
@@ -35,7 +35,7 @@ export function AppointmentCard({
   const statusStyles = {
     upcoming: "bg-info-2 text-info-6",
     completed: "bg-success-2 text-success-6",
-    cancelled: "bg-error-2 text-error-6",
+    cancelled: "bg-error-2 text-error-5",
   }
 
   const statusLabels = {
@@ -76,12 +76,7 @@ export function AppointmentCard({
           <Button variant="outline" size="sm" onClick={onReschedule}>
             Reschedule
           </Button>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="text-error-6"
-            onClick={onCancel}
-          >
+          <Button variant="ghost" size="sm" className="text-error-5" onClick={onCancel}>
             Cancel
           </Button>
         </CardFooter>

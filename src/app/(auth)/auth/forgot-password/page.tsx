@@ -2,10 +2,10 @@
 
 import type React from "react"
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 
 export default function ForgotPassword() {
   const router = useRouter()
@@ -27,21 +27,15 @@ export default function ForgotPassword() {
   return (
     <div className="w-full max-w-md space-y-8 rounded-lg bg-system-1 p-8 shadow-md">
       <div className="space-y-6">
-        <h2 className="text-xl font-semibold text-system-13">
-          Esqueci minha senha
-        </h2>
+        <h2 className="text-xl font-semibold text-system-13">Esqueci minha senha</h2>
 
         {submitted ? (
           <div className="space-y-4">
             <p className="text-sm text-system-12">
-              Enviamos um e-mail com instruções para redefinir sua senha. Por
-              favor, verifique sua caixa de entrada.
+              Enviamos um e-mail com instruções para redefinir sua senha. Por favor, verifique sua caixa de entrada.
             </p>
 
-            <Button
-              onClick={() => router.push("/login")}
-              className="w-full bg-primary-9 hover:bg-primary-10"
-            >
+            <Button onClick={() => router.push("/login")} className="w-full bg-primary-9 hover:bg-primary-10">
               Voltar para o Login
             </Button>
           </div>
@@ -49,12 +43,11 @@ export default function ForgotPassword() {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
               <p className="text-sm text-system-12">
-                Digite seu e-mail abaixo e enviaremos instruções para redefinir
-                sua senha.
+                Digite seu e-mail abaixo e enviaremos instruções para redefinir sua senha.
               </p>
 
               <label htmlFor="email" className="block text-sm font-medium">
-                E-mail<span className="text-error-6">*</span>
+                E-mail<span className="text-error-5">*</span>
               </label>
               <Input
                 id="email"
@@ -66,11 +59,7 @@ export default function ForgotPassword() {
               />
             </div>
 
-            <Button
-              type="submit"
-              className="w-full bg-primary-9 hover:bg-primary-10"
-              disabled={isLoading}
-            >
+            <Button type="submit" className="w-full bg-primary-9 hover:bg-primary-10" disabled={isLoading}>
               {isLoading ? "Enviando..." : "Enviar instruções"}
             </Button>
           </form>
