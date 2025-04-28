@@ -1,13 +1,13 @@
 {
-  "name": "haidoc-frontend",
-  "description": "HaiDoc Frontend, Next15, Typescript, shadcn UI, Redux",
+  "name": "haidoc-admin",
+  "description": "HaiDoc Admin, Next15, Typescript, shadcn UI, Redux",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev-turbo": "next dev --turbopack",
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 4000",
     "lint": "next lint",
     "add-ui": "npx shadcn@latest add"
   },
