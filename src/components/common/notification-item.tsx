@@ -65,7 +65,7 @@ export function NotificationItem({
       {notification.sender ? (
         <Avatar className="h-10 w-10 flex-shrink-0">
           <AvatarImage
-            src={notification.sender.avatar || "/placeholder.svg"}
+            src={notification.sender.avatar || "/images/placeholder.svg"}
             alt={notification.sender.name}
           />
           <AvatarFallback>
