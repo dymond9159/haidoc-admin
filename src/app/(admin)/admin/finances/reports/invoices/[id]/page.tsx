@@ -196,7 +196,7 @@ export default function InvoiceDetailPage() {
                 size={100}
                 color="#000000"
                 backgroundColor="#ffffff"
-                logoUrl="/placeholder.svg?height=20&width=20"
+                logoUrl="/images/placeholder.svg?height=20&width=20"
               />
             </div>
             <p className="text-xs text-system-9 text-center">

@@ -34,6 +34,7 @@ import { cn } from "@/lib/utils"
 import { RootState } from "@/store"
 import { setSideBarOpen, toggleCollapse } from "@/store/reducers/settings-slice"
 import { useSelector } from "react-redux"
+import { ScrollArea, ScrollBar } from "../ui"
 interface NavItem {
   icon: React.ElementType
   label: string
@@ -245,7 +246,26 @@ export function Sidebar() {
             )}
           </div>
         </div>
-        <div className="flex-1 overflow-y-auto px-2 py-4">
+        <ScrollArea className="h-[calc(100vh-89px)]">
+          <div className="flex-1 px-2 py-4">
+            <nav className="space-y-1">
+              {navItems.map((item) => (
+                <NavLink
+                  key={item.href}
+                  item={item}
+                  isTabletView={isTabletViewMode}
+                />
+              ))}
+            </nav>
+            <Separator className="my-3" />
+            <BackButton
+              isTabletView={isTabletViewMode}
+              closeSheet={() => dispatch(toggleCollapse())}
+            />
+          </div>
+          <ScrollBar orientation="vertical" />
+        </ScrollArea>
+        {/* <div className="flex-1 overflow-y-auto px-2 py-4">
           <nav className="space-y-1">
             {navItems.map((item) => (
               <NavLink
@@ -260,7 +280,7 @@ export function Sidebar() {
             isTabletView={isTabletViewMode}
             closeSheet={() => dispatch(toggleCollapse())}
           />
-        </div>
+        </div> */}
         <div
           className={cn("w-full flex-shrink-0", backgroundHeightClass)}
           style={backgroundStyle}
