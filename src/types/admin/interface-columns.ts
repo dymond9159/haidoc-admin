@@ -63,6 +63,20 @@ export interface InvoiceColumns {
   dueDate: string
 }
 
+export interface ReceiptColumns {
+  id: string
+  number: string
+  issueDate: string
+  unitValue: number
+  plansCount: string
+  paymentMethod: PaymentMethod
+  issuer: Party
+  customer: Party
+  subtotal: number
+  totalWithTaxes: number
+  dueDate: string
+}
+
 /*
  * MedicalAppointment
  */

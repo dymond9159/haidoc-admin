@@ -1,7 +1,7 @@
 "use client"
 
-import * as React from "react"
 import * as TabsPrimitive from "@radix-ui/react-tabs"
+import * as React from "react"
 
 import { cn } from "@/lib/utils"
 import { cva } from "class-variance-authority"
@@ -36,7 +36,7 @@ function TabsList({
     <TabsPrimitive.List
       data-slot="tabs-list"
       className={cn(
-        "flex flex-row items-center justify-center w-fit h-9 bg-muted text-muted-foreground rounded-lg p-[3px]",
+        "flex items-center justify-center w-fit h-9 bg-muted text-muted-foreground rounded-lg p-[3px]",
         orientation === "vertical" && "h-fit flex-col items-start",
         className,
       )}
@@ -105,4 +105,4 @@ function TabsContent({
   )
 }
 
-export { Tabs, TabsList, TabsTrigger, TabsContent, tabTriggerVariants }
+export { Tabs, TabsContent, TabsList, TabsTrigger, tabTriggerVariants }

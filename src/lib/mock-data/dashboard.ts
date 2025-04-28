@@ -1,3 +1,5 @@
+import { ProjectionChartDataType } from "@/components/admin/dashboard/chart-section"
+import { TimeframeOptions } from "@/types"
 import {
   HarvestsColumns,
   HarvestType,
@@ -90,4 +92,100 @@ export {
   mockOnlineConsultations,
   mockPersonConsultations,
   mockPharmacyDeliveries,
+}
+
+const generateRandomValue = () => {
+  return Math.floor(Math.random() * (800 - 100 + 1)) + 100
+}
+
+const allMonths: ProjectionChartDataType[] = [
+  {
+    month: "Jan",
+    optimistic: generateRandomValue(),
+    expected: generateRandomValue(),
+    pessimistic: generateRandomValue(),
+  },
+  {
+    month: "Feb",
+    optimistic: generateRandomValue(),
+    expected: generateRandomValue(),
+    pessimistic: generateRandomValue(),
+  },
+  {
+    month: "Mar",
+    optimistic: generateRandomValue(),
+    expected: generateRandomValue(),
+    pessimistic: generateRandomValue(),
+  },
+  {
+    month: "Apr",
+    optimistic: generateRandomValue(),
+    expected: generateRandomValue(),
+    pessimistic: generateRandomValue(),
+  },
+  {
+    month: "May",
+    optimistic: generateRandomValue(),
+    expected: generateRandomValue(),
+    pessimistic: generateRandomValue(),
+  },
+  {
+    month: "Jun",
+    optimistic: generateRandomValue(),
+    expected: generateRandomValue(),
+    pessimistic: generateRandomValue(),
+  },
+  {
+    month: "Jul",
+    optimistic: generateRandomValue(),
+    expected: generateRandomValue(),
+    pessimistic: generateRandomValue(),
+  },
+  {
+    month: "Aug",
+    optimistic: generateRandomValue(),
+    expected: generateRandomValue(),
+    pessimistic: generateRandomValue(),
+  },
+  {
+    month: "Sep",
+    optimistic: generateRandomValue(),
+    expected: generateRandomValue(),
+    pessimistic: generateRandomValue(),
+  },
+  {
+    month: "Oct",
+    optimistic: generateRandomValue(),
+    expected: generateRandomValue(),
+    pessimistic: generateRandomValue(),
+  },
+  {
+    month: "Nov",
+    optimistic: generateRandomValue(),
+    expected: generateRandomValue(),
+    pessimistic: generateRandomValue(),
+  },
+  {
+    month: "Dec",
+    optimistic: generateRandomValue(),
+    expected: generateRandomValue(),
+    pessimistic: generateRandomValue(),
+  },
+]
+
+export const mockProjectionData = (
+  timeframe: TimeframeOptions,
+): ProjectionChartDataType[] => {
+  const today = new Date()
+  const currentMonth = today.getMonth()
+
+  switch (timeframe) {
+    case TimeframeOptions.SixMonths:
+      const startMonth = Math.max(0, currentMonth - 5)
+      return allMonths.slice(startMonth, currentMonth + 1)
+    case TimeframeOptions.Annual:
+      return allMonths
+    default:
+      return []
+  }
 }

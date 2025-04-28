@@ -44,5 +44,8 @@
   "editor.suggestSelection": "first",
   "window.zoomLevel": 0,
   "explorer.confirmDragAndDrop": false,
-  "explorer.confirmDelete": false
+  "explorer.confirmDelete": false,
+  "prettier.bracketSameLine": true,
+  "prettier.experimentalTernaries": false,
+  "vs-code-prettier-eslint.prettierLast": false
 }

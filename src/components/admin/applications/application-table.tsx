@@ -31,10 +31,6 @@ export function ApplicationTable({ status }: ApplicationTableProps) {
     [],
   )
 
-  const handleClearFilters = useCallback(() => {
-    setFilters({})
-  }, [])
-
   const handleViewDetails = (id: string) => {
     router.push(`/admin/applications/${id}?status=${status}`)
   }

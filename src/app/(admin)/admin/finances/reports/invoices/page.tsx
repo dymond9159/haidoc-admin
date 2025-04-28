@@ -1,6 +1,6 @@
 "use client"
 
-import { InvoiceTable } from "@/components/admin/finances/invoice-table"
+import { InvoiceTable } from "@/components/admin/finances/invoices-table"
 import { BackButton } from "@/components/common"
 import { useRouter } from "next/navigation"
 

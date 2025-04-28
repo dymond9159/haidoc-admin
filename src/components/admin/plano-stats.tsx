@@ -1,15 +1,25 @@
-import { StatCard } from "../common"
 import { ThemeColor } from "@/lib/constants"
-import { activeUsersData, newUsersData } from "@/lib/mock-data/users"
+import { generateUserData } from "@/lib/mock-data/users"
+import { calculateTrend } from "@/lib/utils"
+import { TimeframeOptions } from "@/types"
+import { StatCard } from "../common"
 import { UserLineChart } from "./user-line-chart"
 
-export const PlanoStats = () => {
+interface PlanoStatsProps {
+  timeframe?: TimeframeOptions
+}
+
+export const PlanoStats = ({ timeframe }: PlanoStatsProps) => {
+  const { newUsersData, activeUsersData } = generateUserData(
+    timeframe || TimeframeOptions.SixMonths,
+  )
+
   return (
     <div className="grid gap-4 md:grid-cols-2">
       <StatCard
         title="Individual"
-        value="300"
-        trend={-20}
+        value={newUsersData.reduce((a, b) => a + b.value, 0).toString()}
+        trend={calculateTrend(newUsersData)}
         chart={
           <UserLineChart
             data={newUsersData}
@@ -21,8 +31,8 @@ export const PlanoStats = () => {
 
       <StatCard
         title="HaiPatient"
-        value="300"
-        trend={20}
+        value={activeUsersData.reduce((a, b) => a + b.value, 0).toString()}
+        trend={calculateTrend(activeUsersData)}
         chart={
           <UserLineChart
             data={activeUsersData}

@@ -1,7 +1,6 @@
 "use client"
 
-import * as React from "react"
-import { useState, useMemo } from "react"
+import { Pagination } from "@/components/ui/pagination"
 import {
   Table,
   TableBody,
@@ -10,8 +9,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Pagination } from "@/components/ui/pagination"
 import { ArrowRightIcon, Loader2 } from "lucide-react"
+import * as React from "react"
+import { useMemo, useState } from "react"
 import { Button } from "../ui"
 
 // Define a generic type for column definitions

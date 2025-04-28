@@ -1,7 +1,7 @@
 "use client"
 
 import { NavigationCard } from "@/components/admin"
-import { InvoiceTable } from "@/components/admin/finances/invoice-table"
+import { InvoiceTable } from "@/components/admin/finances/invoices-table"
 import { StatCard } from "@/components/common"
 import {
   DiagnosisIcon,

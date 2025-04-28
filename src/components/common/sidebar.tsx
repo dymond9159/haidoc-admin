@@ -1,22 +1,11 @@
 "use client"
 
-import type React from "react"
-import { useState, useEffect } from "react"
 import Link from "next/link"
-import { usePathname, useRouter } from "next/navigation"
-import { cn } from "@/lib/utils"
-import { ChevronLeft, Menu } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { usePathname } from "next/navigation"
+import React, { useEffect } from "react"
+
+import { ArrowLeftIcon, ArrowRightIcon, ChevronLeft } from "lucide-react"
 import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet"
-import { LogoNoText } from "../logo_no_text"
-import { Logo } from "../logo"
-import {
-  ArrowLeftIcon,
   ClockIcon,
   DashboardIcon,
   DollarIcon,
@@ -27,8 +16,24 @@ import {
   UserCheckIcon,
   UserSettingsIcon,
 } from "../icons"
+
+import { Button } from "@/components/ui/button"
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet"
+import { Logo } from "../logo"
+import { LogoNoText } from "../logo_no_text"
 import { Separator } from "../ui/separator"
 
+import { useAppDispatch } from "@/hooks/use-dispatch"
+import { useScreen } from "@/hooks/use-screen"
+import { cn } from "@/lib/utils"
+import { RootState } from "@/store"
+import { setSideBarOpen, toggleCollapse } from "@/store/reducers/settings-slice"
+import { useSelector } from "react-redux"
 interface NavItem {
   icon: React.ElementType
   label: string
@@ -66,46 +71,22 @@ const backgroundStyle = {
 const backgroundHeightClass = "h-[120px]"
 
 export function Sidebar() {
-  const router = useRouter()
+  const dispatch = useAppDispatch()
   const pathname = usePathname()
-  const [isMobile, setIsMobile] = useState(false)
-  const [isTablet, setIsTablet] = useState(false)
-  const [isOpen, setIsOpen] = useState(false)
+
+  // Use screen hook instead of local state
+  const { isMobile, isTablet } = useScreen()
+
+  // Use Redux store instead of local state
+  const isCollapsed = useSelector((state: RootState) => state.settings.isCollapse)
+  const isSideBarOpen = useSelector((state: RootState) => state.settings.isSideBarOpen)
 
   useEffect(() => {
-    const checkScreenSize = () => {
-      const width = window.innerWidth
-      setIsMobile(width < 768)
-      setIsTablet(width >= 768 && width < 1024)
-    }
-    checkScreenSize()
-    window.addEventListener("resize", checkScreenSize)
-    return () => window.removeEventListener("resize", checkScreenSize)
-  }, [])
-
-  useEffect(() => {
-    // Keep sidebar open on non-mobile unless manually closed (logic could be added for this)
-    // For now, default to open on desktop/tablet, closed on mobile initial load
+    // Keep sidebar open on non-mobile unless manually closed
     if (typeof window !== "undefined") {
-      setIsOpen(window.innerWidth >= 768)
+      dispatch(setSideBarOpen(window.innerWidth >= 768))
     }
-  }, []) // Run only once on mount
-
-  const toggleDrawer = () => {
-    setIsOpen(!isOpen)
-  }
-
-  const MobileMenuButton = () => (
-    <Button
-      variant="ghost"
-      size="icon"
-      className="bg-system-1 fixed left-4 top-[23px] z-50 md:hidden" // Ensure button is visible
-      onClick={toggleDrawer}
-      aria-label="Menu"
-    >
-      <Menu className="h-6 w-6" />
-    </Button>
-  )
+  }, [dispatch]) // Run only once on mount
 
   // Shared Nav Link Component
   const NavLink = ({
@@ -127,8 +108,8 @@ export function Sidebar() {
         key={item.href}
         href={item.href}
         className={cn(
-          "flex items-center rounded-md transition-colors",
-          isTabletView ? "justify-center p-3" : "gap-3 px-3 py-2 text-sm",
+          "flex h-12 px-[14px] py-3 items-center rounded-md transition-colors",
+          !isTabletView && "gap-3 text-sm",
           isActive
             ? "bg-secondary-4 text-secondary font-medium"
             : "text-system-11 hover:bg-system-3",
@@ -149,43 +130,53 @@ export function Sidebar() {
   }: {
     isTabletView: boolean
     closeSheet?: () => void
-  }) => (
-    <Button
-      variant="ghost"
-      className={cn(
-        "w-full flex items-center rounded-md text-system-11 hover:bg-system-3",
-        isTabletView
-          ? "justify-center p-3"
-          : "gap-3 px-3 py-2 justify-start text-sm",
-      )}
-      title={isTabletView ? "Recolher" : undefined}
-      onClick={() => {
-        if (closeSheet) closeSheet()
-        router.push("/admin/login") // Navigate to login or back
-      }}
-    >
-      {/* Use ChevronLeft for mobile sheet 'close', ArrowLeft for desktop 'back' */}
-      {isMobile ? (
-        <ChevronLeft className="h-5 w-5 flex-shrink-0" />
+    }) => {
+
+    const RecolherButton = () => {
+      if (isMobile) {
+        return <ChevronLeft size={16} className="flex-shrink-0" />;
+      }
+
+      if (isTablet) {
+        return <ArrowLeftIcon size={16} className="flex-shrink-0" />;
+      }
+
+      return isCollapsed ? (
+        <ArrowRightIcon size={16} className="flex-shrink-0" />
       ) : (
-        <ArrowLeftIcon className="h-5 w-5 flex-shrink-0" />
-      )}
-      {!isTabletView && <span>Recolher</span>}
-    </Button>
-  )
+        <ArrowLeftIcon size={16} className="flex-shrink-0" />
+      );
+    };
+
+    return (
+      <Button
+        variant="ghost"
+        className={cn(
+          "w-full flex !px-4 py-3 items-center rounded-md text-system-11 hover:bg-system-3 h-12",
+          !isTabletView && "gap-3 justify-start text-sm",
+        )}
+        title={isTabletView ? "Recolher" : undefined}
+        onClick={() => {
+          if (closeSheet) closeSheet()
+        }}
+      >
+        <RecolherButton />
+        {!isTabletView && <span>Recolher</span>}
+      </Button>
+    )
+  }
 
   if (isMobile) {
     return (
       <>
-        <MobileMenuButton />
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
+        <Sheet open={isSideBarOpen} onOpenChange={(open) => dispatch(setSideBarOpen(open))}>
           <SheetContent
             side="left"
             className="flex flex-col h-full p-0 w-[240px] border-r-0 bg-white"
           >
             <SheetHeader className="px-3 pt-6 pb-3 border-b">
               <SheetTitle>
-                <Logo size="sm" href={homeLink} className="-ml-1" />{" "}
+                <Logo size="sm" href={homeLink} className="-ml-1" />
               </SheetTitle>
             </SheetHeader>
 
@@ -196,14 +187,14 @@ export function Sidebar() {
                     key={item.href}
                     item={item}
                     isTabletView={false}
-                    closeSheet={() => setIsOpen(false)}
+                    closeSheet={() => dispatch(setSideBarOpen(false))}
                   />
                 ))}
               </nav>
               <Separator className="my-3" />
               <BackButton
                 isTabletView={false}
-                closeSheet={() => setIsOpen(false)}
+                closeSheet={() => dispatch(setSideBarOpen(false))}
               />
             </div>
 
@@ -218,41 +209,58 @@ export function Sidebar() {
   }
 
   // Desktop / Tablet View
-  const sidebarWidth = isTablet ? "w-[65px]" : "w-[240px]"
+  const isTabletViewMode = isTablet || isCollapsed
+  let sidebarWidth = "w-[240px]"
+
+  if (isCollapsed) {
+    sidebarWidth = "w-[65px]"
+    if (isTablet) {
+      sidebarWidth = "w-[0px]"
+    }
+  } else {
+    sidebarWidth = "w-[240px]"
+    if (isTablet) {
+      sidebarWidth = "w-[65px]"
+    }
+  }
 
   return (
     <div
-      className={cn(
-        "hidden md:block h-screen border-r border-system-5 bg-white transition-all duration-300",
+        className={cn(
+        "hidden md:block h-screen border-r border-system-5 bg-white",
         sidebarWidth,
       )}
     >
       <div
-        className="fixed h-full flex flex-col bg-white border-r z-50"
-        style={{ width: isTablet ? "65px" : "240px" }}
+        className={cn("fixed h-full flex flex-col bg-white border-r z-50 overflow-hidden", sidebarWidth)}
       >
-        <div className={cn("px-2", isTablet ? "px-1" : "px-3")}>
+        <div className={cn("px-2", isTabletViewMode ? "px-1" : "px-3")}>
           <div className="flex items-center border-b py-6 h-[89px]">
-            {isTablet ? (
+            {isTabletViewMode ? (
               <div className="flex w-full justify-center px-1">
-                <LogoNoText size="sm" href={homeLink} />
+                <LogoNoText size="xs" href={homeLink} />
               </div>
             ) : (
               <Logo size="sm" href={homeLink} />
             )}
           </div>
         </div>
-
         <div className="flex-1 overflow-y-auto px-2 py-4">
           <nav className="space-y-1">
             {navItems.map((item) => (
-              <NavLink key={item.href} item={item} isTabletView={isTablet} />
+              <NavLink
+                key={item.href}
+                item={item}
+                isTabletView={isTabletViewMode}
+              />
             ))}
           </nav>
           <Separator className="my-3" />
-          <BackButton isTabletView={isTablet} />
+          <BackButton
+            isTabletView={isTabletViewMode}
+            closeSheet={() => dispatch(toggleCollapse())}
+          />
         </div>
-
         <div
           className={cn("w-full flex-shrink-0", backgroundHeightClass)}
           style={backgroundStyle}

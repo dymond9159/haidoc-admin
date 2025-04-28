@@ -28,10 +28,10 @@
         "argsIgnorePattern": "^_"
       }
     ],
-    "@typescript-eslint/no-explicit-any":"off",    
+    "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-empty-object-type": "warn",
     "no-empty-pattern": "warn",
-    "no-console": "off",
+    "no-case-declarations": "off",
     "no-debugger": "error",
     "react/react-in-jsx-scope": "off" // not needed in Next.js
   },
