@@ -14,22 +14,27 @@ import { TimeframeOptions } from "@/types"
 export default function DashboardPage() {
   const [isProjectionActive, setIsProjectionActive] = useState(false)
   const [timeframeTabValue, setTimeframeTabValue] = useState<TimeframeOptions>(
-    TimeframeOptions.SIX_MONTHS,
+    TimeframeOptions.SevenDays,
+  )
+
+  const [timeframeProjectionTabValue, setTimeframeProjectionTabValue] = useState<TimeframeOptions>(
+    TimeframeOptions.SixMonths,
   )
 
   const enabledTimeframeTabs = !isProjectionActive
     ? Object.values(TimeframeOptions)
-    : [TimeframeOptions.SIX_MONTHS, TimeframeOptions.ONE_YEAR]
+    : [TimeframeOptions.SixMonths, TimeframeOptions.Annual]
 
   return (
     <div className="space-y-8">
       <div className="flex flex-wrap items-center gap-3 justify-end sm:justify-between">
         <Tabs
-          defaultValue={TimeframeOptions.SIX_MONTHS}
-          value={timeframeTabValue}
-          onValueChange={(value) =>
-            setTimeframeTabValue(value as TimeframeOptions)
-          }
+          defaultValue={isProjectionActive ? TimeframeOptions.SixMonths : TimeframeOptions.SevenDays}
+          value={isProjectionActive ? timeframeProjectionTabValue : timeframeTabValue}
+          onValueChange={(value) => {
+            if (isProjectionActive) setTimeframeProjectionTabValue(value as TimeframeOptions)
+            else setTimeframeTabValue(value as TimeframeOptions)
+          }}
           className="overflow-x-auto"
         >
           <TabsList>
@@ -58,10 +63,10 @@ export default function DashboardPage() {
           </div>
         </Toggle>
       </div>
-      {isProjectionActive ? (
-        <DashboardProjectionSection />
+      {!isProjectionActive ? (
+        <DashboardDefaultSection timeframe={timeframeTabValue} />
       ) : (
-        <DashboardDefaultSection />
+        <DashboardProjectionSection timeframe={timeframeProjectionTabValue} />
       )}
     </div>
   )

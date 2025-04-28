@@ -1,4 +1,7 @@
 "use client"
+import { useState } from "react"
+
+import { Pencil, Plus, Trash2Icon } from "lucide-react"
 
 import { DeleteProfileDialog } from "@/components/admin/users/delete-profile-dialog"
 import { ProfileFormDialog } from "@/components/admin/users/profile-form-dialog"
@@ -12,9 +15,9 @@ import { Button } from "@/components/ui/button"
 import { Pagination } from "@/components/ui/pagination"
 import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
+
 import { useToast } from "@/hooks/use-toast"
-import { Pencil, Plus, Trash2Icon } from "lucide-react"
-import { useState } from "react"
+import { mockProfiles } from "@/lib/mock-data/users"
 
 // Profile type definition
 interface Permission {
@@ -33,129 +36,7 @@ interface Profile {
 export function ProfilesTab() {
   const { toast } = useToast()
   const [currentPage, setCurrentPage] = useState(1)
-  const [profiles, setProfiles] = useState<Profile[]>([
-    {
-      id: "1",
-      name: "Perfil X",
-      permissions: [
-        {
-          id: "1",
-          name: "Aplicações de usuários business",
-          description:
-            "O usuário pode visualizar, aprovar, reprovar e cancelar as solicitações dos usuários.",
-          enabled: true,
-        },
-        {
-          id: "2",
-          name: "Finanças",
-          description:
-            "O usuário pode visualizar, aprovar, reprovar e cancelar as solicitações dos usuários.",
-          enabled: true,
-        },
-        {
-          id: "3",
-          name: "Entregas",
-          description:
-            "O usuário pode visualizar, aprovar, reprovar e cancelar as solicitações dos usuários.",
-          enabled: false,
-        },
-        {
-          id: "4",
-          name: "Pré-avaliações",
-          description:
-            "O usuário pode visualizar, aprovar, reprovar e cancelar as solicitações dos usuários.",
-          enabled: false,
-        },
-        {
-          id: "5",
-          name: "Log de atividades",
-          description:
-            "O usuário pode visualizar as informações de usuários pacientes e usuários business.",
-          enabled: true,
-        },
-      ],
-    },
-    {
-      id: "2",
-      name: "Perfil A",
-      permissions: [
-        {
-          id: "1",
-          name: "Aplicações de usuários business",
-          description:
-            "O usuário pode visualizar, aprovar, reprovar e cancelar as solicitações dos usuários.",
-          enabled: false,
-        },
-        {
-          id: "2",
-          name: "Finanças",
-          description:
-            "O usuário pode visualizar, aprovar, reprovar e cancelar as solicitações dos usuários.",
-          enabled: true,
-        },
-      ],
-    },
-    {
-      id: "3",
-      name: "Perfil B",
-      permissions: [
-        {
-          id: "1",
-          name: "Aplicações de usuários business",
-          description:
-            "O usuário pode visualizar, aprovar, reprovar e cancelar as solicitações dos usuários.",
-          enabled: true,
-        },
-        {
-          id: "3",
-          name: "Entregas",
-          description:
-            "O usuário pode visualizar, aprovar, reprovar e cancelar as solicitações dos usuários.",
-          enabled: true,
-        },
-      ],
-    },
-    {
-      id: "4",
-      name: "Perfil C",
-      permissions: [
-        {
-          id: "4",
-          name: "Pré-avaliações",
-          description:
-            "O usuário pode visualizar, aprovar, reprovar e cancelar as solicitações dos usuários.",
-          enabled: true,
-        },
-        {
-          id: "5",
-          name: "Log de atividades",
-          description:
-            "O usuário pode visualizar as informações de usuários pacientes e usuários business.",
-          enabled: true,
-        },
-      ],
-    },
-    {
-      id: "5",
-      name: "Perfil D",
-      permissions: [
-        {
-          id: "2",
-          name: "Finanças",
-          description:
-            "O usuário pode visualizar, aprovar, reprovar e cancelar as solicitações dos usuários.",
-          enabled: true,
-        },
-        {
-          id: "5",
-          name: "Log de atividades",
-          description:
-            "O usuário pode visualizar as informações de usuários pacientes e usuários business.",
-          enabled: false,
-        },
-      ],
-    },
-  ])
+  const [profiles, setProfiles] = useState<Profile[]>(mockProfiles)
 
   // State for create/edit dialog
   const [isProfileDialogOpen, setIsProfileDialogOpen] = useState(false)
@@ -227,18 +108,15 @@ export function ProfilesTab() {
           Novo perfil
         </Button>
       </div>
-
       <Accordion type="multiple" className="w-full">
         {profiles.map((profile) => (
           <AccordionItem key={profile.id} value={profile.id} className="w-full">
-            <div>
-              <AccordionTrigger
-                asChild
-                className="w-full py-4 flex items-center hover:no-underline"
-              >
-                <div className="flex-1 flex items-center justify-between">
-                  <span className="font-medium">{profile.name}</span>
-                  <div className="flex gap-2 pr-2">
+            <AccordionTrigger
+              className="w-full py-4 flex items-center hover:no-underline"
+            >
+              <div className="flex-1 flex items-center justify-between">
+                <span className="font-medium">{profile.name}</span>
+                <div className="flex gap-2 pr-2">
                     <Button
                       variant="ghost"
                       size="icon"
@@ -261,10 +139,9 @@ export function ProfilesTab() {
                     >
                       <Trash2Icon className="h-4 w-4" />
                     </Button>
-                  </div>
                 </div>
-              </AccordionTrigger>
-            </div>
+              </div>
+            </AccordionTrigger>
             <AccordionContent className="px-4 pb-4">
               <Separator className="mt-2 mb-4" />
               <div className="space-y-4">

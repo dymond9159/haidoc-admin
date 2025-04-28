@@ -1,20 +1,23 @@
 "use client"
+import { useCallback, useMemo, useState } from "react"
 
-import { useState, useMemo, useCallback } from "react"
+import { Pencil, Trash2 } from "lucide-react"
+
+import { DeleteUserDialog } from "@/components/admin/users/delete-user-dialog"
+import { UserFormDialog } from "@/components/admin/users/user-form-dialog"
+import { ColumnDef } from "@/components/common/data-table"
+import { EnhancedTable } from "@/components/common/enhanced-table"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Pencil, Trash2 } from "lucide-react"
-import { UserFormDialog } from "@/components/admin/users/user-form-dialog"
-import { DeleteUserDialog } from "@/components/admin/users/delete-user-dialog"
-import type { User } from "@/types/user"
+
 import { useToast } from "@/hooks/use-toast"
-import { EnhancedTable } from "@/components/common/enhanced-table"
-import { ColumnDef } from "@/components/common/data-table"
+
 import { mockUsers } from "@/lib/mock-data/users"
+import type { User } from "@/types/user"
 
 export function UserTable() {
   const { toast } = useToast()
-  const [users, setUsers] = useState<User[]>(mockUsers)
+  const [users, setUsers] = useState<User[]>(mockUsers || [])
 
   // State for edit dialog
   const [editingUser, setEditingUser] = useState<User | null>(null)

@@ -10,7 +10,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { ThemeColor } from "@/lib/constants"
 import { ChartOptions } from "@/types/admin"
 
-export type ChartDataType = {
+export type ProjectionChartDataType = {
   month: string
   optimistic: number
   expected: number
@@ -34,7 +34,7 @@ const chartConfig = {
 
 interface ChartSectionProps {
   title?: string
-  data?: ChartDataType[]
+  data?: ProjectionChartDataType[]
 }
 
 export function ChartSection({ title, data = [] }: ChartSectionProps) {

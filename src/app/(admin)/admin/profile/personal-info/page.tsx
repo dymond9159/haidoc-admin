@@ -1,6 +1,15 @@
 "use client"
 
-import { useState } from "react"
+import { Asterisk, BackButton } from "@/components/common"
+import { ConfirmationDialog } from "@/components/common/confirm-dialog"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { useMobile } from "@/hooks/use-mobile"
+import { useToast } from "@/hooks/use-toast"
+import { cn } from "@/lib/utils"
 import {
   ChevronRightIcon,
   Eye,
@@ -10,16 +19,7 @@ import {
   Trash2,
   UserRoundIcon,
 } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { useToast } from "@/hooks/use-toast"
-import { ConfirmationDialog } from "@/components/common/confirm-dialog"
-import { Asterisk, BackButton } from "@/components/common"
-import { cn } from "@/lib/utils"
-import { useMobile } from "@/hooks/use-mobile"
+import { useState } from "react"
 
 export default function AdminRegistrationInfoPage() {
   const { toast } = useToast()
@@ -95,7 +95,7 @@ export default function AdminRegistrationInfoPage() {
 
         <TabsContent value="dados-cadastrais">
           <Card>
-            <CardContent className="pt-6">
+            <CardContent className="pt-6 px-0 md:px-6">
               <div className="mb-6 flex justify-center">
                 <div className="relative">
                   <img
@@ -200,7 +200,7 @@ export default function AdminRegistrationInfoPage() {
 
         <TabsContent value="senha">
           <Card>
-            <CardContent className="pt-6">
+            <CardContent className="pt-6 px-0 md:px-6">
               <div className="space-y-4">
                 <div>
                   <h3 className="text-lg font-medium text-secondary">

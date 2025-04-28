@@ -14,13 +14,13 @@ import { useRouter } from "next/navigation"
 const config = [
   {
     title: "Faturas",
-    href: "/admin/finances/invoices",
+    href: "/admin/finances/reports/invoices",
     icon: <DollarDocIcon fill={ThemeColor.secondary[11]} />,
     illustration: <InvoiceLeftImageIcon />,
   },
   {
     title: "Recibos",
-    href: "/admin/finances/invoices",
+    href: "/admin/finances/reports/receipts",
     icon: <InvoiceDocIcon fill={ThemeColor.secondary[11]} />,
     illustration: <InvoiceRightImageIcon />,
   },

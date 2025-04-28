@@ -47,11 +47,11 @@ export function InvoiceTable({
   }, [])
 
   const handleViewMoreClick = () => {
-    router.push(`/admin/finances/invoices`)
+    router.push(`/admin/finances/reports/invoices`)
   }
 
   const handleViewDetails = (id: string) => {
-    router.push(`/admin/finances/invoices/${id}`)
+    router.push(`/admin/finances/reports/invoices/${id}`)
   }
 
   const columns: ColumnDef<InvoiceColumns>[] = useMemo(

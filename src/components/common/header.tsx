@@ -1,14 +1,20 @@
 "use client"
 
 import Link from "next/link"
+import { usePathname, useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
+
 import {
-  ShoppingBag,
   ChevronDown,
-  LogOutIcon,
   CircleUserRoundIcon,
+  LogOutIcon,
+  Menu,
+  ShoppingBag,
 } from "lucide-react"
-import { Button } from "@/components/ui/button"
+
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,14 +23,24 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { usePathname, useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
 import { NotificationsDropdown } from "./notifications-dropdown"
+
+import { useAppDispatch } from "@/hooks/use-dispatch"
+import { useScreen } from "@/hooks/use-screen"
+import { cn } from "@/lib/utils"
+import { RootState } from "@/store"
+import { setSideBarOpen, toggleCollapse } from "@/store/reducers/settings-slice"
 
 export function Header() {
   const router = useRouter()
+  const dispatch = useAppDispatch()
   const pathname = usePathname()
+  const { isMobile, isTablet, isDesktop } = useScreen()
   const [pageTitle, setPageTitle] = useState("Home")
+
+  const isCollapse = useSelector(
+    (state: RootState) => state.settings.isCollapse,
+  )
 
   useEffect(() => {
     // Set default page title based on pathname
@@ -52,14 +68,37 @@ export function Header() {
     if (match) {
       setPageTitle(pageTitles[match])
     } else {
-      setPageTitle("") // fallback
+      setPageTitle("")
     }
   }, [pathname])
 
+  const MenuButton = () => (
+    <Button
+      variant="ghost"
+      size="icon"
+      className={cn(
+        "bg-system-1 hover:bg-transparent mt-[2px]",
+        isDesktop && "hidden",
+        isTablet && !isCollapse && "hidden",
+      )}
+      onClick={() => {
+        if (isMobile) {
+          dispatch(setSideBarOpen(true))
+        } else {
+          dispatch(toggleCollapse())
+        }
+      }}
+      aria-label="Menu"
+    >
+      <Menu className="h-6 w-6" />
+    </Button>
+  )
+
   return (
-    <header className="sticky top-0 z-30 flex h-20 items-center justify-between bg-system-2 px-4 md:px-6">
+    <header className="sticky top-0 z-30 flex h-20 items-center justify-between bg-system-2 px-4">
       <div className="flex items-center">
-        <h1 className="text-xl font-semibold ml-10 md:ml-0">{pageTitle}</h1>
+        <MenuButton />
+        <h1 className="text-xl font-semibold">{pageTitle}</h1>
       </div>
 
       <div className="flex items-center gap-4">
@@ -94,9 +133,11 @@ export function Header() {
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-56">
             <DropdownMenuLabel>Minha Conta</DropdownMenuLabel>
-            <DropdownMenuItem onClick={() => router.push("/admin/profile")}>
-              <CircleUserRoundIcon size="14" />
-              Informações Pessoais
+            <DropdownMenuItem asChild>
+              <Link href="/admin/profile" className="flex items-center gap-2">
+                <CircleUserRoundIcon size="14" />
+                Informações Pessoais
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => router.push("/admin/login")}>

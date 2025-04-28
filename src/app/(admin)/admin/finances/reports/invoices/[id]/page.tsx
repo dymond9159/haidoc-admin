@@ -91,7 +91,6 @@ export default function InvoiceDetailPage() {
         <div className="space-y-8">
           {/* Main Invoice Info */}
           <div>
-            <h2 className="text-lg font-medium mb-4">Fatura</h2>
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <p className="text-sm text-system-9 mb-1">Número da fatura</p>
@@ -197,7 +196,7 @@ export default function InvoiceDetailPage() {
                 size={100}
                 color="#000000"
                 backgroundColor="#ffffff"
-                logoUrl="/placeholder.svg?height=20&width=20"
+                logoUrl="/images/placeholder.svg?height=20&width=20"
               />
             </div>
             <p className="text-xs text-system-9 text-center">

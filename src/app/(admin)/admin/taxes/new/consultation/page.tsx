@@ -2,18 +2,10 @@
 
 import type React from "react"
 
-import { Suspense, useEffect, useState } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
-import { ChevronLeft, Plus } from "lucide-react"
+import { Asterisk, BackButton } from "@/components/common"
 import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 import {
   MultiSelect,
   MultiSelectContent,
@@ -21,8 +13,16 @@ import {
   MultiSelectTrigger,
   MultiSelectValue,
 } from "@/components/ui/multi-select"
-import { Asterisk, BackButton } from "@/components/common"
-import { Card } from "@/components/ui/card"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Plus } from "lucide-react"
+import { useRouter, useSearchParams } from "next/navigation"
+import { Suspense, useState } from "react"
 
 // Service types mapping
 const serviceTypesMap: Record<string, string> = {

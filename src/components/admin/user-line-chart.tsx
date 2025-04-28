@@ -1,14 +1,14 @@
 "use client"
 
+import { cn } from "@/lib/utils"
 import {
+  LineChart as BaseLineChart,
   CartesianGrid,
   Line,
-  LineChart as BaseLineChart,
   XAxis,
   YAxis,
 } from "recharts"
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "../ui/chart"
-import { cn } from "@/lib/utils"
 
 interface LineChartProps {
   data: Record<string, unknown>[]
@@ -20,7 +20,7 @@ interface LineChartProps {
 export function UserLineChart({ data, color, className }: LineChartProps) {
   const chartConfig = {
     value: {
-      label: "Users",
+      label: "Usuários",
       color: color,
     },
   }
@@ -47,19 +47,13 @@ export function UserLineChart({ data, color, className }: LineChartProps) {
           stroke="#e5e5e5"
         />
         <XAxis
-          dataKey="day"
+          dataKey="timeframe"
           tickLine={false}
           axisLine={false}
           tickMargin={8}
           fontSize={14}
         />
-        <YAxis
-          domain={[0, 400]}
-          tickCount={5}
-          tickLine={false}
-          axisLine={false}
-          fontSize={14}
-        />
+        <YAxis tickCount={5} tickLine={false} axisLine={false} fontSize={14} />
         <ChartTooltip
           content={
             <ChartTooltipContent className="w-[100px]" nameKey="value" />

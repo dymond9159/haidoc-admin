@@ -1,40 +1,89 @@
-import { ChartDataType } from "@/components/admin/dashboard/chart-section"
+import { TimeframeOptions } from "@/types"
 
-// Sample data for the graphs
-export const newUsersData = [
-  { day: "Seg", value: 290 },
-  { day: "Ter", value: 260 },
-  { day: "Qua", value: 210 },
-  { day: "Qui", value: 190 },
-  { day: "Sex", value: 140 },
-  { day: "Sáb", value: 90 },
-  { day: "Dom", value: 75 },
+// Helper to get random integer between min and max
+const getRandomInt = (min: number, max: number) =>
+  Math.floor(Math.random() * (max - min + 1)) + min
+
+const weekDays = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"]
+const months = [
+  "Jan",
+  "Fev",
+  "Mar",
+  "Abr",
+  "Mai",
+  "Jun",
+  "Jul",
+  "Ago",
+  "Set",
+  "Out",
+  "Nov",
+  "Dez",
 ]
 
-export const activeUsersData = [
-  { day: "Seg", value: 240 },
-  { day: "Ter", value: 250 },
-  { day: "Qua", value: 260 },
-  { day: "Qui", value: 255 },
-  { day: "Sex", value: 140 },
-  { day: "Sáb", value: 90 },
-  { day: "Dom", value: 300 },
-]
+export const generateUserData = (timeframe: TimeframeOptions) => {
+  let labels: string[] = []
+  let minValue = 0,
+    maxValue = 0
 
-export const monthlyData: ChartDataType[] = [
-  { month: "Jan", optimistic: 300, expected: 250, pessimistic: 200 },
-  { month: "Feb", optimistic: 320, expected: 260, pessimistic: 210 },
-  { month: "Mar", optimistic: 350, expected: 280, pessimistic: 220 },
-  { month: "Apr", optimistic: 380, expected: 300, pessimistic: 230 },
-  { month: "May", optimistic: 410, expected: 330, pessimistic: 250 },
-  { month: "Jun", optimistic: 450, expected: 350, pessimistic: 270 },
-  { month: "Jul", optimistic: 480, expected: 370, pessimistic: 290 },
-  { month: "Aug", optimistic: 510, expected: 400, pessimistic: 310 },
-  { month: "Sep", optimistic: 540, expected: 420, pessimistic: 330 },
-  { month: "Oct", optimistic: 570, expected: 440, pessimistic: 350 },
-  { month: "Nov", optimistic: 600, expected: 470, pessimistic: 370 },
-  { month: "Dec", optimistic: 650, expected: 500, pessimistic: 400 },
-]
+  switch (timeframe) {
+    case TimeframeOptions.SevenDays:
+      labels = weekDays
+      minValue = 0
+      maxValue = 10
+      break
+
+    case TimeframeOptions.OneMonth:
+      const daysInMonth = new Date(
+        new Date().getFullYear(),
+        new Date().getMonth() + 1,
+        0,
+      ).getDate()
+      labels = Array.from({ length: daysInMonth }, (_, i) => (i + 1).toString())
+      minValue = 0
+      maxValue = 10
+      break
+
+    case TimeframeOptions.SixMonths:
+      const currentMonth = new Date().getMonth() // 0 = Jan, 11 = Dec
+      labels = Array.from({ length: 6 }, (_, i) => {
+        const monthIndex = (currentMonth - 5 + i + 12) % 12
+        return months[monthIndex]
+      })
+      minValue = 100
+      maxValue = 300
+      break
+
+    case TimeframeOptions.Annual:
+      labels = months // Full year
+      minValue = 100
+      maxValue = 300
+      break
+
+    case TimeframeOptions.AllTime:
+      labels = ["2020", "2021", "2022", "2023", "2024"]
+      minValue = 500
+      maxValue = 1000
+      break
+
+    default:
+      labels = []
+  }
+
+  const newUsersData = labels.map((label) => ({
+    timeframe: label,
+    value: getRandomInt(minValue, maxValue),
+  }))
+
+  const activeUsersData = labels.map((label) => ({
+    timeframe: label,
+    value: getRandomInt(minValue / 2, maxValue / 2),
+  }))
+
+  return {
+    newUsersData,
+    activeUsersData,
+  }
+}
 
 export const mockUsers = [
   {
@@ -103,5 +152,129 @@ export const mockUsers = [
     name: "Rafael Souza Martins",
     email: "rafael.martins@haidoc.com",
     profile: "Perfil X",
+  },
+]
+
+export const mockProfiles = [
+  {
+    id: "1",
+    name: "Perfil X",
+    permissions: [
+      {
+        id: "1",
+        name: "Aplicações de usuários business",
+        description:
+          "O usuário pode visualizar, aprovar, reprovar e cancelar as solicitações dos usuários.",
+        enabled: true,
+      },
+      {
+        id: "2",
+        name: "Finanças",
+        description:
+          "O usuário pode visualizar, aprovar, reprovar e cancelar as solicitações dos usuários.",
+        enabled: true,
+      },
+      {
+        id: "3",
+        name: "Entregas",
+        description:
+          "O usuário pode visualizar, aprovar, reprovar e cancelar as solicitações dos usuários.",
+        enabled: false,
+      },
+      {
+        id: "4",
+        name: "Pré-avaliações",
+        description:
+          "O usuário pode visualizar, aprovar, reprovar e cancelar as solicitações dos usuários.",
+        enabled: false,
+      },
+      {
+        id: "5",
+        name: "Log de atividades",
+        description:
+          "O usuário pode visualizar as informações de usuários pacientes e usuários business.",
+        enabled: true,
+      },
+    ],
+  },
+  {
+    id: "2",
+    name: "Perfil A",
+    permissions: [
+      {
+        id: "1",
+        name: "Aplicações de usuários business",
+        description:
+          "O usuário pode visualizar, aprovar, reprovar e cancelar as solicitações dos usuários.",
+        enabled: false,
+      },
+      {
+        id: "2",
+        name: "Finanças",
+        description:
+          "O usuário pode visualizar, aprovar, reprovar e cancelar as solicitações dos usuários.",
+        enabled: true,
+      },
+    ],
+  },
+  {
+    id: "3",
+    name: "Perfil B",
+    permissions: [
+      {
+        id: "1",
+        name: "Aplicações de usuários business",
+        description:
+          "O usuário pode visualizar, aprovar, reprovar e cancelar as solicitações dos usuários.",
+        enabled: true,
+      },
+      {
+        id: "3",
+        name: "Entregas",
+        description:
+          "O usuário pode visualizar, aprovar, reprovar e cancelar as solicitações dos usuários.",
+        enabled: true,
+      },
+    ],
+  },
+  {
+    id: "4",
+    name: "Perfil C",
+    permissions: [
+      {
+        id: "4",
+        name: "Pré-avaliações",
+        description:
+          "O usuário pode visualizar, aprovar, reprovar e cancelar as solicitações dos usuários.",
+        enabled: true,
+      },
+      {
+        id: "5",
+        name: "Log de atividades",
+        description:
+          "O usuário pode visualizar as informações de usuários pacientes e usuários business.",
+        enabled: true,
+      },
+    ],
+  },
+  {
+    id: "5",
+    name: "Perfil D",
+    permissions: [
+      {
+        id: "2",
+        name: "Finanças",
+        description:
+          "O usuário pode visualizar, aprovar, reprovar e cancelar as solicitações dos usuários.",
+        enabled: true,
+      },
+      {
+        id: "5",
+        name: "Log de atividades",
+        description:
+          "O usuário pode visualizar as informações de usuários pacientes e usuários business.",
+        enabled: false,
+      },
+    ],
   },
 ]
