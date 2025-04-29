@@ -7,7 +7,7 @@ module.exports = {
       name: "haidoc-admin",
       script: "node_modules/next/dist/bin/next",
       args: "start -p 4000",
-      instances: "max",
+      instances: 1,
       exec_mode: "cluster",
       env: {
         NODE_ENV: "production",
