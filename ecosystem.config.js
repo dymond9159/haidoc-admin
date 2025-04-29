@@ -1,5 +1,3 @@
-const { exec } = require("child_process")
-
 // ecosystem.config.js
 module.exports = {
   apps: [
