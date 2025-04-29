@@ -1,23 +1,8 @@
 "use client"
 
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Line,
-  LineChart,
-  XAxis,
-  YAxis,
-} from "recharts"
+import { Bar, BarChart, CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts"
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   ChartConfig,
   ChartContainer,
@@ -40,17 +25,8 @@ interface ChartProps {
   height?: string
 }
 
-export function Chart({
-  title,
-  description,
-  data,
-  config,
-  footer,
-  chartType,
-  height,
-}: ChartProps) {
+export function Chart({ title, description, data, config, footer, chartType, height }: ChartProps) {
   const ChartComponent = chartType === ChartOptions.Bar ? BarChart : LineChart
-  const DataComponent = chartType === ChartOptions.Bar ? Bar : Line
 
   return (
     <Card className="p-6 pt-2 pl-0 pb-2">
@@ -61,10 +37,7 @@ export function Chart({
         </CardHeader>
       )}
       <CardContent className="p-0">
-        <ChartContainer
-          config={config}
-          className={cn("w-full", height && `h-[210px]`)}
-        >
+        <ChartContainer config={config} className={cn("w-full", height && `h-[210px]`)}>
           <ChartComponent accessibilityLayer data={data}>
             <CartesianGrid vertical={false} />
             <XAxis
@@ -78,26 +51,17 @@ export function Chart({
             <ChartTooltip content={<ChartTooltipContent hideLabel />} />
             <ChartLegend content={<ChartLegendContent />} verticalAlign="top" />
 
-            {Object.entries(config).map(([key, { color }]) => (
-              <DataComponent
-                key={key}
-                dataKey={key}
-                stackId="a"
-                fill={color}
-                stroke={color}
-                strokeWidth={2}
-                // radius={[4, 4, 0, 0]}
-                dot={false}
-              />
-            ))}
+            {Object.entries(config).map(([key, { color }]) =>
+              chartType === ChartOptions.Bar ? (
+                <Bar key={key} dataKey={key} stackId="a" fill={color} radius={[4, 4, 4, 4]} />
+              ) : (
+                <Line key={key} dataKey={key} stroke={color} strokeWidth={2} dot={false} type="monotone" />
+              ),
+            )}
           </ChartComponent>
         </ChartContainer>
       </CardContent>
-      {footer && (
-        <CardFooter className="flex-col items-start gap-2 text-sm">
-          {footer}
-        </CardFooter>
-      )}
+      {footer && <CardFooter className="flex-col items-start gap-2 text-sm">{footer}</CardFooter>}
     </Card>
   )
 }
