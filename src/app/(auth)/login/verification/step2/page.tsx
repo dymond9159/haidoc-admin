@@ -1,8 +1,8 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
+import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
 
 export default function VerificationStep2() {
   const router = useRouter()
@@ -11,10 +11,7 @@ export default function VerificationStep2() {
 
   useEffect(() => {
     // Get the verification method from sessionStorage
-    const storedMethod = sessionStorage.getItem("verificationMethod") as
-      | "email"
-      | "sms"
-      | null
+    const storedMethod = sessionStorage.getItem("verificationMethod") as "email" | "sms" | null
     setMethod(storedMethod)
   }, [])
 
@@ -23,7 +20,7 @@ export default function VerificationStep2() {
 
     setTimeout(() => {
       setIsLoading(false)
-      router.push("/auth/verification/step3")
+      router.push("/login/verification/step3")
     }, 500)
   }
 
@@ -32,20 +29,17 @@ export default function VerificationStep2() {
       <div className="space-y-2">
         {method === "email" ? (
           <p className="text-md text-system-12">
-            Enviamos um código de autenticação para o seu e-mail cadastrado. Por
-            favor, verifique a sua caixa de entrada e a pasta de spam, se
-            necessário.
+            Enviamos um código de autenticação para o seu e-mail cadastrado. Por favor, verifique a sua caixa de entrada
+            e a pasta de spam, se necessário.
           </p>
         ) : method === "sms" ? (
           <p className="text-md text-system-12">
-            Enviamos um código de autenticação para o seu número cadastrado. Por
-            favor, verifique a sua caixa de entrada e a pasta de spam, se
-            necessário.
+            Enviamos um código de autenticação para o seu número cadastrado. Por favor, verifique a sua caixa de entrada
+            e a pasta de spam, se necessário.
           </p>
         ) : (
           <p className="text-md text-system-12">
-            Enviamos um código de autenticação. Por favor, verifique a sua caixa
-            de entrada.
+            Enviamos um código de autenticação. Por favor, verifique a sua caixa de entrada.
           </p>
         )}
       </div>

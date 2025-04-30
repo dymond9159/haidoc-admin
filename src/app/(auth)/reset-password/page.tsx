@@ -25,7 +25,7 @@ export default function ForgotPassword() {
   }
 
   return (
-    <div className="w-full max-w-md space-y-8 rounded-lg bg-system-1 p-8 shadow-md">
+    <div className="w-full space-y-8">
       <div className="space-y-6">
         <h2 className="text-xl font-semibold text-system-13">Esqueci minha senha</h2>
 

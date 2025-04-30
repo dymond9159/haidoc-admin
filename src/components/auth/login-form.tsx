@@ -1,5 +1,6 @@
 "use client"
 
+import { Asterisk } from "@/components/common"
 import { LogoIcon } from "@/components/icons/hidoc-icons"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -22,7 +23,7 @@ export const LoginForm = () => {
 
     setTimeout(() => {
       setIsLoading(false)
-      router.push("/auth/verification/step1")
+      router.push("/login/verification/step1")
     }, 1000)
   }
   return (
@@ -36,7 +37,7 @@ export const LoginForm = () => {
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="space-y-2">
           <label htmlFor="email" className="block text-sm font-medium">
-            E-mail<span className="text-error-5">*</span>
+            E-mail <Asterisk />
           </label>
           <Input
             id="email"
@@ -51,7 +52,7 @@ export const LoginForm = () => {
 
         <div className="space-y-2">
           <label htmlFor="password" className="block text-sm font-medium">
-            Senha<span className="text-error-5">*</span>
+            Senha <Asterisk />
           </label>
           <div className="relative">
             <Input
@@ -78,7 +79,10 @@ export const LoginForm = () => {
         </Button>
 
         <div className="">
-          <Link href="/auth/forgot-password" className="font-bold text-primary-9 hover:text-primary-10 text-sm">
+          <Link
+            href="/reset-password/verification/step1"
+            className="font-bold text-primary-9 hover:text-primary-10 text-sm"
+          >
             Esqueci minha senha
           </Link>
         </div>

@@ -39,9 +39,9 @@ export default function VerificationStep3() {
       setIsLoading(false)
 
       if (code === "ABC123") {
-        router.push("/auth/verification/success")
+        router.push("/login/verification/success")
       } else {
-        router.push("/auth/verification/error")
+        setError("O código digitado está incorreto.")
       }
     }, 1000)
   }

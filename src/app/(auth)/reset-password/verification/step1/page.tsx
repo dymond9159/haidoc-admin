@@ -29,7 +29,7 @@ export default function VerificationStep1() {
       setIsLoading(false)
       // Store the selected method in sessionStorage to use in the next steps
       sessionStorage.setItem("verificationMethod", method)
-      router.push("/auth/verification/step2")
+      router.push("/reset-password/verification/step2")
     }, 1000)
   }
 
@@ -37,8 +37,8 @@ export default function VerificationStep1() {
     <div className="space-y-6">
       <div className="space-y-2">
         <p className="text-md text-system-12">
-          Para completar seu Login com sucesso, por favor efetue a autenticação de seus dados. Escolha por qual meio
-          deseja receber o código.
+          Para alterar sua senha, por favor efetue a autenticação de seus dados. Escolha por qual meio deseja receber o
+          código.
         </p>
       </div>
 
